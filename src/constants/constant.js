@@ -1,0 +1,1 @@
+export const Linkedln_logo = "https://freelogopng.com/images/all_img/1656994981linkedin-icon-png.png";

@@ -1,0 +1,12 @@
+.header{
+    border: 2px solid black;
+
+    .header_left{
+        border: 2px solid green;
+
+        img{
+            object-fit: contain; //maintain the aspect ratio
+            height: 35px;
+        }
+    }
+}
