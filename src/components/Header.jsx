@@ -1,6 +1,7 @@
 import './header.scss';
 import {Linkedln_logo} from '../constants/constant'
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined , HomeFilled , ContactsFilled , ShoppingFilled , MessageFilled,BellFilled , UserOutlined } from '@ant-design/icons';
+import HeaderOption from './HeaderOption';
 
 
 const Header = () => {
@@ -11,11 +12,17 @@ const Header = () => {
 
             <div className="header_searchBar">
                   <SearchOutlined />
-                  <input type="search" name="" id="" />
+                  <input type="search" name="" id="" placeholder='search' />
             </div>
 
         </div>
         <div className="header_right">
+         <HeaderOption Icon={HomeFilled} title="home"/>
+         <HeaderOption  Icon={ContactsFilled} title="my network" />
+         <HeaderOption  Icon={ShoppingFilled} title="jobs" />
+         <HeaderOption Icon={MessageFilled} title="messages" />
+         <HeaderOption Icon={BellFilled} title="notification"/>
+         <HeaderOption Icon={UserOutlined}/>
 
         </div>
     </div>

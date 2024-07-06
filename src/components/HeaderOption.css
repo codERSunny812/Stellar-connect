@@ -1,0 +1,28 @@
+.headerOptions{ 
+    border: 2px solid hsl(120, 100%, 97%);
+    display: flex; 
+   flex-direction: column; 
+    align-items: center;
+    margin-right: 20px;
+   margin-left: 10px;
+    color: gray;
+    cursor: pointer;
+    text-transform: capitalize;  
+}
+
+
+.header_icon{
+height: 26px;
+width: 26px;
+}
+
+.headerOptions > h3{
+    font-size: 13px;
+    font-weight:600;
+}
+
+
+.headerOptions:hover{
+    color: black;
+}
+
