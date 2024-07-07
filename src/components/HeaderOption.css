@@ -1,8 +1,8 @@
 .headerOptions{ 
-    border: 2px solid hsl(120, 100%, 97%);
     display: flex; 
    flex-direction: column; 
     align-items: center;
+    justify-content: center;
     margin-right: 20px;
    margin-left: 10px;
     color: gray;
@@ -12,17 +12,20 @@
 
 
 .header_icon{
-height: 26px;
-width: 26px;
+    /* ant design use font size to increase the size */
+    font-size: 21px; 
+    margin: 1px 0;
+    color: #676667;
 }
 
 .headerOptions > h3{
     font-size: 13px;
-    font-weight:600;
+    font-weight:400;
+   
 }
 
 
-.headerOptions:hover{
+.headerOptions:hover , .header_icon:hover{
     color: black;
 }
 

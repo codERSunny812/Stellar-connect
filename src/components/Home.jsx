@@ -1,6 +1,7 @@
 import SideBar from "./SideBar"
 import Feed from "./Feed"
 import Widget from "./Widget"
+import './Home.scss';
 
 const Home = () => {
   return (

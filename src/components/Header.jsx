@@ -11,7 +11,7 @@ const Header = () => {
             <img src={Linkedln_logo} alt="" />
 
             <div className="header_searchBar">
-                  <SearchOutlined />
+                  <SearchOutlined className='header_searchBar_icon' />
                   <input type="search" name="" id="" placeholder='search' />
             </div>
 

@@ -1,0 +1,122 @@
+@font-face {
+    font-family: Roboto;
+    src: local(Roboto-Regular),url(../font/Roboto-Regular.ttf);
+}
+
+.sideBar{
+flex: 0.2;
+position: sticky;
+top: 100px;
+text-align: center;
+border-radius: 12px;
+height: fit-content;
+
+
+  .sideBar_top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 12px;
+    background: white;
+    padding-bottom: 10px;
+
+
+
+    .sideBar_bg{
+        width:100%;
+    }
+
+    .sideBar_avtar{
+        position: relative;
+        height: 100px;
+        top:-52px;
+    }
+
+    h2{
+        font-size: 23px;
+        text-transform: capitalize;
+        font-family: Roboto;
+        margin-bottom:5px;
+    }
+    h4{
+        font-size: 15px;
+        font-family: Roboto;
+        margin-bottom: 10px;
+
+    }
+
+
+    hr{
+        width: 100%;
+    }
+
+    .sideBar_stats{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        text-transform: capitalize;
+
+        .sideBarStats_one , .sideBarStats_two{
+            display: flex;
+            align-items: center;
+            justify-content:space-between;
+            font-weight:500;
+            color: rgb(103, 102, 103);
+            font-family: Roboto;
+            margin: 8px 0;
+            padding: 3px 15px;
+
+            .sideBar_num{
+                color: rgba(0, 0, 255, 0.881);
+            }
+
+          
+        }
+
+        .sideBarStats_one:hover,.sideBarStats_two:hover{
+            background-color:lightgray;
+            width: 100%;
+        }
+
+        
+    }
+
+    .sideBar_Premium_Info{
+        width: 100%;
+        margin: 5px 0;
+        padding: 4px 5px;
+
+        .sideBar_text {
+                width: 75%;
+                font-family: Roboto;
+                font-size: 15px;
+                text-transform: capitalize;
+                font-weight: 200;
+                text-align: start;
+            }
+
+        .sideBar_Premium_icon{
+            display: flex;
+            align-items: center;
+
+           .sideBar_icon{
+            font-size: 23px;
+           }
+           h6{
+            margin: 0 4px;
+            font-size: 14px;
+            text-transform: capitalize;
+            font-family: Roboto;
+           }
+        }
+
+        
+    }
+
+    .sideBar_Premium_Info:hover{
+        background-color:lightgray;
+    }
+  }
+
+}
