@@ -1,8 +1,19 @@
 import './sideBar.scss';
 import  {avtar , banner} from '../constants/constant.js'
-import {PoundCircleTwoTone} from '@ant-design/icons'
+import {PoundCircleTwoTone,SaveFilled ,BulbFilled} from '@ant-design/icons'
+import PropTypes from 'prop-types'
 
 const SideBar = () => {
+
+  // component for the recent item
+  const RecentItems = ({title})=>{
+    return(
+    <div className="recentItems">
+    <BulbFilled className='recentItems_icon'/>
+    <h5>{title}</h5>
+    </div>
+    )}
+
   return (
     <div className="sideBar">
 
@@ -40,8 +51,9 @@ const SideBar = () => {
          <hr />
 
          <div className="sideBar_saved_post">
-          <span>saved</span>
-          <h4>saved items</h4>
+          <SaveFilled className='sideBar_saved_post_icon' />
+          <span className='sideBar_saved_text'>saved items</span>
+
          </div>
 
 
@@ -49,11 +61,30 @@ const SideBar = () => {
 
 
       <div className="sideBar_bottom">
+        <p>recent</p>
+        <RecentItems title="developers , engineers"/>
+        <RecentItems title="reactjs" />
+        <RecentItems title="programming" />
+        <RecentItems title="design" />
+
+        <p>groups</p>
+
+        <RecentItems title="javascript" />
+        <RecentItems title="react developer" />
+        <RecentItems title="programming" />
+        <RecentItems title="geekforgeeks" />
+
 
       </div>
 
     </div>
   )
 }
+SideBar.propTypes = {
+  title: PropTypes.string
+
+}
+
+
 
 export default SideBar
