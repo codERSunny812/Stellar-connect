@@ -149,11 +149,12 @@ font-family: Roboto;
     background: white;
     border-radius: 12px;
     margin: 15px 0;
-    padding: 23px 10px;
+    padding: 23px 0px;
 
     p{
         text-transform: capitalize;
         font-weight: 600;
+        padding:0px 15px;
     }
 
     .recentItems{
@@ -164,10 +165,8 @@ font-family: Roboto;
         .recentItems_icon{
             font-size: 19px;
             color: rgb(103, 102, 103);
-        }
-
-        .recentItems_icon:hover ,h5:hover{
-            color: rgba(0, 0, 0, 0.864);
+            padding-left:15px;
+            padding-right: 6px ;
         }
 
         h5{
@@ -180,6 +179,13 @@ font-family: Roboto;
     .recentItems:hover{
         background: lightgray;
         width: 100%;
+        .recentItems_icon{
+            color: black;
+        }
+        h5{
+            color: black;
+        }
+      
     }
 
   }
