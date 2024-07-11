@@ -1,6 +1,7 @@
 import './Feed.css';
 import { avtar } from '../constants/constant';
 import {PictureTwoTone ,ToolTwoTone , FilePdfTwoTone } from '@ant-design/icons'
+import Post from './Post';
 
 const Feed = () => {
   return (
@@ -36,6 +37,7 @@ const Feed = () => {
     </div>
 
     {/* post section of the feed */}
+    <Post/>
     
   </div>
   )

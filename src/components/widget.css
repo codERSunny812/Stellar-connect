@@ -1,3 +1,45 @@
 .widget{
+    padding: 0 13px;
     flex: 0.2;
+    background-color: white;
+    border-radius: 12px;
+    height: fit-content;
+    font-family: Roboto;
+    border: 0.5px solid gray;
+    /* margin: 0 40px; */
+}
+
+.widget_heading{
+    margin-top: 22px;
+    margin-left: 20px;
+    text-transform: capitalize;
+    font-size: 25px;
+}
+
+.widget > h4{
+    text-transform: capitalize;
+    font-weight: 600;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.news_heading{
+    margin-top: 13px;
+    text-transform: capitalize;
+    margin-left: 12px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.news_heading h4{
+    font-size: 18px;
+    /* text-wrap: nowrap; */
+    color: rgba(0, 0, 0, 0.813);
+}
+
+.news_heading h6{
+    margin-top:3px;
+    color: gray;
+    font-weight: 400;
+    padding: 2px 9px;
 }

@@ -10,6 +10,7 @@ top: 300px;
 border-radius: 12px;
 height: fit-content;
 font-family: Roboto;
+margin: 0 40px;
 
 
   .sideBar_top{
@@ -25,6 +26,7 @@ font-family: Roboto;
 
     .sideBar_bg{
         width:100%;
+        border-radius:12px 12px 0 0;
     }
 
     .sideBar_avtar{
