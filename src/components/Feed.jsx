@@ -2,8 +2,18 @@ import './Feed.css';
 import { avtar } from '../constants/constant';
 import {PictureTwoTone ,ToolTwoTone , FilePdfTwoTone } from '@ant-design/icons'
 import Post from './Post';
+import { useEffect, useState } from 'react';
+import { db } from '../constants/Firebase.config';
+// import {collection} from 'firebase/firestore'
 
 const Feed = () => {
+  const [posts , setPost] = useState(null);
+
+  useEffect(()=>{
+  //connnecting with the DB.
+  // db.collection()
+
+  },[])
   return (
   <div className="feed">
     {/*post upload section  */}
