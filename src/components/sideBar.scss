@@ -6,7 +6,7 @@
 .sideBar{
 flex: 0.2;
 position: sticky;
-top: 300px;
+// top: 300px;
 border-radius: 12px;
 height: fit-content;
 font-family: Roboto;
@@ -27,12 +27,14 @@ margin: 0 40px;
     .sideBar_bg{
         width:100%;
         border-radius:12px 12px 0 0;
+        height: 70px;
     }
 
     .sideBar_avtar{
         position: relative;
-        height: 100px;
-        top:-52px;
+        height:60px;
+        top:-32px;
+        margin-bottom: 12px;
     }
 
     h2{
@@ -41,11 +43,13 @@ margin: 0 40px;
         font-family: Roboto;
         margin-bottom:5px;
         margin-top: -35px;
+        font-weight: 500;
     }
     h4{
-        font-size: 15px;
+        font-size: 12px;
         font-family: Roboto;
         margin-bottom: 10px;
+        font-weight: 400;
 
     }
 
@@ -67,9 +71,12 @@ margin: 0 40px;
             font-family: Roboto;
             margin: 8px 0;
             padding: 3px 15px;
+            font-weight:200;
+            
 
             .sideBar_num{
                 color: rgba(0, 0, 255, 0.881);
+                font-weight: 500;
             }
 
           
@@ -109,6 +116,7 @@ margin: 0 40px;
             font-size: 14px;
             text-transform: capitalize;
             font-family: Roboto;
+            font-weight: 5;
            }
         }
 

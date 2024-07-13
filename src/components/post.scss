@@ -24,10 +24,12 @@
 
                 text-transform: capitalize;
                 font-size: 22px;
+                font-weight: 600;
             }
             p{
                 text-transform: capitalize;
                 font-size: 10px;
+                font-weight: 400;
             }
         }
 
@@ -36,7 +38,20 @@
     .post_content{
         font-size: 19px;
         margin: 12px;
+        font-weight: 400;
     }
+    .post_img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 12px;
+        
+        img {
+                height: 200px;
+            }
+    }
+
+    
 
     .post_section_icon{
         display: flex; 

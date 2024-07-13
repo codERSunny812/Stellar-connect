@@ -2,7 +2,8 @@ import './post.scss';
 import {avtar} from '../constants/constant'
 import {LikeOutlined , CommentOutlined , ShareAltOutlined , DeploymentUnitOutlined} from '@ant-design/icons'
 
-const Post = ({name , bio , description}) => {
+const Post = ({postData:{id, mediaUrl , content}}) => {
+  console.log(mediaUrl)
   return (
    <div className="post_section">
 
@@ -15,9 +16,22 @@ const Post = ({name , bio , description}) => {
       </div>
     </div>
 
-    <p className='post_content'>this is the content of the  post</p>
+    <p className='post_content'>{content}</p>
 
     {/* add photo if you want  */}
+
+    
+      {/* Conditionally render the image */}
+      {mediaUrl && (
+        <div className="post_img">
+          <img src={mediaUrl} alt="" />
+        </div>
+      )}
+      
+
+
+    
+   
 
     <hr />
 
