@@ -2,18 +2,30 @@ import './Feed.css';
 import { avtar } from '../constants/constant';
 import {PictureTwoTone ,ToolTwoTone , FilePdfTwoTone } from '@ant-design/icons'
 import Post from './Post';
-import { useState } from 'react';
-import addPost from '../Collections/Post';
-import {storage , db } from '../constants/Firebase.config'
-import {ref,uploadBytes,getDownloadURL } from 'firebase/storage'
-import { useEffect } from 'react';
-import {collection , getDocs} from 'firebase/firestore'
+import { useState ,useEffect } from 'react';
+import { storage  } from '../constants/Firebase.config'
+import { ref,uploadBytes,getDownloadURL } from 'firebase/storage'
+import {addPost , getPost} from '../Collections/Post'
 
 
 const Feed = () => {
   const [posts , setPost] = useState([]);
   const [postContent, setPostContent] = useState("");
   const [mediaFile , setMediaFile] = useState(null);
+
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const postsData = await getPost();
+        setPost(postsData);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+    fetchPosts();
+  });
+
 
   const handleInputChange = (e) => {
     setPostContent(e.target.value);
@@ -35,48 +47,45 @@ const Feed = () => {
 
     console.log("function execution started")
 
-
     let mediaUrl = "";
 
     if (mediaFile) {
-      // ref creates a reference to the storage location.
-      const storageRef = ref(storage, `media/${mediaFile.name}`);
-      // uploadBytes uploads the file to Firebase Storage
-      await uploadBytes(storageRef, mediaFile);
-      // getDownloadURL retrieves the URL of the uploaded file.
-      mediaUrl = await getDownloadURL(storageRef);
+      try {
+        // ref creates a reference to the storage location.
+        const storageRef = ref(storage, `media/${mediaFile.name}`);
+        // uploadBytes uploads the file to Firebase Storage
+        await uploadBytes(storageRef, mediaFile);
+        // getDownloadURL retrieves the URL of the uploaded file.
+        mediaUrl = await getDownloadURL(storageRef);
+      } catch (error) {
+        console.log(error);
+      }
+      
     }
 
-    await addPost({
-      content:postContent,
-      media:mediaUrl,
-      createdAt:new Date()
-    });
+    try {
 
-    setPostContent("");
-    setMediaFile(null);
+      const newPost ={
+        content: postContent,
+        media: mediaUrl,
+        createdAt: new Date()
+      }
+      const docId = await addPost(newPost);
+
+      console.log(docId);
+
+      // update the post array after adding the new post 
+      setPost(prevPosts => [{ id: docId, ...newPost }, ...prevPosts]);
+      setPostContent("");
+      setMediaFile(null);
+    } catch (error) {
+      console.log("error in adding the document")
+    }
+
+    
 
 
   }
-
-
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const postsCollection = collection(db, "posts");
-      //collection is used to get a refrence to the post collection
-      const postsSnapshot = await getDocs(postsCollection);
-      //get docs is used to fetch the document from the collection
-      const postsData = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setPost(postsData);
-    };
-
-    fetchPosts();
-  }, []);
-
-  // console.log(posts)
-
-
 
 
 

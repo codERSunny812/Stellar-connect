@@ -1,4 +1,5 @@
 import './icon.css';
+import PropTypes from 'prop-types'
 
 const Icons = ({Icons , name}) => {
 
@@ -10,4 +11,11 @@ const Icons = ({Icons , name}) => {
   )
 }
 
-export default Icons
+
+Icons.propTypes = {
+  Icons: PropTypes.object,
+  name:PropTypes.string
+
+}
+
+export default Icons;

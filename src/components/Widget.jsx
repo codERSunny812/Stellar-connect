@@ -1,5 +1,5 @@
 import './widget.css';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const Widget = () => {
 
@@ -19,9 +19,6 @@ const Widget = () => {
       <News title="msme rope influecers" para="9390 reader" />
       <News title="iim's welcome more women students" para="1959 reader" />
       <News title="legatech to serve more tech jobs" para="2959 reader" />
-    
-
-
     </div>
   )
 }

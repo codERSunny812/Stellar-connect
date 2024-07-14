@@ -9,3 +9,76 @@ export const banner = "https://imgs.search.brave.com/G2HPGJnvMQv8KqOweOSIzn_ipLq
 
 
 export const FrontImage = "https://media.licdn.com/media//AAYAAgSrAAgAAQAAAAAAAGM6w-NyPk-_SVikYiCJ6V3Z-Q.png";
+
+
+export const collabrativeArcticle = ["marketing" , "public administration" ,"health care" , "engineering" , "it service" , "sustainability","business administration" , "telecommunications","hr management"];
+
+
+export const findJobs = [
+    "engineering","business development","finance","administrative assistant","retail associate","customer service","information technology technology","human resource"
+];
+
+export const postJob = [
+    "post a job"
+]
+
+export const software_tools=[
+    "ecommerce platform",
+    "crm software",
+    "human resource management system",
+    "recruting software",
+    "sales intelligence software",
+    "marketing automation software",
+    "help desk software",
+    "social network software",
+    "desktop publishing software"
+]
+
+
+export const footer_content_1 = [
+    'signup',
+    'help center',
+    'about',
+    'press',
+    'blog',
+    'carrer',
+    'developers'
+];
+
+
+export const footer_content_2 = [
+    'Learning',
+'Jobs',
+'Games',
+'Salary',
+'Mobile',
+'Services',
+'Products',
+'Top Companies Hub'
+];
+
+
+export const footer_content_3 = [
+    'Talent',
+'Marketing',
+'Sales',
+'Learning'
+];
+
+
+export const footer_content_4=[
+'Members',
+'Jobs',
+'Companies',
+'Featured',
+'Learning',
+'Posts',
+'Articles',
+'Schools',
+'News',
+'News Letters',
+'Services',
+'Products',
+'Advice',
+'People Search'
+]

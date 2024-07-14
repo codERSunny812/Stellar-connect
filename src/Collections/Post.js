@@ -1,4 +1,4 @@
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, query, orderBy , getDocs } from 'firebase/firestore';
 import { db } from '../constants/Firebase.config';
 
 
@@ -10,10 +10,30 @@ const addPost = async (post) => {
             createdAt: new Date(),
         });
         console.log("Document written with ID: ", docRef.id);
+        return docRef.id;
     } catch (e) {
         console.error("Error adding document: ", e);
+        throw e;
     }
 
 }
 
-export default addPost;
+const getPost =async ()=>{
+try {
+    //collection is used to get a refrence to the post collection
+    const postsCollection = collection(db, "posts");
+    //query func to order the post by created date
+    const postsQuery = query(postsCollection, orderBy("createdAt", "desc"));
+    //get docs is used to fetch the document from the collection
+    const postsSnapshot = await getDocs(postsQuery);
+
+    const postsData = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return postsData;
+    
+} catch (error) {
+  console.log("error in  fetching the data from the front end")  
+}
+}
+
+
+export {addPost , getPost}

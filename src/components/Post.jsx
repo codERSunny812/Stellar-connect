@@ -1,6 +1,7 @@
 import './post.scss';
 import {avtar} from '../constants/constant'
 import {LikeOutlined , CommentOutlined , ShareAltOutlined , DeploymentUnitOutlined} from '@ant-design/icons'
+import PropTypes from 'prop-types'
 
 const Post = ({postData:{id, mediaUrl , content}}) => {
   console.log(mediaUrl)
@@ -16,23 +17,13 @@ const Post = ({postData:{id, mediaUrl , content}}) => {
       </div>
     </div>
 
-    <p className='post_content'>{content}</p>
-
-    {/* add photo if you want  */}
-
-    
+    <p className='post_content'>{content}</p>   
       {/* Conditionally render the image */}
       {mediaUrl && (
         <div className="post_img">
           <img src={mediaUrl} alt="" />
         </div>
       )}
-      
-
-
-    
-   
-
     <hr />
 
     <div className="post_section_icon">
@@ -67,5 +58,14 @@ const Post = ({postData:{id, mediaUrl , content}}) => {
    </div>
   )
 }
+
+Post.propTypes = {
+  id:PropTypes.string,
+  mediaUrl:PropTypes.string,
+  postData:PropTypes.object,
+  content:PropTypes.string
+}
+
+
 
 export default Post
