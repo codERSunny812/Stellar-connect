@@ -1,56 +1,71 @@
-
-import { Outlet, createBrowserRouter } from 'react-router-dom'
 import './App.css'
 import Home from './components/Home'
-import Header from './components/Header'
-import { SignedIn, SignedOut , UserButton} from "@clerk/clerk-react";
-import Base from './components/Base'
-import SignUpPage from './components/SignUpPage'
-import SignInPage from './components/SignInPage';
+import { Outlet, createBrowserRouter } from 'react-router-dom'
+import Signup from './components/Signup'
+import Signin from './components/Signin';
+import React ,{Suspense} from 'react'
+import AuthLayout from './Auth';
+
+
+
+// lazy loading the component
+const MyNetwork = React.lazy(() => import('./components/MyNetwork') );
+const Jobs = React.lazy(() => import('./components/Jobs'));
+const Message = React.lazy(() => import('./components/Message'));
+const Notification = React.lazy(() => import('./components/Notification'));
+
+
+
 
 function App() {
-
-
   return (
-  <>
-  <header>
-        <SignedOut>
-          {/* Children of this component can only be seen while signed out. */}
-          <Base/>
-        </SignedOut>
-        <SignedIn> 
-          {/* Children of this component can only be seen while signed in. */}
-          <Header />
-          <Outlet />
-        </SignedIn>
-  </header>
-
-  </>
+    <>
+      <Outlet/>
+    </>
   )
 }
 
 export default App
 
-
-
-
 export const Router = createBrowserRouter([
   {
-    path:'/',
-    element:<App/>, 
-    children:[
+    path: '/',
+    element: <App />,
+    children: [
       {
-       path:'/',
-       element:<Home/>
+        path: '/',
+        element: <AuthLayout />,
+        children: [
+          {
+            path: '/',
+            element: <Suspense fallback={<div>Loading...</div>}><Home /></Suspense>,
+          },
+          {
+            path: '/my-network',
+            element: <Suspense fallback={<div>Loading...</div>}><MyNetwork /></Suspense>,
+          },
+          {
+            path: '/jobs',
+            element: <Suspense fallback={<div>Loading...</div>}><Jobs /></Suspense>,
+          },
+          {
+            path: '/messages',
+            element: <Suspense fallback={<div>Loading...</div>}><Message /></Suspense>,
+          },
+          {
+            path: '/notification',
+            element: <Suspense fallback={<div>Loading...</div>}><Notification /></Suspense>,
+          },
+        ],
       },
       {
-      path:'/sign-up',
-      element:<SignUpPage/>
+        path: '/sign-up/*',
+        element: <Signup />,
       },
       {
-        path: '/sign-in',
-        element: <SignInPage />
-      }
-    ]
+        path: '/sign-in/*',
+        element: <Signin />,
+      },
+    ],
   },
 ]);

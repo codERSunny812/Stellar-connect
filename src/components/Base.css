@@ -25,7 +25,7 @@ img{
 .signInBtn{
    padding:13px 24px;
    border-radius:15px;
-   color: blue;
+   /* color: blue; */
    border: 1px solid rgb(0, 0, 255);
    font-weight: 600;
    font-size: 16px;
@@ -97,7 +97,7 @@ img{
 }
 
 span{
-color: blue;
+/* color: blue; */
 font-weight: 600;
 }
 
@@ -114,6 +114,7 @@ font-weight: 600;
   justify-content:center; /* Changed from center to space-between */
   padding: 43px;
   /* margin-bottom: 12px; */
+  cursor: pointer;
 }
 
 .part1 {
@@ -191,6 +192,17 @@ h4{
   cursor: pointer;
   text-decoration: underline;
 }
+
+.login_in_link{
+  text-decoration: none;
+  color:white;
+}
+
+.sign_up_link{
+text-decoration: none;
+  color:blue;
+}
+
 
 
 

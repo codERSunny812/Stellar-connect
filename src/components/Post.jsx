@@ -1,17 +1,20 @@
 import './post.scss';
-import {avtar} from '../constants/constant'
 import {LikeOutlined , CommentOutlined , ShareAltOutlined , DeploymentUnitOutlined} from '@ant-design/icons'
 import PropTypes from 'prop-types'
+import {useUser} from '@clerk/clerk-react'
 
-const Post = ({postData:{id, mediaUrl , content}}) => {
-  console.log(mediaUrl)
+const Post = ({postData:{id, mediaUrl , content},userData}) => {
+  // console.log(id);
+
+  const {user} = useUser();
+ 
   return (
    <div className="post_section">
 
     <div className="postinfo_top">
-      <img src={avtar} alt="" />
+      <img src={user.imageUrl} alt="" style={{borderRadius:'50%'}} />
       <div className="postInfo_about_user">
-      <h4>sunny</h4>
+      <h4>{userData.firstName}</h4>
       <p>sde@google</p>
 
       </div>

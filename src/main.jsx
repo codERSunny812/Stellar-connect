@@ -7,6 +7,8 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { RouterProvider } from 'react-router-dom';
 import { ClerkProvider } from '@clerk/clerk-react'
+import { dark } from '@clerk/themes';
+import { UserContextProvider } from './context/UserInfo.jsx';
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -17,8 +19,16 @@ if (!PUBLISHABLE_KEY) {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-      <RouterProvider router={Router} />
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}
+    appearance={{
+      baseTheme:dark
+    }}>
+      <UserContextProvider>
+        
+        <RouterProvider router={Router} />
+
+      </UserContextProvider>
+     
     </ClerkProvider>
     
   </React.StrictMode>,

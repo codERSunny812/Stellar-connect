@@ -1,10 +1,13 @@
 import './header.scss';
 import {Linkedln_logo} from '../constants/constant'
-import { SearchOutlined , HomeFilled , ContactsFilled , ShoppingFilled , MessageFilled,BellFilled , UserOutlined } from '@ant-design/icons';
+import { SearchOutlined , HomeFilled , ContactsFilled , ShoppingFilled , MessageFilled,BellFilled   } from '@ant-design/icons';
 import HeaderOption from './HeaderOption';
-
+import {UserButton, useUser} from '@clerk/clerk-react'
+import {Link} from 'react-router-dom'
 
 const Header = () => {
+  const data = useUser();
+  console.log(data.user.imageUrl)
   return (
     <div className="header">
         <div className="header_left">
@@ -17,13 +20,30 @@ const Header = () => {
 
         </div>
         <div className="header_right">
-         <HeaderOption Icon={HomeFilled} title="home"/>
-         <HeaderOption  Icon={ContactsFilled} title="my network" />
-         <HeaderOption  Icon={ShoppingFilled} title="jobs" />
-         <HeaderOption Icon={MessageFilled} title="messages" />
-         <HeaderOption Icon={BellFilled} title="notification"/>
-         <HeaderOption Icon={UserOutlined}/>
+          <Link to='/' style={{textDecoration:'none'}}>
+          <HeaderOption Icon={HomeFilled} title="home" />
+          </Link>
 
+        <Link to='/my-network' style={{textDecoration:'none'}}>
+          <HeaderOption Icon={ContactsFilled} title="my network" />
+        </Link>
+
+        <Link to='/jobs' style={{textDecoration:'none'}}>
+          <HeaderOption Icon={ShoppingFilled} title="jobs" />
+        </Link>
+
+        <Link to='/messages' style={{textDecoration:'none'}}>
+          <HeaderOption Icon={MessageFilled} title="messages" />
+        </Link>
+
+        <Link to='notification' style={{textDecoration:'none'}}>
+          <HeaderOption Icon={BellFilled} title="notification" />
+        </Link>
+
+        <Link to='profile' style={{textDecoration:'none'}}>
+          <UserButton />
+        </Link>
+          
         </div>
     </div>
   )

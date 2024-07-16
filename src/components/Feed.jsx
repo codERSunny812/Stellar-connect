@@ -1,17 +1,18 @@
 import './Feed.css';
-import { avtar } from '../constants/constant';
 import {PictureTwoTone ,ToolTwoTone , FilePdfTwoTone } from '@ant-design/icons'
 import Post from './Post';
 import { useState ,useEffect } from 'react';
 import { storage  } from '../constants/Firebase.config'
 import { ref,uploadBytes,getDownloadURL } from 'firebase/storage'
 import {addPost , getPost} from '../Collections/Post'
+import {useUser} from '@clerk/clerk-react'
 
-
-const Feed = () => {
+const Feed = ({userData}) => {
   const [posts , setPost] = useState([]);
   const [postContent, setPostContent] = useState("");
   const [mediaFile , setMediaFile] = useState(null);
+  const {user}= useUser();
+
 
 
   useEffect(() => {
@@ -92,9 +93,10 @@ const Feed = () => {
   return (
   <div className="feed">
     {/*post upload section  */}
+    
     <div className="feedSection_top">
       <div className="feedSection_upload_section">
-        <img src={avtar} alt="" />
+          <img src={user.imageUrl} alt="" style={{ borderRadius: '50%' }} />
         <input type="text" name="" 
         id="upload_section_input"  
         placeholder='Start a post'
@@ -135,7 +137,7 @@ const Feed = () => {
       posts.map((posts)=>{
         return(
           <div className="" key={posts.id}>
-            <Post postData={posts} />
+            <Post postData={posts} userData={userData} />
           </div>
         )
       })

@@ -2,8 +2,12 @@ import './sideBar.scss';
 import  {avtar , banner} from '../constants/constant.js'
 import {PoundCircleTwoTone,SaveFilled ,BulbFilled} from '@ant-design/icons'
 import PropTypes from 'prop-types'
+import { useUser } from '@clerk/clerk-react';
 
-const SideBar = () => {
+const SideBar = ({userData}) => {
+
+  const {user} = useUser();
+
 
   // component for the recent item
   const RecentItems = ({title})=>{
@@ -20,8 +24,8 @@ const SideBar = () => {
       <div className="sideBar_top">
 
         <img src={banner} alt="user bg" className='sideBar_bg'/>
-         <img src={avtar } className='sideBar_avtar' alt="user profile photo" />
-         <h2>sushil pandey</h2>
+         <img src={user.imageUrl} className='sideBar_avtar' alt="user profile photo" />
+         <h2>{userData?.firstName}</h2>
          <h4>sengersunny448@gmail.com</h4>
 
          <hr  />

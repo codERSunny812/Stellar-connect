@@ -16,3 +16,13 @@ body{
   height: 100%;
   width: 100%;
 }
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+    height:screen;
+    width: 100%;
+    box-sizing: border-box;
+}

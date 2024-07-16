@@ -2,6 +2,8 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore }  from 'firebase/firestore'
 import {getStorage} from 'firebase/storage'
+import {useAuth} from '@clerk/clerk-react'
+import { getAuth, signInWithCustomToken } from "firebase/auth";
 
 
 const firebaseConfig = {
@@ -20,3 +22,5 @@ export const analytics = getAnalytics(app);
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+// Connect to Firebase auth
+const auth = getAuth(app);
