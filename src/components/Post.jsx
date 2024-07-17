@@ -14,19 +14,27 @@ const Post = ({postData:{id, mediaUrl , content},userData}) => {
     <div className="postinfo_top">
       <img src={user.imageUrl} alt="" style={{borderRadius:'50%'}} />
       <div className="postInfo_about_user">
-      <h4>{userData.firstName}</h4>
+      <h4>{userData?.firstName || "sunny"}</h4>
       <p>sde@google</p>
 
       </div>
     </div>
+      {
+        content ? (
+          <>
+            <p className='post_content'>{content}</p>
+            {mediaUrl && (
+              <div className="post_img">
+                <img src={mediaUrl} alt="" />
+              </div>
+            )}
+          </>
+        ) : (
+          <h1>no post uploaded</h1>
+        )
+      }
 
-    <p className='post_content'>{content}</p>   
-      {/* Conditionally render the image */}
-      {mediaUrl && (
-        <div className="post_img">
-          <img src={mediaUrl} alt="" />
-        </div>
-      )}
+   
     <hr />
 
     <div className="post_section_icon">
@@ -66,7 +74,8 @@ Post.propTypes = {
   id:PropTypes.string,
   mediaUrl:PropTypes.string,
   postData:PropTypes.object,
-  content:PropTypes.string
+  content:PropTypes.string,
+  userData:PropTypes.object
 }
 
 

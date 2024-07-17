@@ -13,19 +13,25 @@ const Feed = ({userData}) => {
   const [mediaFile , setMediaFile] = useState(null);
   const {user}= useUser();
 
+  console.log(posts);
 
+
+
+ 
+  const fetchPosts = async () => {
+    try {
+      const postsData = await getPost();
+      // setPost(prevPosts => ...prevPosts, postsData);
+      setPost(postsData);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const postsData = await getPost();
-        setPost(postsData);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
-    };
     fetchPosts();
-  });
+  }, []);
+
 
 
   const handleInputChange = (e) => {
@@ -71,12 +77,14 @@ const Feed = ({userData}) => {
         media: mediaUrl,
         createdAt: new Date()
       }
-      const docId = await addPost(newPost);
-
-      console.log(docId);
+      // const docId = await addPost(newPost);
+      // Add the userId to the new post data
+     const docId= await addPost(newPost,user.id);
 
       // update the post array after adding the new post 
       setPost(prevPosts => [{ id: docId, ...newPost }, ...prevPosts]);
+      fetchPosts();
+      setPost(prevPosts => [...prevPosts, { id: docId, ...newPost }]);
       setPostContent("");
       setMediaFile(null);
     } catch (error) {
@@ -119,7 +127,6 @@ const Feed = ({userData}) => {
             <ToolTwoTone className='feedSection_icon'
             twoToneColor="green" />
             <p>jobs</p>
-
         </div>
 
         <div className="feedSection_article_icon">
@@ -134,6 +141,7 @@ const Feed = ({userData}) => {
 
     {/* post section of the feed */}
     {
+      posts.length > 0 ? (
       posts.map((posts)=>{
         return(
           <div className="" key={posts.id}>
@@ -141,6 +149,9 @@ const Feed = ({userData}) => {
           </div>
         )
       })
+    ) : (
+      <h1> no post uploaded</h1>
+    )
     }
     
     

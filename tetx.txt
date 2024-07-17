@@ -1,6 +1,0 @@
-import PropTypes from 'prop-types'
-
-SideBar.propTypes = {
-  title: PropTypes.string
-
-}

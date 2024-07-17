@@ -4,27 +4,33 @@ import Widget from "./Widget"
 import './home.scss';
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserInfo";
-import {addUser} from '../Collections/User'
+import {addUser , getUser} from '../Collections/User'
 
 const Home = () => {
 
   const data = useContext(UserContext);
 
-  console.log(data);
-
   const[userData , setUserData]=useState(null);
 
+  // adding the data of the user to the DB
   useEffect(() => {
     const addUserToDb = async () => {
-      if (data && data.id) {
-        const userInfo = await addUser(data);
-        setUserData(userInfo);
+      if (data) {
+        // if will return a unique id
+        const userId = await addUser(data);
+
+        if(userId){
+          // fetch the data of the user from the firebase store
+          const userDoc = await getUser(userId);
+          setUserData(userDoc);
+        }
+
+         
       }
     };
     addUserToDb();
   }, [data]);
 
-  console.log(userData);
   return (
     <>
 
@@ -33,8 +39,7 @@ const Home = () => {
       <Feed userData={userData}/>
       <Widget/>
     </div>
-    
-   
+     
     </>
   )
 }

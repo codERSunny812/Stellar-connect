@@ -2,9 +2,10 @@ import { collection, addDoc, query, orderBy , getDocs } from 'firebase/firestore
 import { db } from '../constants/Firebase.config';
 
 
-const addPost = async (post) => {
+const addPost = async (post,userId) => {
     try {
         const docRef = await addDoc(collection(db, "posts"), {
+            userId: userId,
             content: post.content,
             mediaUrl: post.media,
             createdAt: new Date(),
@@ -19,8 +20,7 @@ const addPost = async (post) => {
 }
 
 const getPost =async ()=>{
-try {
-    //collection is used to get a refrence to the post collection
+try {   
     const postsCollection = collection(db, "posts");
     //query func to order the post by created date
     const postsQuery = query(postsCollection, orderBy("createdAt", "desc"));

@@ -1,25 +1,27 @@
 import { createContext } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { useUser } from "@clerk/clerk-react";
 
 export const UserContext = createContext(null);
 
-console.log(UserContext);
+// console.log(UserContext);
 
 export const UserContextProvider = ({ children }) => {
-  const {user} = useUser();
- 
+  const { user } = useUser();
+  // console.log(user)
+
   const userData = {
-    // Define any user-related data here
-    id:user?.id,
-    fullName:user?.fullName,
-    firstName:user?.firstName,
+    // defining the user data into object
+    id: user?.id,
+    fullName: user?.fullName,
+    firstName: user?.firstName,
+    avtar: user?.imageUrl,
   };
 
+  // console.log(userData);
+
   return (
-    <UserContext.Provider value={userData}>
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={userData}>{children}</UserContext.Provider>
   );
 };
 

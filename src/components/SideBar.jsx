@@ -1,12 +1,15 @@
 import './sideBar.scss';
-import  {avtar , banner} from '../constants/constant.js'
+import  {banner} from '../constants/constant.js'
 import {PoundCircleTwoTone,SaveFilled ,BulbFilled} from '@ant-design/icons'
 import PropTypes from 'prop-types'
-import { useUser } from '@clerk/clerk-react';
+import { useContext } from 'react';
+import { UserContext } from '../context/UserInfo.jsx';
 
-const SideBar = ({userData}) => {
 
-  const {user} = useUser();
+const SideBar = () => {
+
+  const {id,fullName,avtar} = useContext(UserContext);
+
 
 
   // component for the recent item
@@ -24,8 +27,8 @@ const SideBar = ({userData}) => {
       <div className="sideBar_top">
 
         <img src={banner} alt="user bg" className='sideBar_bg'/>
-         <img src={user.imageUrl} className='sideBar_avtar' alt="user profile photo" />
-         <h2>{userData?.firstName}</h2>
+         <img src={avtar} className='sideBar_avtar' alt="user profile photo" />
+         <h2>{fullName}</h2>
          <h4>sengersunny448@gmail.com</h4>
 
          <hr  />

@@ -1,13 +1,16 @@
 import './header.scss';
-import {Linkedln_logo} from '../constants/constant'
+import {Linkedln_logo,avtar} from '../constants/constant'
 import { SearchOutlined , HomeFilled , ContactsFilled , ShoppingFilled , MessageFilled,BellFilled   } from '@ant-design/icons';
 import HeaderOption from './HeaderOption';
-import {UserButton, useUser} from '@clerk/clerk-react'
+import {UserButton} from '@clerk/clerk-react'
 import {Link} from 'react-router-dom'
+import { useContext } from 'react';
+import { UserContext } from '../context/UserInfo';
 
 const Header = () => {
-  const data = useUser();
-  console.log(data.user.imageUrl)
+
+  const {imageUrl} = useContext(UserContext)
+
   return (
     <div className="header">
         <div className="header_left">
@@ -40,8 +43,9 @@ const Header = () => {
           <HeaderOption Icon={BellFilled} title="notification" />
         </Link>
 
-        <Link to='profile' style={{textDecoration:'none'}}>
+        <Link to='/profile' style={{textDecoration:'none'}}>
           <UserButton />
+          {/* <img src={avtar}  /> */}
         </Link>
           
         </div>
