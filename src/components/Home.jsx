@@ -1,7 +1,7 @@
 import SideBar from "./SideBar"
 import Feed from "./Feed"
 import Widget from "./Widget"
-import './home.scss';
+import './Home.scss';
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserInfo";
 import {addUser} from '../Collections/User'
