@@ -1,37 +1,32 @@
-import { setDoc , getDoc , doc } from 'firebase/firestore';
+import { setDoc, getDoc, doc } from 'firebase/firestore';
 import { db } from '../constants/Firebase.config';
 
-
-
-export const addUser = async(user)=>{
-try {
-
-  // check that user is present or not
-  if (!user) return null;
-
-// This code snippet is used to create a reference(userRef) to a specific document in a Firestore database collection(users).
-  const userRef = doc(db, "users", user.id);
-  const userSnap = await getDoc(userRef);
-
-  if (!userSnap.exists()) {
-   const ref= await setDoc(userRef, {
-      fullName: user.fullName,
-      avtar:user.imageUrl
-    });
-    return ref.id;
-  } else {
-    return userSnap.id;  
-  }
-} catch (error) {
-  console.log('user can be added to the data base ')  
-}
-}
-
-export const getUser = async (userId)=>{
+export const addUser = async (userData) => {
   try {
-    // create a refrence to this doc
+    if (!userData) return null;
+
+    const userRef = doc(db, "users", userData.id);
+    const userSnap = await getDoc(userRef);
+
+    if (!userSnap.exists()) {
+      const userIdRef = await setDoc(userRef, {
+        id:userData.id,
+        fullName: userData.fullName,
+        avatar: userData.imageUrl
+      });
+      return userIdRef;
+    } else {
+      return userSnap.id;
+    }
+  } catch (error) {
+    console.log(`Error adding user to database: ${error.message}`);
+    return null;
+  }
+};
+
+export const getUser = async (userId) => {
+  try {
     const userRef = doc(db, 'users', userId);
-    // getting the data of the user
     const userSnap = await getDoc(userRef);
 
     if (userSnap.exists()) {
@@ -44,4 +39,4 @@ export const getUser = async (userId)=>{
     console.error('Error fetching user:', error);
     return null;
   }
-}
+};

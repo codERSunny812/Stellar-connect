@@ -2,16 +2,11 @@ import { collection, addDoc, query, orderBy , getDocs } from 'firebase/firestore
 import { db } from '../constants/Firebase.config';
 
 
-const addPost = async (post,userId) => {
+const addPost = async (post) => {
     try {
-        const docRef = await addDoc(collection(db, "posts"), {
-            userId: userId,
-            content: post.content,
-            mediaUrl: post.media,
-            createdAt: new Date(),
-        });
-        console.log("Document written with ID: ", docRef.id);
-        return docRef.id;
+        const postId = await addDoc(collection(db, "posts"),post);
+        console.log("Document written with ID: ", postId);
+        return postId;
     } catch (e) {
         console.error("Error adding document: ", e);
         throw e;

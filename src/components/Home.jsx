@@ -4,39 +4,57 @@ import Widget from "./Widget"
 import './home.scss';
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserInfo";
-import {addUser , getUser} from '../Collections/User'
+import {addUser} from '../Collections/User'
+import { Breathing } from "react-shimmer";
+
 
 const Home = () => {
 
-  const data = useContext(UserContext);
+  // context api for the data of all the user
+  const {userData}= useContext(UserContext);
+  console.log(userData);
 
-  const[userData , setUserData]=useState(null);
+  
+  const [userId,setUserId]=useState(null);
+  console.log(userId); //both are same 
+  console.log(userData.id);  //both are same
 
+  
   // adding the data of the user to the DB
   useEffect(() => {
     const addUserToDb = async () => {
-      if (data) {
-        // if will return a unique id
-        const userId = await addUser(data);
-
-        if(userId){
-          // fetch the data of the user from the firebase store
-          const userDoc = await getUser(userId);
-          setUserData(userDoc);
+      if (userData && userData.id) {
+        try {
+          const userId = await addUser(userData);
+          setUserId(userId);
+          // if (userId) {
+          //   const userDoc = await getUser(userId);
+          // }
+        } catch (error) {
+          console.log(`Error adding user to DB: ${error.message}`);
         }
-
-         
       }
     };
     addUserToDb();
-  }, [data]);
+  }, [userData]);
+
+  // Conditional rendering to wait for userData to be populated
+  if (!userData || userData == null) {
+    return (
+      <div className="shimmer-container">
+        <Breathing width={300} height={500} />
+        <Breathing width={300} height={500} />
+        <Breathing width={300} height={500} />
+      </div>
+    );
+  }
 
   return (
     <>
 
     <div className="App_body">
       <SideBar userData={userData}/>
-      <Feed userData={userData}/>
+      <Feed userData={userData} userId={userId} />
       <Widget/>
     </div>
      

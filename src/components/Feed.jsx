@@ -1,17 +1,22 @@
 import './Feed.css';
 import {PictureTwoTone ,ToolTwoTone , FilePdfTwoTone } from '@ant-design/icons'
 import Post from './Post';
-import { useState ,useEffect } from 'react';
+import { useState ,useEffect, useContext } from 'react';
 import { storage  } from '../constants/Firebase.config'
 import { ref,uploadBytes,getDownloadURL } from 'firebase/storage'
 import {addPost , getPost} from '../Collections/Post'
-import {useUser} from '@clerk/clerk-react'
+import PropTypes from 'prop-types'
+import { UserContext } from '../context/UserInfo';
 
-const Feed = ({userData}) => {
+
+const Feed = ({userId}) => {
+
   const [posts , setPost] = useState([]);
-  const [postContent, setPostContent] = useState("");
+  const [postCaption, setPostCaption] = useState("");
   const [mediaFile , setMediaFile] = useState(null);
-  const {user}= useUser();
+
+  const {userData} = useContext(UserContext)
+  
 
   console.log(posts);
 
@@ -21,7 +26,6 @@ const Feed = ({userData}) => {
   const fetchPosts = async () => {
     try {
       const postsData = await getPost();
-      // setPost(prevPosts => ...prevPosts, postsData);
       setPost(postsData);
     } catch (error) {
       console.error("Error fetching posts:", error);
@@ -35,11 +39,11 @@ const Feed = ({userData}) => {
 
 
   const handleInputChange = (e) => {
-    setPostContent(e.target.value);
+    setPostCaption(e.target.value);
   };
 
   const handleInputKeyPress = async (e) => {
-    if (e.key === 'Enter' && postContent.trim()) {
+    if (e.key === 'Enter' && postCaption.trim()) {
       await handleSubmit();
     }
   };
@@ -71,44 +75,35 @@ const Feed = ({userData}) => {
     }
 
     try {
-
       const newPost ={
-        content: postContent,
+        caption: postCaption,
         media: mediaUrl,
+        userId:userId,//storing the id of the user
         createdAt: new Date()
       }
-      // const docId = await addPost(newPost);
-      // Add the userId to the new post data
-     const docId= await addPost(newPost,user.id);
-
-      // update the post array after adding the new post 
-      setPost(prevPosts => [{ id: docId, ...newPost }, ...prevPosts]);
-      fetchPosts();
-      setPost(prevPosts => [...prevPosts, { id: docId, ...newPost }]);
-      setPostContent("");
+      const postId = await addPost(newPost);
+      setPost(prevPosts => [...prevPosts, { id: postId, ...newPost }]);
+      setPostCaption("");
       setMediaFile(null);
     } catch (error) {
       console.log("error in adding the document")
     }
-
-    
-
-
   }
 
 
 
   return (
   <div className="feed">
+
+
     {/*post upload section  */}
-    
     <div className="feedSection_top">
       <div className="feedSection_upload_section">
-          <img src={user.imageUrl} alt="" style={{ borderRadius: '50%' }} />
+          <img src={userData.imageUrl} alt="" style={{ borderRadius: '50%',height:'50px' , width:'50px' }} />
         <input type="text" name="" 
         id="upload_section_input"  
         placeholder='Start a post'
-        value={postContent}
+        value={postCaption}
         onChange={handleInputChange}
         onKeyPress={handleInputKeyPress} 
         />
@@ -145,7 +140,7 @@ const Feed = ({userData}) => {
       posts.map((posts)=>{
         return(
           <div className="" key={posts.id}>
-            <Post postData={posts} userData={userData} />
+            <Post posts={posts}  />
           </div>
         )
       })
@@ -157,6 +152,12 @@ const Feed = ({userData}) => {
     
   </div>
   )
+}
+
+Feed.propTypes = {
+  userId: PropTypes.string,
+  user:PropTypes.object
+
 }
 
 export default Feed

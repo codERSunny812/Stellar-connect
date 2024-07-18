@@ -1,5 +1,12 @@
 
 
+.shimmer-container {
+display: flex;
+justify-content: space-around;
+padding: 20px;
+}
+
+
 .App_body{
     display: flex;
     gap: 20px;

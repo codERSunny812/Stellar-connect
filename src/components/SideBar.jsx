@@ -8,7 +8,9 @@ import { UserContext } from '../context/UserInfo.jsx';
 
 const SideBar = () => {
 
-  const {id,fullName,avtar} = useContext(UserContext);
+  const {userData} = useContext(UserContext);
+  console.log(userData)
+  
 
 
 
@@ -27,8 +29,8 @@ const SideBar = () => {
       <div className="sideBar_top">
 
         <img src={banner} alt="user bg" className='sideBar_bg'/>
-         <img src={avtar} className='sideBar_avtar' alt="user profile photo" />
-         <h2>{fullName}</h2>
+         <img src={userData?.imageUrl} className='sideBar_avtar' alt="user profile photo" />
+         <h2>{userData?.fullName}</h2>
          <h4>sengersunny448@gmail.com</h4>
 
          <hr  />

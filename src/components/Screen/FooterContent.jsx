@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 
 const FooterContent = ({title,link}) => {
-    console.log(link)
+    // console.log(link)
   return (
     <div className="FooterContent">
         <h4>{title}</h4>

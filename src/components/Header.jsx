@@ -9,7 +9,8 @@ import { UserContext } from '../context/UserInfo';
 
 const Header = () => {
 
-  const {imageUrl} = useContext(UserContext)
+  const {user} = useContext(UserContext);
+  // console.log(user);
 
   return (
     <div className="header">
