@@ -2,14 +2,15 @@ import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useUser } from "@clerk/clerk-react";
 
+
 export const UserContext = createContext(null);
 
-// console.log(UserContext);
+
 
 export const UserContextProvider = ({ children }) => {
 
   const { user } = useUser();
-  console.log(user)
+  // console.log(user);
 
 
    const [userData ,setUserData] = useState(null); //to store the data of the user
@@ -26,10 +27,12 @@ export const UserContextProvider = ({ children }) => {
       }
    },[user])
 
-  console.log(userData);
+  console.log("UserData in UserContext:", userData);
 
   return (
-    <UserContext.Provider value={{ userData: userData }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ userData }}>
+      {children}
+      </UserContext.Provider>
   );
 };
 
