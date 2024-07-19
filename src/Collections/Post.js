@@ -1,4 +1,4 @@
-import { collection, addDoc, query, orderBy , getDocs } from 'firebase/firestore';
+import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../constants/Firebase.config';
 
 
@@ -8,27 +8,33 @@ const addPost = async (post) => {
         console.log("Document written with ID: ", postId);
         return postId;
     } catch (e) {
-        console.error("Error adding document: ", e);
+        console.error("Error adding document: ", e.message);
         throw e;
     }
 
 }
 
-const getPost =async ()=>{
-try {   
-    const postsCollection = collection(db, "posts");
-    //query func to order the post by created date
-    const postsQuery = query(postsCollection, orderBy("createdAt", "desc"));
-    //get docs is used to fetch the document from the collection
-    const postsSnapshot = await getDocs(postsQuery);
+const getPost = async () => {
+    const postsRef = collection(db, "posts");
+    const usersRef = collection(db, "users");
 
-    const postsData = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    return postsData;
-    
-} catch (error) {
-  console.log("error in  fetching the data from the front end")  
-}
-}
+    const postSnapshot = await getDocs(postsRef);
+    const postData = [];
+
+    for (const postDoc of postSnapshot.docs) {
+        const post = postDoc.data();
+        const userSnapshot = await getDocs(query(usersRef,where("id", "==", post.userId)));
+
+        if (!userSnapshot.empty) {
+            const userData = userSnapshot.docs[0].data();
+            post.user = userData;
+        }
+
+        postData.push(post);
+    }
+
+    return postData;
+};
 
 
 export {addPost , getPost}
