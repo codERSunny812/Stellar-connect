@@ -1,16 +1,16 @@
 import './header.scss';
-import {Linkedln_logo,avtar} from '../constants/constant'
+import {Linkedln_logo} from '../constants/constant';
 import { SearchOutlined , HomeFilled , ContactsFilled , ShoppingFilled , MessageFilled,BellFilled   } from '@ant-design/icons';
 import HeaderOption from './HeaderOption';
-import {UserButton} from '@clerk/clerk-react'
-import {Link} from 'react-router-dom'
+import {UserButton} from '@clerk/clerk-react';
+import {Link} from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../context/UserInfo';
 
 const Header = () => {
 
-  const {user} = useContext(UserContext);
-  // console.log(user);
+  const {userData} = useContext(UserContext);
+  console.log("UserData in Header:", userData);
 
   return (
     <div className="header">

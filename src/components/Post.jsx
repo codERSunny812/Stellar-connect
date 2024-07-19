@@ -4,20 +4,15 @@ import PropTypes from 'prop-types'
 import {useUser} from '@clerk/clerk-react'
 import { avtar } from '../constants/constant';
 
-const Post = ({posts:{caption,media,userId}}) => {
-
-  // console.log(id);
-  // console.log(caption);
-
-  // const {user} = useUser();
+const Post = ({post:{caption,media,user}}) => {
  
   return (
    <div className="post_section">
 
     <div className="postinfo_top">
-      <img src={media} alt="" style={{borderRadius:'50%'}} />
+      <img src={user?.avatar} alt="" style={{borderRadius:'50%'}} />
       <div className="postInfo_about_user">
-      <h4>sunny</h4>
+      <h4>{user?.fullName}</h4>
       <p>sde@google</p>
 
       </div>

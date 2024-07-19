@@ -71,3 +71,20 @@ input:hover{
     margin: 0 3px;
     font-family: Roboto;
 }
+
+.no-post{
+    /* border: 2px solid black; */
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.no-post-anim{
+    height: 400px;
+}
+
+.no-post p{
+    text-transform: capitalize;
+    font-size: 35px;
+}

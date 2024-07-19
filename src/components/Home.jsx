@@ -11,25 +11,24 @@ import { Breathing } from "react-shimmer";
 const Home = () => {
 
   // context api for the data of all the user
-  const {userData}= useContext(UserContext);
-  console.log(userData);
+  const {userData} = useContext(UserContext);
+  console.log(userData)
+
 
   
   const [userId,setUserId]=useState(null);
+
   console.log(userId); //both are same 
-  console.log(userData.id);  //both are same
+  console.log(userData?.id);  //both are same
 
   
   // adding the data of the user to the DB
   useEffect(() => {
     const addUserToDb = async () => {
-      if (userData && userData.id) {
+      if (userData && userData?.id) {
         try {
           const userId = await addUser(userData);
           setUserId(userId);
-          // if (userId) {
-          //   const userDoc = await getUser(userId);
-          // }
         } catch (error) {
           console.log(`Error adding user to DB: ${error.message}`);
         }
@@ -53,8 +52,8 @@ const Home = () => {
     <>
 
     <div className="App_body">
-      <SideBar userData={userData}/>
-      <Feed userData={userData} userId={userId} />
+      <SideBar />
+      <Feed userId={userId} />
       <Widget/>
     </div>
      
