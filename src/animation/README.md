@@ -3,8 +3,8 @@
 
 Stellar connect is a feature-rich social networking platform designed to connect professionals and facilitate networking opportunities. With its intuitive interface and robust features, users can effortlessly engage with their professional community
 
-# 📦 Tech Stack
 
+# 📦 Tech Stack
 - ReactJS: Frontend library for building user interfaces.
 - Ant Design: UI framework for enhancing the visual appeal and user experience.
 - Firebase: Backend as a service providing authentication and database.
@@ -13,7 +13,6 @@ Stellar connect is a feature-rich social networking platform designed to connect
 - Clerk: Authentication solution for managing user sessions and sign-ups.
 
 # 👨🏼‍🍳 Features
-
 Stellar connect offers a comprehensive suite of features to enhance user interaction and connectivity:
 
 - User Authentication: Secure sign-up and login process with email verification.
@@ -24,7 +23,6 @@ Stellar connect offers a comprehensive suite of features to enhance user interac
 - Lazy Loading: Implemented to optimize performance and improve user experience.
 
 # ⛏️ Process
-
 ## Planning and Setup
 
 - Requirement Gathering: Outlined the project's requirements, features, and technologies to be used.
@@ -44,7 +42,6 @@ Stellar connect offers a comprehensive suite of features to enhance user interac
 - End-to-End Testing: Ensured the application works as expected from the user's perspective.
 
 ## Deployment and Optimization
-
 - Optimization: Used lazy loading to improve performance and load times.
 - Deployment: Deployed the application to a hosting platform.
 
@@ -52,7 +49,6 @@ Stellar connect offers a comprehensive suite of features to enhance user interac
 
 - Monitoring: Implemented tools to track application performance and user activity.
 - Maintenance: Regular updates and bug fixes to enhance user experience and security.
-
 ## 📚 Learning
 
 During the development process, valuable insights and skills were gained in various areas:
@@ -64,8 +60,8 @@ During the development process, valuable insights and skills were gained in vari
 - UI/UX Design: Created an intuitive and visually appealing user interface with Ant Design and SCSS.
 
 # ✨ Improvement
-
 Feel free to provide suggestions or contribute to the project. Your feedback is valuable to us!
+
 
 ## Installation
 
@@ -82,37 +78,20 @@ Install the Dependencies::
 
 ```
 
+
 Start the development Server::
 
 ```bash
   npm run dev
 ```
+    
 
 ## Authors
 
 - [@codERSunny](https://github.com/codERSunny812)
 
+
 ## Screenshots
 
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
-
-
-## App UI
-
-**Home of the App:**
-![Home](assets/home.png)
-
-**Registration Page of the App:**
-![Registration Page](assets/signup.png.png)
-
-**Login Page of the App:**
-![Login Page](assets/signin.png)
-
-**Connection page of the App:**
-![Home Page](assets/MyConnection.png)
-
-**Profile section of the App:**
-![Mobile View](assets/Profile.png)
-
-**main section of the App:**
-![Mobile View](assets/main.png)
