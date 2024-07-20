@@ -5,7 +5,6 @@ import Base from "./components/Base";
 import { Suspense } from "react";
 
 const AuthLayout = () => (
- 
   <>
     <SignedIn>
       <Header />

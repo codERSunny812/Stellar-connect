@@ -1,82 +1,74 @@
+.post_section {
+  background-color: white;
+  font-family: Roboto;
+  border-radius: 12px;
+  margin-top: 12px;
+  border: 0.5px solid gray;
+  padding: 15px 0;
 
-.post_section{
-    background-color: white;
-    font-family: Roboto;
-    border-radius: 12px;
-    margin-top: 12px;
-    border: 0.5px solid gray;
-    padding: 15px 0;
+  .postinfo_top {
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
 
-
-    .postinfo_top{
-        display: flex;
-        align-items: center;
-        padding-left:25px;
-
-        img{
-            height: 50px;
-        }
-
-        .postInfo_about_user{
-            margin-left: 12px;
-            h4{
-
-                text-transform: capitalize;
-                font-size: 22px;
-                font-weight: 600;
-            }
-            p{
-                text-transform: capitalize;
-                font-size: 10px;
-                font-weight: 400;
-                margin-top: -10px;
-            }
-        }
-
+    img {
+      height: 50px;
     }
 
-    .post_content{
-        font-size: 19px;
-        margin: 12px;
+    .postInfo_about_user {
+      margin-left: 12px;
+      h4 {
+        text-transform: capitalize;
+        font-size: 22px;
+        font-weight: 600;
+      }
+      p {
+        text-transform: capitalize;
+        font-size: 10px;
         font-weight: 400;
+        margin-top: -10px;
+      }
     }
-    .post_img{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 12px;
-        
-        img {
-                height: 200px;
-            }
+  }
+
+  .post_content {
+    font-size: 19px;
+    margin: 12px;
+    font-weight: 400;
+  }
+  .post_img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+
+    img {
+      height: 200px;
     }
+  }
 
-    
+  .post_section_icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 12px;
 
-    .post_section_icon{
-        display: flex; 
-        align-items: center;
-        justify-content: space-around;
-        margin-top: 12px;
+    .like_icon_box,
+    .comment_icon_box,
+    .share_icon_box,
+    .repost_icon_box {
+      display: flex;
+      align-items: center;
 
-        .like_icon_box , .comment_icon_box , .share_icon_box , .repost_icon_box{
-            display:flex;
-            align-items: center;
+      .icon {
+        font-size: 23px;
+      }
 
-            .icon{
-                font-size: 23px;
-            }
-
-            p{
-                text-transform:capitalize;
-                font-weight: 600;
-                margin-left: 3px;
-            }
-
-        }
-
-
+      p {
+        text-transform: capitalize;
+        font-weight: 600;
+        margin-left: 3px;
+      }
     }
-
-    
+  }
 }

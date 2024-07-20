@@ -1,65 +1,59 @@
-$searchBarBg:#ECF3F6;
+$searchBarBg: #ecf3f6;
 
+.header {
+  display: flex;
+  justify-content: space-evenly;
+  // align-items: center;
+  border-bottom: 0.2px solid lightgray;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  position: sticky;
+  top: 0; //stick at the top
+  z-index: 999;
+  width: 100%;
+  background: #fefeff;
 
-.header{
+  .header_left {
     display: flex;
-    justify-content:space-evenly;
-    // align-items: center;
-    border-bottom: 0.2px solid lightgray;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    position:sticky;
-    top:0; //stick at the top
-    z-index: 999;
-    width: 100%;
-    background: #FEFEFF;
+    align-items: center;
 
-    .header_left{
-        display: flex;
-        align-items: center;
-
-        img{
-            object-fit: contain; //maintain the aspect ratio
-            height: 35px;
-            margin-right: 13px;
-        }
-
-        .header_searchBar{
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border-radius: 2px;
-            height: 29px;
-            width: 95%;
-            color: gray;
-            background-color:$searchBarBg;
-
-            .header_searchBar_icon{
-                color: #3C3C3F;
-                font-size: 13px;
-                font-weight: 900;
-                box-shadow: #3C3C3F;
-            }
-
-            input{
-                margin: 0 7px;
-                outline:none;
-                border:none;
-                background: none;
-                padding-left: 6px;
-                text-transform: capitalize;
-
-            
-            }
-
-          
-            
-        }
+    img {
+      object-fit: contain; //maintain the aspect ratio
+      height: 35px;
+      margin-right: 13px;
     }
 
-    .header_right{
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .header_searchBar {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border-radius: 2px;
+      height: 29px;
+      width: 95%;
+      color: gray;
+      background-color: $searchBarBg;
+
+      .header_searchBar_icon {
+        color: #3c3c3f;
+        font-size: 13px;
+        font-weight: 900;
+        box-shadow: #3c3c3f;
+      }
+
+      input {
+        margin: 0 7px;
+        outline: none;
+        border: none;
+        background: none;
+        padding-left: 6px;
+        text-transform: capitalize;
+      }
     }
+  }
+
+  .header_right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

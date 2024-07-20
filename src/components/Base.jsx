@@ -47,7 +47,7 @@ const Base = () => {
 
           <div className="email">
             <MailFilled style={{ color: "white", fontSize: "26px" }} />
-            <p> <Link to='/sign-in' className="login_in_link"> Continue with email </Link></p>
+            <p> <Link to='/sign-up' className="login_in_link"> Continue with email </Link></p>
           </div>
 
           <p className="disclaimer">

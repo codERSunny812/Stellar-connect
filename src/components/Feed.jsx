@@ -4,31 +4,27 @@ import Post from './Post';
 import { useState, useEffect, useContext } from 'react';
 import { storage } from '../constants/Firebase.config';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { addPost, getPost } from '../Collections/Post';
+//import { addPost, getPost } from '../Collections/Post';
 import PropTypes from 'prop-types';
 import { UserContext } from '../context/UserInfo';
 import Lottie from 'lottie-react';
 import NoPost from '../animation/NoPost.json';
+import zustandStore from '../store/Store';
+
 
 const Feed = ({ userId }) => {
-  const [posts, setPost] = useState([]);
+  // const [posts, setPost] = useState([]);
   const [postCaption, setPostCaption] = useState("");
   const [mediaFile, setMediaFile] = useState(null);
 
   const { userData } = useContext(UserContext);
 
-  const fetchPosts = async () => {
-    try {
-      const postsData = await getPost();
-      setPost(postsData);
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-    }
-  };
+  const { posts, fetchPosts, addPost, likePost } = zustandStore();
+
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [fetchPosts]);
 
   const handleInputChange = (e) => {
     setPostCaption(e.target.value);
@@ -64,10 +60,11 @@ const Feed = ({ userId }) => {
         caption: postCaption,
         media: mediaUrl,
         userId: userId,
-        createdAt: new Date()
+        createdAt: new Date(),
+        likes:0
       };
-      const postId = await addPost(newPost);
-      setPost(prevPosts => [...prevPosts, { id: postId, ...newPost }]);
+       await addPost(newPost);
+      // setPost(prevPosts => [...prevPosts, { id: postId, ...newPost }]);
       setPostCaption("");
       setMediaFile(null);
     } catch (error) {
@@ -75,7 +72,7 @@ const Feed = ({ userId }) => {
     }
   };
 
-  console.log(posts)
+  // console.log(posts)
 
   return (
     <div className="feed">
@@ -115,7 +112,7 @@ const Feed = ({ userId }) => {
       {posts.length > 0 ? (
         posts.map((post) => (
           <div key={post.userId}>
-            <Post post={post} />
+            <Post post={post} likePost={likePost} />
           </div>
         ))
       ) : (

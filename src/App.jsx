@@ -1,12 +1,12 @@
 import "./App.css";
 import Home from "./components/Home";
 import { Outlet, createBrowserRouter } from "react-router-dom";
-import Signup from "./components/Signup";
-import Signin from "./components/Signin";
 import React, { Suspense } from "react";
 import AuthLayout from "./Auth";
 import { UserProfile } from "@clerk/clerk-react";
 import Error from "./Error";
+import SignUpPage from "./components/Signup";
+import SignInPage from "./components/Signup";
 
 // lazy loading the component
 const MyNetwork = React.lazy(() => import("./components/MyNetwork"));
@@ -86,16 +86,16 @@ export const Router = createBrowserRouter([
       },
       {
         path: "/sign-up/*",
-        element: <Signup />,
+        element: <SignUpPage/>,
       },
       {
         path: "/sign-in/*",
-        element: <Signin />,
+        element: <SignInPage />,
       },
       {
-        path:'*',
-        element:<Error/>
-      }
+        path: "*",
+        element: <Error />,
+      },
     ],
   },
 ]);

@@ -30,7 +30,7 @@ const getPost = async () => {
             post.user = userData;
         }
 
-        postData.push(post);
+        postData.push({ id: postDoc.id, ...post });
     }
 
     return postData;

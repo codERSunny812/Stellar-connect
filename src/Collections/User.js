@@ -1,4 +1,4 @@
-import { setDoc, getDoc, doc } from 'firebase/firestore';
+import { setDoc, getDoc, doc, collection , getDocs } from 'firebase/firestore';
 import { db } from '../constants/Firebase.config';
 
 export const addUser = async (userData) => {
@@ -40,3 +40,20 @@ export const getUser = async (userId) => {
     return null;
   }
 };
+
+
+export const allUserData = async()=>{
+try {
+  const allUserRef = collection(db, "users");
+  const allUserSnapshot = await getDocs(allUserRef);
+  // Extract data from snapshot
+  const allUserData = allUserSnapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+  return allUserData;
+} catch (error) {
+  console.log(`error in fetching the user from the db`)
+}
+
+}

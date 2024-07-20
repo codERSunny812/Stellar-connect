@@ -1,27 +1,22 @@
-import SideBar from "./SideBar"
-import Feed from "./Feed"
-import Widget from "./Widget"
-import './Home.scss';
+import SideBar from "./SideBar";
+import Feed from "./Feed";
+import Widget from "./Widget";
+import "./Home.scss";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserInfo";
-import {addUser} from '../Collections/User'
+import { addUser } from "../Collections/User";
 import { Breathing } from "react-shimmer";
 
-
 const Home = () => {
-
   // context api for the data of all the user
-  const {userData} = useContext(UserContext);
-  console.log(userData)
+  const { userData } = useContext(UserContext);
+  console.log("the data of the loggedin user:"+userData);
 
+  const [userId, setUserId] = useState(null);
 
-  
-  const [userId,setUserId]=useState(null);
+  // console.log(userId); //both are same
+  // console.log(userData?.id); //both are same
 
-  console.log(userId); //both are same 
-  console.log(userData?.id);  //both are same
-
-  
   // adding the data of the user to the DB
   useEffect(() => {
     const addUserToDb = async () => {
@@ -50,15 +45,13 @@ const Home = () => {
 
   return (
     <>
-
-    <div className="App_body">
-      <SideBar />
-      <Feed userId={userId} />
-      <Widget/>
-    </div>
-     
+      <div className="App_body">
+        <SideBar />
+        <Feed userId={userId} />
+        <Widget />
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

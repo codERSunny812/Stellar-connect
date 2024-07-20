@@ -1,20 +1,18 @@
 @font-face {
-    font-family: Roboto;
-    src: local(Roboto-Regular),url(../font/Roboto-Regular.ttf);
+  font-family: Roboto;
+  src: local(Roboto-Regular), url(../font/Roboto-Regular.ttf);
 }
 
-.sideBar{
-flex: 0.2;
-position: sticky;
-// top: 300px;
-border-radius: 12px;
-height: fit-content;
-font-family: Roboto;
-margin: 0 40px;
+.sideBar {
+  flex: 0.2;
+  position: sticky;
+  // top: 300px;
+  border-radius: 12px;
+  height: fit-content;
+  font-family: Roboto;
+  margin: 0 40px;
 
-
-  .sideBar_top{
-
+  .sideBar_top {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,184 +20,170 @@ margin: 0 40px;
     border-radius: 12px;
     background: white;
 
-
-
-    .sideBar_bg{
-        width:100%;
-        border-radius:12px 12px 0 0;
-        height: 70px;
+    .sideBar_bg {
+      width: 100%;
+      border-radius: 12px 12px 0 0;
+      height: 70px;
     }
 
-    .sideBar_avtar{
-        position: relative;
-        height:70px;
-        width:70px;
-        top:-32px;
-        margin-bottom: 12px;
-        border-radius: 50%;
+    .sideBar_avtar {
+      position: relative;
+      height: 70px;
+      width: 70px;
+      top: -32px;
+      margin-bottom: 12px;
+      border-radius: 50%;
     }
 
-    h2{
-        font-size: 23px;
-        text-transform: capitalize;
-        font-family: Roboto;
-        margin-bottom:5px;
-        margin-top: -35px;
-        font-weight: 500;
+    h2 {
+      font-size: 23px;
+      text-transform: capitalize;
+      font-family: Roboto;
+      margin-bottom: 5px;
+      margin-top: -35px;
+      font-weight: 500;
     }
-    h4{
-        font-size: 12px;
-        font-family: Roboto;
-        margin-bottom: 10px;
-        font-weight: 400;
-
-    }
-
-
-    hr{
-        width: 100%;
+    h4 {
+      font-size: 12px;
+      font-family: Roboto;
+      margin-bottom: 10px;
+      font-weight: 400;
     }
 
-    .sideBar_stats{
-        width: 100%;
-        text-transform: capitalize;
-
-        .sideBarStats_one , .sideBarStats_two{
-            display: flex;
-            align-items: center;
-            justify-content:space-between;
-            font-weight:500;
-            color: rgb(103, 102, 103);
-            font-family: Roboto;
-            margin: 8px 0;
-            padding: 3px 15px;
-            font-weight:200;
-            
-
-            .sideBar_num{
-                color: rgba(0, 0, 255, 0.881);
-                font-weight: 500;
-            }
-
-          
-        }
-
-        .sideBarStats_one:hover,.sideBarStats_two:hover{
-            background-color:lightgray;
-            width: 100%;
-        }
-
-        
+    hr {
+      width: 100%;
     }
 
-    .sideBar_Premium_Info{
-        width: 100%;
-        margin: 5px 0;
-        padding: 4px 5px;
+    .sideBar_stats {
+      width: 100%;
+      text-transform: capitalize;
 
-        .sideBar_text {
-                width: 75%;
-                font-family: Roboto;
-                font-size: 15px;
-                text-transform: capitalize;
-                font-weight: 200;
-                text-align: start;
-            }
-
-        .sideBar_Premium_icon{
-            display: flex;
-            align-items: center;
-
-           .sideBar_icon{
-            font-size: 23px;
-           }
-           h6{
-            margin: 0 4px;
-            font-size: 14px;
-            text-transform: capitalize;
-            font-family: Roboto;
-            font-weight: 5;
-           }
-        }
-
-        
-    }
-
-    .sideBar_Premium_Info:hover{
-        background-color:lightgray;
-        h6{
-            color:rgba(0, 0, 255, 0.806)
-        }
-    }
-
-
-    .sideBar_saved_post{
-        width: 100%;
+      .sideBarStats_one,
+      .sideBarStats_two {
         display: flex;
         align-items: center;
-        padding:10px;
+        justify-content: space-between;
+        font-weight: 500;
+        color: rgb(103, 102, 103);
+        font-family: Roboto;
+        margin: 8px 0;
+        padding: 3px 15px;
+        font-weight: 200;
 
-        .sideBar_saved_post_icon{
-            font-size: 23px;
-            margin-right: 5px;
-            margin-left: 4px;
+        .sideBar_num {
+          color: rgba(0, 0, 255, 0.881);
+          font-weight: 500;
         }
+      }
 
-        .sideBar_saved_text{
+      .sideBarStats_one:hover,
+      .sideBarStats_two:hover {
+        background-color: lightgray;
+        width: 100%;
+      }
+    }
+
+    .sideBar_Premium_Info {
+      width: 100%;
+      margin: 5px 0;
+      padding: 4px 5px;
+
+      .sideBar_text {
+        width: 75%;
+        font-family: Roboto;
+        font-size: 15px;
+        text-transform: capitalize;
+        font-weight: 200;
+        text-align: start;
+      }
+
+      .sideBar_Premium_icon {
+        display: flex;
+        align-items: center;
+
+        .sideBar_icon {
+          font-size: 23px;
+        }
+        h6 {
+          margin: 0 4px;
+          font-size: 14px;
+          text-transform: capitalize;
+          font-family: Roboto;
+          font-weight: 5;
+        }
+      }
+    }
+
+    .sideBar_Premium_Info:hover {
+      background-color: lightgray;
+      h6 {
+        color: rgba(0, 0, 255, 0.806);
+      }
+    }
+
+    .sideBar_saved_post {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+
+      .sideBar_saved_post_icon {
+        font-size: 23px;
+        margin-right: 5px;
+        margin-left: 4px;
+      }
+
+      .sideBar_saved_text {
         text-transform: capitalize;
         font-weight: 500;
-        }
+      }
     }
-    .sideBar_saved_post:hover{
-        background-color: lightgray;
+    .sideBar_saved_post:hover {
+      background-color: lightgray;
     }
-    
   }
 
-  .sideBar_bottom{
+  .sideBar_bottom {
     border: 1px solid lightgray;
     background: white;
     border-radius: 12px;
     margin: 15px 0;
     padding: 23px 0px;
 
-    p{
-        text-transform: capitalize;
-        font-weight: 600;
-        padding:0px 15px;
+    p {
+      text-transform: capitalize;
+      font-weight: 600;
+      padding: 0px 15px;
     }
 
-    .recentItems{
-        display:flex;
-        text-transform: capitalize;
-        margin: 6px 0;
+    .recentItems {
+      display: flex;
+      text-transform: capitalize;
+      margin: 6px 0;
 
-        .recentItems_icon{
-            font-size: 19px;
-            color: rgb(103, 102, 103);
-            padding-left:15px;
-            padding-right: 6px ;
-        }
+      .recentItems_icon {
+        font-size: 19px;
+        color: rgb(103, 102, 103);
+        padding-left: 15px;
+        padding-right: 6px;
+      }
 
-        h5{
-            font-weight: 500;
-            margin: 5px 2px;
-            color: rgb(103, 102, 103);
-        }
+      h5 {
+        font-weight: 500;
+        margin: 5px 2px;
+        color: rgb(103, 102, 103);
+      }
     }
 
-    .recentItems:hover{
-        background: lightgray;
-        width: 100%;
-        .recentItems_icon{
-            color: black;
-        }
-        h5{
-            color: black;
-        }
-      
+    .recentItems:hover {
+      background: lightgray;
+      width: 100%;
+      .recentItems_icon {
+        color: black;
+      }
+      h5 {
+        color: black;
+      }
     }
-
   }
-
 }
