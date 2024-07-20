@@ -21,7 +21,10 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header_left">
-        <img src={Linkedln_logo} alt="" />
+        <Link to='/'>
+          <img src={Linkedln_logo} alt="" />
+        </Link>
+       
 
         <div className="header_searchBar">
           <SearchOutlined className="header_searchBar_icon" />

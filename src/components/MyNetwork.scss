@@ -17,6 +17,20 @@
                 text-transform: capitalize;
                 font-size: 23px;
             }
+
+
+            .friend-card{
+                display: flex;
+                align-items: center;
+                margin-top: 12px;
+                margin-left: 12px;
+                padding: 10px 6px;
+                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+                .friend-avatar{
+                    border-radius:50%;
+                }
+            }
     }
 
     .mid{
