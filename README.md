@@ -100,10 +100,10 @@ Start the development Server::
 ## App UI
 
 **Home of the App:**
-![Home](assets/home.png)
+![Home](assets/Home.png)
 
 **Registration Page of the App:**
-![Registration Page](assets/signup.png.png)
+![Registration Page](assets/signup.png)
 
 **Login Page of the App:**
 ![Login Page](assets/signin.png)
