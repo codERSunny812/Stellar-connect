@@ -1,7 +1,7 @@
 
 # Stellar connect
 
-Stellar connect is a feature-rich social networking platform designed to connect professionals and facilitate networking opportunities. With its intuitive interface and robust features, users can effortlessly engage with their professional community
+Stellar Connect is a feature-rich social networking platform designed to connect professionals and facilitate networking opportunities. With its intuitive interface and robust features, users can effortlessly engage with their professional community
 
 # 📦 Tech Stack
 
