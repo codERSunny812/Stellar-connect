@@ -22,3 +22,14 @@ p{
     margin-top: 3px;
 
 }
+
+@media (max-width:768px) {
+  .Icons{
+    display: none;
+    padding:1px 3px;
+  }
+  
+  p{
+    font-weight: 300;
+  }
+}

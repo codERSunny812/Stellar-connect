@@ -158,7 +158,7 @@ font-weight: 600;
 
 }
 
-.footer{
+/* .footer{
   background-color:lightgrey;
   display: flex;
   justify-content: center;
@@ -193,15 +193,215 @@ h4{
   text-decoration: underline;
 }
 
-.login_in_link{
+
+
+ */
+
+ .login_in_link{
   text-decoration: none;
   color:white;
 }
-
 .sign_up_link{
 text-decoration: none;
   color:blue;
 }
+
+.footer {
+  background-color: lightgrey;
+  display: flex;
+  justify-content: center;
+  padding: 19px 8px;
+  flex-wrap: wrap; /* Enable wrapping for responsiveness */
+  gap: 20px; /* Add spacing between columns on smaller screens */
+}
+
+.FooterContent {
+  margin-left: 70px;
+  flex: 1 1 200px; /* Flex-grow, flex-shrink, and minimum width for responsiveness */
+}
+
+h4 {
+  font-size: 20px;
+  text-transform: capitalize;
+  margin: 10px 0;
+}
+
+.footer_list {
+  padding: 4px;
+  margin: 12px 0;
+}
+
+.footer_end_list {
+  margin-top: 15px;
+  color: rgb(74, 73, 73);
+}
+
+.footer_end:hover {
+  color: blue;
+  cursor: pointer;
+  /* text-decoration: underline; */
+}
+@media (max-width:768px){
+
+  .topBar{
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    /* border: 2px solid red; */
+    width: 100%;
+  }
+
+  .topBar img{
+    /* width: 35px; */
+    height: 23px;
+
+  }
+
+  .icons{
+    /* border: 2px solid gold; */
+  }
+
+  .bottomBar{
+    /* border: 2px solid red; */
+    flex-direction: column;
+  }
+
+  .base_img{
+    /* object-fit:fill; */
+     /* object-fit: contain; */
+    /* height:100%; */
+    width:100%;
+  }
+
+  .login_crendential{
+    padding:0px;
+    margin: 2px;
+  }
+
+  .login_crendential > h1{
+    font-family: Roboto;
+    margin: 5px 3px;
+    font-size: 50px;
+    padding: 14px ;
+    width: 60%;
+    font-weight: 400;
+    color: rgb(247, 166, 15);
+    margin:19px 4px;
+}
+
+.twitter,.email{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid gray; */
+    text-align: center;
+    padding: 19px;
+    border-radius: 22px;
+    text-decoration: none;
+    text-decoration-style: none;
+    width: 100%;
+
+}
+
+.disclaimer{
+  /* display: flex; */
+  margin-top: 19px;
+  flex-direction: column;
+    font-weight: 300;
+    padding: 2px 14px;
+    width: 100%;
+    text-align: center;
+}
+
+.screen2 {
+  /* border: 2px solid rgb(169, 203, 18); */
+  display: flex;
+  flex-direction: column;
+  /* align-items:flex-start;  */
+  /* justify-content:center;  */
+  padding: 43px;
+  /* margin-bottom: 12px; */
+  cursor: pointer;
+}
+
+.part1 {
+  /* border: 2px solid rgb(0, 0, 255); */
+  flex: 1; /* Ensures part1 takes equal space */
+  margin-right: 20px; /* Adds some spacing between part1 and part2 */
+}
+
+.part1_heading {
+  font-size: 45px;
+  width: 100%;
+  font-weight: 400;
+  padding: 4px 40px;
+  margin-top: 20px;
+}
+
+.part1_para {
+  width: 100%;
+  font-weight: 200;
+  padding: 4px 40px;
+  margin-top: 20px;
+}
+
+.part2 {
+  /* border: 2px solid hotpink; */
+  margin-top: 12px;
+  flex: 1; /* Ensures part2 takes equal space */
+  display: flex;
+  flex-wrap: wrap; /* Enables wrapping */
+  align-items: center;
+  justify-content: center;
+}
+
+.article_category {
+  border: 1px solid black;
+  width:fit-content; /* Adjust as needed for number of items per row */
+  margin: 5px; /* Adds spacing between items */
+  /* box-sizing: border-box; Ensures padding/border don't affect width */
+  border-radius:50px;
+  text-align: center;
+  padding: 16px 5px;
+  color: rgb(40, 39, 39);
+  text-transform: capitalize;
+}
+
+.footer {
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start */
+    padding: 20px; /* Add padding for better spacing */
+  }
+
+  .FooterContent {
+    margin-left: 0; /* Remove left margin for smaller screens */
+    width: 100%; /* Ensure it takes full width */
+  }
+
+  h4 {
+    font-size: 18px; /* Slightly smaller font for headings */
+  }
+
+
+
+
+}
+
+/* Media Query for Extra Small Screens */
+@media screen and (max-width: 480px) {
+  .footer {
+    padding: 15px;
+  }
+
+  h4 {
+    font-size: 16px; /* Reduce font size for extra small screens */
+  }
+
+  .footer_end_list {
+    font-size: 14px; /* Adjust font size for links */
+  }
+}
+
 
 
 

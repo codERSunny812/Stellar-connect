@@ -37,6 +37,7 @@ const Base = () => {
       </div>
 
       <div className="bottomBar">
+
         <div className="login_crendential">
           <h1>Welcome to your professional community</h1>
 
@@ -66,6 +67,7 @@ const Base = () => {
         </div>
 
         <img src={img} alt="front imageec" className="base_img" />
+        
       </div>
 
       {/* second screen 2 */}
