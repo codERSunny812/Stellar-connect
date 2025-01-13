@@ -57,3 +57,46 @@ $searchBarBg: #ecf3f6;
     justify-content: center;
   }
 }
+
+@media (max-width:768px) {
+  .header { 
+      width: 100%;
+  
+      .header_left {
+        display: flex;
+        align-items: center;
+  
+        img {
+          object-fit: contain; //maintain the aspect ratio
+          height: 33px;
+          margin-right: 15px;
+        }
+  
+        .header_searchBar {
+          display:none;
+  
+          .header_searchBar_icon {
+            color: #3c3c3f;
+            font-size: 13px;
+            font-weight: 900;
+            box-shadow: #3c3c3f;
+          }
+  
+          input {
+            margin: 0 7px;
+            outline: none;
+            border: none;
+            background: none;
+            padding-left: 6px;
+            text-transform: capitalize;
+          }
+        }
+      }
+  
+      .header_right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+}

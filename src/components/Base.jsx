@@ -75,12 +75,12 @@ const Base = () => {
         arr={collabrativeArcticle}
         mainHeading="Explore collaborative articles"
         para="We’re unlocking community knowledge in a new way. Experts add insights directly into each article, started with the help of AI."
-        bgColor="lightgray"
+        bgColor="#808080"
       />
 
       {/* screen 3 */}
       <Screen2
-        mainHeading="Find the right job or internship for you"
+        mainHeading="Find right job or internship for you"
         arr={findJobs}
         bgColor="white"
       />

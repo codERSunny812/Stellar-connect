@@ -4,9 +4,7 @@ const Screen2 = ({ arr, mainHeading, para , bgColor }) => {
   return (
       <div className="screen2" style={{ backgroundColor: bgColor}}>
     <div className="part1">
-
               <h3 className="part1_heading">{mainHeading}</h3>
-
               <p className="part1_para">
                  {para}
               </p>

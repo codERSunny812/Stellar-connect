@@ -3,7 +3,6 @@
     src: local(Roboto-Regular),url(../font/Roboto-Bold.ttf);
 }
 .feed{
-    /* border: 2px solid red; */
     flex: 0.6;
     /* font-family:Roboto; */
     
@@ -87,4 +86,92 @@ input:hover{
 .no-post p{
     text-transform: capitalize;
     font-size: 35px;
+}
+
+@media (max-width:768px) {
+ .feed{
+    width: 100%;
+    
+}
+
+.feedSection_top{
+    border: 0.5px solid  gray;
+    background: white;
+    border-radius: 12px;
+    padding: 10px 8px;
+
+}
+
+.feedSection_upload_section{
+    /* border: 2px solid brown; */
+    display: flex;
+    align-items: center;
+    margin-left: 49px;
+}
+
+.feedSection_upload_section > img{
+    height: 50px;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+input{
+    border: 0.5px solid black;
+    outline: none;
+    width: 75%;
+    padding:14px;
+    border-radius: 19px;
+}
+
+input:hover{
+    background-color: rgba(211, 211, 211, 0.589);
+}
+
+#upload_section_input::placeholder{
+    font-size: 20px;
+    font-weight: 500;
+    font-family:Roboto;
+    color: rgba(0, 0, 0, 0.939);
+}
+
+.feedSection_file_select{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 15px;
+    margin-bottom: 4px;
+}
+
+.feedSection_file_select , .feedSection_job_icon , .feedSection_article_icon {
+    display: flex;
+    align-items: center;
+   
+}
+
+.feedSection_icon{
+    font-size: 24px;
+}
+.feedSection_file_select p{
+    text-transform: capitalize;
+    margin: 0 3px;
+    font-family: Roboto;
+}
+
+.no-post{
+    /* border: 2px solid black; */
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.no-post-anim{
+    height: 400px;
+}
+
+.no-post p{
+    text-transform: capitalize;
+    font-size: 35px;
+}
+
 }

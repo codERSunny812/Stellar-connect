@@ -29,3 +29,36 @@
     color: black;
 }
 
+
+@media (max-width:768px) {
+    .headerOptions{ 
+    display: flex; 
+   flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+   margin-left: 10px;
+    color: gray;
+    cursor: pointer;
+    text-transform: capitalize;  
+}
+
+
+.header_icon{
+    /* ant design use font size to increase the size */
+    font-size: 25px; 
+    margin: 1px 0;
+    color: #676667;
+}
+
+.headerOptions > h3{
+    display: none;
+   
+}
+
+
+.headerOptions:hover , .header_icon:hover{
+    color: black;
+}
+}
+

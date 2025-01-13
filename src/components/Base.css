@@ -39,6 +39,7 @@ img{
     display: flex;
     align-items: center;
     padding: 4px 10px;
+    /* background-image: radial-gradient(circle, #222222, #323232, #434343, #555555, #676767, #6c6c6c, #707070, #757575, #6d6d6d, #656565, #5e5e5e, #565656); */
 }
 
 .login_crendential{
@@ -110,9 +111,9 @@ font-weight: 600;
 
 .screen2 {
   display: flex;
-  align-items:flex-start; /* Changed from center to flex-start */
+  align-items:center; /* Changed from center to flex-start */
   justify-content:center; /* Changed from center to space-between */
-  padding: 43px;
+  padding: 40px;
   /* margin-bottom: 12px; */
   cursor: pointer;
 }
@@ -152,7 +153,7 @@ font-weight: 600;
   /* box-sizing: border-box; Ensures padding/border don't affect width */
   border-radius:50px;
   text-align: center;
-  padding: 16px 2px;
+  padding: 15px 8px;
   color: rgb(40, 39, 39);
   text-transform: capitalize;
 
