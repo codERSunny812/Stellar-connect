@@ -5,11 +5,13 @@
   margin-top: 12px;
   border: 0.5px solid gray;
   padding: 15px 0;
+  // border: 2px solid red;
 
   .postinfo_top {
     display: flex;
     align-items: center;
-    padding-left: 25px;
+    padding-left: 20px;
+    // border: 2px solid green;
 
     img {
       height: 50px;
@@ -32,6 +34,7 @@
   }
 
   .post_content {
+    // border: 2px solid hotpink;
     font-size: 19px;
     margin: 12px;
     font-weight: 400;
@@ -44,6 +47,11 @@
 
     img {
       height: 200px;
+    }
+
+    .post_content_line{
+      color: gray;
+      padding: 3px;
     }
   }
 
@@ -61,12 +69,12 @@
       align-items: center;
 
       .icon {
-        font-size: 23px;
+        font-size: 20px;
       }
 
       p {
         text-transform: capitalize;
-        font-weight: 600;
+        font-weight: 500;
         margin-left: 3px;
       }
     }

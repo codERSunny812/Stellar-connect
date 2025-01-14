@@ -16,9 +16,7 @@ const Feed = ({ userId }) => {
   // const [posts, setPost] = useState([]);
   const [postCaption, setPostCaption] = useState("");
   const [mediaFile, setMediaFile] = useState(null);
-
   const { userData } = useContext(UserContext);
-
   const { posts, fetchPosts, addPost, likePost } = zustandStore();
 
 
@@ -72,7 +70,7 @@ const Feed = ({ userId }) => {
     }
   };
 
-  // console.log(posts)
+  console.log(posts)
 
   return (
     <div className="feed">

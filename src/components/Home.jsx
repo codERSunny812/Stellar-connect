@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserInfo";
 import { addUser } from "../Collections/User";
 import { Breathing } from "react-shimmer";
-
+ 
 const Home = () => {
   // context api for the data of all the user
   const { userData } = useContext(UserContext);

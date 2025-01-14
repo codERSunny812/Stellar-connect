@@ -4,7 +4,8 @@
 }
 
 .sideBar {
-  flex: 0.2;
+  // border: 2px solid red;
+  flex: 0.25;
   position: sticky;
   // top: 300px;
   border-radius: 12px;
@@ -19,6 +20,8 @@
     border: 1px solid lightgray;
     border-radius: 12px;
     background: white;
+    gap:9px;
+    // width: fit-content;
 
     .sideBar_bg {
       width: 100%;
@@ -36,22 +39,25 @@
     }
 
     h2 {
-      font-size: 23px;
+      font-size: 19px;
       text-transform: capitalize;
       font-family: Roboto;
-      margin-bottom: 5px;
-      margin-top: -35px;
+      margin-bottom: 3px;
+      margin-top: -34px;
       font-weight: 500;
     }
     h4 {
-      font-size: 12px;
+      text-align: center;
+      font-size: 11px;
       font-family: Roboto;
       margin-bottom: 10px;
-      font-weight: 400;
+      font-weight: 300;
+      padding: 0 8px;
     }
 
     hr {
       width: 100%;
+      color: rgba(128, 128, 128, 0.503);
     }
 
     .sideBar_stats {
@@ -63,24 +69,28 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-weight: 500;
         color: rgb(103, 102, 103);
         font-family: Roboto;
         margin: 8px 0;
         padding: 3px 15px;
-        font-weight: 200;
+
+        p{
+          font-weight: 500;
+          font-size: 13px;
+        }
+        
 
         .sideBar_num {
           color: rgba(0, 0, 255, 0.881);
-          font-weight: 500;
+          font-weight: 200;
         }
       }
 
-      .sideBarStats_one:hover,
-      .sideBarStats_two:hover {
-        background-color: lightgray;
-        width: 100%;
-      }
+      // .sideBarStats_one:hover,
+      // .sideBarStats_two:hover {
+      //   background-color: lightgray;
+      //   width: 100%;
+      // }
     }
 
     .sideBar_Premium_Info {
@@ -89,35 +99,24 @@
       padding: 4px 5px;
 
       .sideBar_text {
-        width: 75%;
+        display: flex;
+        align-items: center;
+        width: 100%;
         font-family: Roboto;
-        font-size: 15px;
+        font-size: 13px;
         text-transform: capitalize;
-        font-weight: 200;
+        font-weight: 600;
         text-align: start;
+        padding: 0 4px;
+        
+        span{
+          margin: 0 9px;
+        }
       }
 
       .sideBar_Premium_icon {
         display: flex;
         align-items: center;
-
-        .sideBar_icon {
-          font-size: 23px;
-        }
-        h6 {
-          margin: 0 4px;
-          font-size: 14px;
-          text-transform: capitalize;
-          font-family: Roboto;
-          font-weight: 5;
-        }
-      }
-    }
-
-    .sideBar_Premium_Info:hover {
-      background-color: lightgray;
-      h6 {
-        color: rgba(0, 0, 255, 0.806);
       }
     }
 
@@ -125,18 +124,14 @@
       width: 100%;
       display: flex;
       align-items: center;
-      padding: 10px;
+      margin: 5px 0;
+      padding: 4px 5px;
 
-      .sideBar_saved_post_icon {
-        font-size: 23px;
-        margin-right: 5px;
-        margin-left: 4px;
-      }
-
-      .sideBar_saved_text {
-        text-transform: capitalize;
-        font-weight: 500;
-      }
+      // .sideBar_saved_text {
+      //   margin: 0 9px;
+      //   text-transform: capitalize;
+      //   font-weight: 500;
+      // }
     }
     .sideBar_saved_post:hover {
       background-color: lightgray;
@@ -152,12 +147,13 @@
 
     p {
       text-transform: capitalize;
-      font-weight: 600;
+      font-weight: 100;
       padding: 0px 15px;
     }
 
     .recentItems {
       display: flex;
+      gap: 3px;
       text-transform: capitalize;
       margin: 6px 0;
 
@@ -176,6 +172,7 @@
     }
 
     .recentItems:hover {
+      cursor: pointer;
       background: lightgray;
       width: 100%;
       .recentItems_icon {

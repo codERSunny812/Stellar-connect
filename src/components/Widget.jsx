@@ -7,13 +7,13 @@ const Widget = () => {
     return(
       <div className="news_heading">
         <h4>{title}</h4>
-        <h6>{para}</h6>
+        <p>{para}</p>
       </div>
     )
   }
   return (
     <div className="widget">
-      <h1 className='widget_heading'>linkdln news</h1>
+      <h1 className='widget_heading'>trending now</h1>
       <h4>new stories</h4>
       <News title="building india's top ev workspace" para="2959 reader"/>
       <News title="msme rope influecers" para="9390 reader" />

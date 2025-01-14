@@ -31,13 +31,15 @@ const Post = ({ post, likePost }) => {
 
   return (
     <div className="post_section">
+      {/* top section of the post */}
       <div className="postinfo_top">
         <img src={post?.user?.avatar} alt="" style={{ borderRadius: "50%" }} />
         <div className="postInfo_about_user">
           <h4>{post?.user?.fullName}</h4>
-          <p>sde@google</p>
+          <p>bio of the user</p>
         </div>
       </div>
+      {/* post caption  */}
       <p className="post_content">{post?.caption}</p>
       {post?.media && (
         <div className="post_img">
@@ -45,7 +47,7 @@ const Post = ({ post, likePost }) => {
         </div>
       )}
 
-      <hr />
+      <hr className="post_content_line" />
 
       <div className="post_section_icon">
         <div className="like_icon_box">
@@ -54,11 +56,13 @@ const Post = ({ post, likePost }) => {
               <>
                 <LikeFilled className="icon" style={{color:'blue'}} onClick={handleLike} />
                 <p>{post?.likes}</p>
+                <p>like</p>
               </>
             ) : (
               <>
                   <LikeOutlined className="icon" onClick={handleLike} />
                   <p>{post?.likes}</p>
+                  <p>like</p>
               </>
           
             )

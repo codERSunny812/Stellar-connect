@@ -1,5 +1,5 @@
 .widget {
-  padding: 0 13px;
+  padding: 0 20px;
   flex: 0.2;
   background-color: white;
   border-radius: 12px;
@@ -7,11 +7,12 @@
   font-family: Roboto;
   border: 0.5px solid gray;
   /* margin: 0 40px; */
+  width: 100%;
 }
 
 .widget_heading {
   margin-top: 22px;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   text-transform: capitalize;
   font-size: 25px;
   font-weight: 500;
@@ -20,29 +21,30 @@
 .widget > h4 {
   text-transform: capitalize;
   font-weight: 500;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   margin-top: 10px;
 }
 
 .news_heading {
   margin-top: 13px;
   text-transform: capitalize;
-  margin-left: 12px;
+  /* margin-left: 12px; */
   margin-bottom: 8px;
 }
 
 .news_heading h4 {
-  font-size: 18px;
+  font-size: 14px;
   /* text-wrap: nowrap; */
   color: rgba(0, 0, 0, 0.813);
   font-weight: 400;
 }
 
-.news_heading h6 {
-  margin-top: 3px;
+.news_heading p {
+  /* margin-top: 3px; */
   color: gray;
   font-weight: 200;
-  padding: 2px 9px;
+  font-size:11px;
+  /* padding: 0px 9px; */
 }
 
 @media (max-width:768px) {

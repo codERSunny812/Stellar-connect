@@ -1,10 +1,11 @@
 import "./sideBar.scss";
 import { banner } from "../constants/constant.js";
-import { PoundCircleTwoTone, SaveFilled, BulbFilled } from "@ant-design/icons";
+import { BulbFilled } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import { UserContext } from "../context/UserInfo.jsx";
-
+import { FaSquare } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa6";
 const SideBar = () => {
   const { userData } = useContext(UserContext);
   
@@ -29,7 +30,7 @@ const SideBar = () => {
           alt="user profile photo"
         />
         <h2>{userData?.fullName}</h2>
-        <h4>sengersunny448@gmail.com</h4>
+        <h4>Ex Intern@Cynayd Solution||Full Stack Developer🚀|| LeetCode 1 🌟 || Open source contributer ☯⚒</h4>
 
         <hr />
         <div className="sideBar_stats">
@@ -46,21 +47,25 @@ const SideBar = () => {
         <hr />
 
         <div className="sideBar_Premium_Info">
-          <p className="sideBar_text">get 4x more profile view with premium</p>
-          <div className="sideBar_Premium_icon">
-            <PoundCircleTwoTone
-              twoToneColor="#FCD12A"
-              className="sideBar_icon"
-            />
-            <h6>try for $0</h6>
-          </div>
+          <p className="sideBar_text">
+            <span>
+            <FaSquare color="orange"/>
+            </span>
+            see all premium features
+          </p>
         </div>
 
         <hr />
 
-        <div className="sideBar_saved_post">
-          <SaveFilled className="sideBar_saved_post_icon" />
-          <span className="sideBar_saved_text">saved items</span>
+        <div className="sideBar_Premium_Info">
+          <p className="sideBar_text">
+            <span>
+              <FaBookmark color="slategray" />
+            </span>
+            saved items
+          </p>
+          
+          
         </div>
       </div>
 
