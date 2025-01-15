@@ -2,9 +2,6 @@ import { addDoc, collection , where , getDocs , query } from 'firebase/firestore
 import {db} from '../constants/Firebase.config'
 
 
-
-
-
 // Function to add a friend
 export const addFriend = async (userId, friendId) => {
     try {

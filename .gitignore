@@ -25,26 +25,3 @@ dist-ssr
 *.sw?
 
 
-
-
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAUDUPbhQhFl7p9wk6cmkqKCsrYUr8SbCw",
-  authDomain: "stellarconnect-605a0.firebaseapp.com",
-  projectId: "stellarconnect-605a0",
-  storageBucket: "stellarconnect-605a0.firebasestorage.app",
-  messagingSenderId: "933116417347",
-  appId: "1:933116417347:web:b3ea7ed803ebe85b0bcbf6",
-  measurementId: "G-CHFEJLED5L"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
