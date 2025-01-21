@@ -1,0 +1,89 @@
+.post_section {
+  background-color: white;
+  font-family: Roboto, sans-serif;
+  border-radius: 12px;
+  margin-top: 12px;
+  border: 0.5px solid gray;
+  padding: 15px 0;
+}
+
+.post_section .postinfo_top {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.post_section .postinfo_top img {
+  height: 50px;
+  width: 50px;
+}
+
+.post_section .postinfo_top .postInfo_about_user {
+  margin-left: 12px;
+}
+
+.post_section .postinfo_top .postInfo_about_user h4 {
+  text-transform: capitalize;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.post_section .postinfo_top .postInfo_about_user p {
+  text-transform: capitalize;
+  font-size: 10px;
+  font-weight: 400;
+  margin-top: -10px;
+}
+
+.post_section .post_content {
+  font-size: 19px;
+  margin: 12px;
+  font-weight: 400;
+}
+
+.post_section .post_img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.post_section .post_img img {
+  height: 200px;
+}
+
+.post_section .post_img .post_content_line {
+  color: gray;
+  padding: 3px;
+}
+
+.post_section .post_section_icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 12px;
+}
+
+.post_section .post_section_icon .like_icon_box,
+.post_section .post_section_icon .comment_icon_box,
+.post_section .post_section_icon .share_icon_box,
+.post_section .post_section_icon .repost_icon_box {
+  display: flex;
+  align-items: center;
+}
+
+.post_section .post_section_icon .like_icon_box .icon,
+.post_section .post_section_icon .comment_icon_box .icon,
+.post_section .post_section_icon .share_icon_box .icon,
+.post_section .post_section_icon .repost_icon_box .icon {
+  font-size: 20px;
+}
+
+.post_section .post_section_icon .like_icon_box p,
+.post_section .post_section_icon .comment_icon_box p,
+.post_section .post_section_icon .share_icon_box p,
+.post_section .post_section_icon .repost_icon_box p {
+  text-transform: capitalize;
+  font-weight: 500;
+  margin-left: 3px;
+}

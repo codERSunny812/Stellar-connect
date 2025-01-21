@@ -1,4 +1,4 @@
-import "./post.scss";
+import "./post.css";
 import {
   LikeOutlined,
   LikeFilled,

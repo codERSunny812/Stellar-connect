@@ -1,0 +1,20 @@
+.shimmer-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.App_body {
+  display: flex;
+  gap: 20px;
+  background-color: #f5f3ee;
+  margin: 29px 69px;
+}
+
+@media (max-width: 768px) {
+  .App_body {
+    flex-direction: column; /* Stack elements vertically */
+    margin: 15px;          /* Remove the margins to allow full width */
+    gap: 0;                /* Remove gaps between elements */
+  }
+}

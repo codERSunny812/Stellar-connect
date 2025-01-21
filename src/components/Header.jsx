@@ -1,4 +1,4 @@
-import "./header.scss";
+import "./header.css";
 import { Linkedln_logo } from "../constants/constant";
 import {
   SearchOutlined,

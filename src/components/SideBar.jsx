@@ -1,4 +1,4 @@
-import "./sideBar.scss";
+import "./sideBar.css";
 import { banner } from "../constants/constant.js";
 import { BulbFilled } from "@ant-design/icons";
 import PropTypes from "prop-types";
