@@ -14,10 +14,10 @@ const MyNetwork = () => {
   const [friends, setFriends] = useState([]);
   const [friendDetails, setFriendDetails] = useState([]);
 
-  console.log(allUser);
-  console.log(friends);
-  console.log(id);
-  console.log(userData);
+  // console.log(allUser);
+  // console.log(friends);
+  // console.log(id);
+  // console.log(userData);
 
   useEffect(() => {
     if (!id) return; // Exit early if id is not defined

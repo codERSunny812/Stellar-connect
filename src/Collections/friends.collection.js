@@ -11,7 +11,7 @@ export const addFriend = async (userId, friendId) => {
             friendId
         };
         await addDoc(friendRef, friendDoc);
-        console.log(`Friend added: ${friendId}`);
+        // console.log(`Friend added: ${friendId}`);
     } catch (error) {
         console.error("Error adding friend: ", error);
     }

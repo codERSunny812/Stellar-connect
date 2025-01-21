@@ -2,15 +2,16 @@ import "./sideBar.scss";
 import { banner } from "../constants/constant.js";
 import { BulbFilled } from "@ant-design/icons";
 import PropTypes from "prop-types";
-import { useContext } from "react";
-import { UserContext } from "../context/UserInfo.jsx";
 import { FaSquare } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa6";
-const SideBar = () => {
-  const { userData } = useContext(UserContext);
-  
+import useStore from "../store/Store.js";
 
-  // component for the recent item
+const SideBar = () => {
+//  extracting the user data from zustand store
+  const useData = useStore((state) => state.userData); 
+
+  // console.log("user data in side bar:", useData);
+
   const RecentItems = ({ title }) => {
     return (
       <div className="recentItems">
@@ -25,11 +26,11 @@ const SideBar = () => {
       <div className="sideBar_top">
         <img src={banner} alt="user bg" className="sideBar_bg" />
         <img
-          src={userData?.imageUrl}
+          src={useData?.imageUrl}
           className="sideBar_avtar"
           alt="user profile photo"
         />
-        <h2>{userData?.fullName}</h2>
+        <h2>{useData?.fullName}</h2>
         <h4>Ex Intern@Cynayd Solution||Full Stack Developer🚀|| LeetCode 1 🌟 || Open source contributer ☯⚒</h4>
 
         <hr />

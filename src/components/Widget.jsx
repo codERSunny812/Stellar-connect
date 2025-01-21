@@ -1,7 +1,8 @@
 import './widget.css';
 import PropTypes from 'prop-types';
 
-const Widget = () => {
+
+const Widget =() => {
 
   const News = ({title,para})=>{
     return(

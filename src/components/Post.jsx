@@ -9,14 +9,15 @@ import {
 import PropTypes from "prop-types";
 import {Shimmer}    from 'react-shimmer'
 import {useState} from 'react'
+import LazyLoad from "react-lazyload";
 
 
 const Post = ({ post, likePost }) => {
   
   // console.log(likePost);
 
-  console.log('the data  of the post array is:');
-  console.log(post);
+  // console.log('the data  of the post array is:');
+  // console.log(post);
   const [postLiked , setPostLiked] = useState(false);
 
 
@@ -33,9 +34,9 @@ const Post = ({ post, likePost }) => {
     <div className="post_section">
       {/* top section of the post */}
       <div className="postinfo_top">
-        <img src={post?.user?.avatar} alt="" style={{ borderRadius: "50%" }} />
+        <img src={post?.uploadUser?.imageUrl} alt="" style={{ borderRadius: "50%" }} />
         <div className="postInfo_about_user">
-          <h4>{post?.user?.fullName}</h4>
+          <h4>{post?.uploadUser?.fullName}</h4>
           <p>bio of the user</p>
         </div>
       </div>
@@ -43,7 +44,9 @@ const Post = ({ post, likePost }) => {
       <p className="post_content">{post?.caption}</p>
       {post?.media && (
         <div className="post_img">
+          <LazyLoad height={200} offset={100} once> 
           <img src={post?.media} alt="" />
+          </LazyLoad>
         </div>
       )}
 
@@ -55,13 +58,13 @@ const Post = ({ post, likePost }) => {
             postLiked ? (
               <>
                 <LikeFilled className="icon" style={{color:'blue'}} onClick={handleLike} />
-                <p>{post?.likes}</p>
+                <p>{post?.likes || 0}</p>
                 <p>like</p>
               </>
             ) : (
               <>
                   <LikeOutlined className="icon" onClick={handleLike} />
-                  <p>{post?.likes}</p>
+                  <p>{post?.likes || 0}</p>
                   <p>like</p>
               </>
           

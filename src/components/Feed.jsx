@@ -1,81 +1,27 @@
 import "./Feed.css";
 import { PictureTwoTone, ToolTwoTone, FilePdfTwoTone } from "@ant-design/icons";
 import Post from "./Post";
-import { useState, useEffect, useContext } from "react";
-import { storage } from "../constants/Firebase.config";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-//import { addPost, getPost } from '../Collections/Post';
-import PropTypes from "prop-types";
-import { UserContext } from "../context/UserInfo";
+import { useState, useEffect } from "react";
 import Lottie from "lottie-react";
 import NoPost from "../animation/NoPost.json";
-import zustandStore from "../store/Store";
 import OutsideClickHandler from "react-outside-click-handler";
 import { RxCross1 } from "react-icons/rx";
+import useStore from "../store/Store";
+import { fileUpload , resizeFile } from "../Service/file.upload";
+// import { updateUser } from "../Collections/user.collection";
+import toast from 'react-hot-toast';
 
 
-const Feed = ({ userId }) => {
-  // const [posts, setPost] = useState([]);
+const Feed = () => {
   const [postCaption, setPostCaption] = useState("");
   const [mediaFile, setMediaFile] = useState(null);
   const [isModal, setIsModal] = useState(false);
-  const { userData } = useContext(UserContext);
-  const { posts, fetchPosts, addPost, likePost } = zustandStore();
+  const userData = useStore((state) => state.userData);
+  const { fetchPosts, posts, addPost } = useStore((state) => state);
 
-  useEffect(() => {
-    fetchPosts();
-  }, [fetchPosts]);
-
-  const handlePostCaption = (e) => {
-    setPostCaption(e.target.value);
-  };
-
-  // const handleInputKeyPress = async (e) => {
-  //   if (e.key === "Enter" && postCaption.trim()) {
-  //     await handleSubmit();
-  //   }
-  // };
-
-  const handleFileChange = async (e) => {
-    if (e.target.files[0]) {
-      setMediaFile(e.target.files[0]);
-    }
-  };
-
-  const handleSubmit = async () => {
-    let mediaUrl = "";
-
-    if (mediaFile) {
-      try {
-        const storageRef = ref(storage, `media/${mediaFile.name}`);
-        await uploadBytes(storageRef, mediaFile);
-        mediaUrl = await getDownloadURL(storageRef);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    try {
-      const newPost = {
-        caption: postCaption,
-        media: mediaUrl,
-        userId: userId,
-        createdAt: new Date(),
-        likes: 0,
-      };
-      await addPost(newPost);
-      // setPost(prevPosts => [...prevPosts, { id: postId, ...newPost }]);
-      setPostCaption("");
-      setMediaFile(null);
-    } catch (error) {
-      console.log("error in adding the document");
-    }
-  };
-
-  const handleModel = () => {
-    setIsModal(true);
-  };
-
+  console.log("post data in feed:", posts);
+  
+// function to handle the model 
   useEffect(() => {
     const handleEsc = (event) => {
       if (event.key === "Escape") {
@@ -87,9 +33,94 @@ const Feed = ({ userId }) => {
   }, []);
 
 
-  // console.log(posts)
-  console.log(postCaption)
-  console.log(userData);
+  // function to fetch all the post from firestore
+  useEffect(()=>{
+   fetchPosts();
+  },[userData])
+
+  // function to handle the post caption``
+  const handlePostCaption = (e) => {
+    setPostCaption(e.target.value);
+  };
+
+
+  // function to handle the image upload 
+  const handleImgUpload = async (e) => {
+    if (e.target.files[0]) {
+      setMediaFile(e.target.files[0]);
+    }
+  };
+
+  // function to upload the image upload after the button click
+  const handlePostUpload =async()=>{
+    // toast message if the caption and media file is empty
+    if (!postCaption && !mediaFile) {
+      return toast('Please add a caption or media before posting.',
+        {
+          duration: 3000,
+          position: 'top-center',
+          pauseOnHover: true,
+          //custom icon
+          icon: '👏',
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+            width: '300px',
+          },
+        }
+      );
+    }
+    toast.promise(
+      new Promise(async (resolve, reject) => {
+        try {
+          let resizeFileUrl = "";
+          let mediaUrl = "";
+
+          if (mediaFile) {
+            //resize the image before uploading
+            resizeFileUrl = await resizeFile(mediaFile);
+            console.log("resize file url:", resizeFileUrl);
+            mediaUrl = await fileUpload(resizeFileUrl); // upload the resized file to the cloudinary
+          }
+
+          //create the post object
+          const postContent = {
+            caption: postCaption || "",
+            media: mediaUrl || "",
+            uploadUser: userData,
+            createdAt: new Date(),
+          }
+
+          //add the post to the firestore and also update the user
+          await addPost(postContent, userData.id);
+          fetchPosts();
+
+          //clear the state of the image and text area 
+          setPostCaption("");
+          setMediaFile(null);
+          setIsModal(false);
+          resolve("Post uploaded successfully! 🎉");
+        } catch (error) {
+          reject("Failed to upload the post. 😞");
+          console.error("Error uploading file:", error.message);
+        }
+
+      })
+     ,
+      {
+        loading: 'Loading',
+        success: 'post uploaded successfully',
+        error: 'Error in uploading post',
+      }
+    )
+  }
+
+  const handleModel = () => {
+    setIsModal(true);
+  };
+
+
 
   return (
     <div className="feed">
@@ -101,16 +132,7 @@ const Feed = ({ userId }) => {
             alt=""
             style={{ borderRadius: "50%", height: "50px", width: "50px" }}
           />
-          {/* <input
-    type="text"
-    id="upload_section_input"
-    placeholder="Start a post"
-    value={postCaption}
-    onChange={handleInputChange}
-    onKeyPress={handleInputKeyPress}
-    onClick={handleModel}
 
-  /> */}
           <div
             id="upload_section_input"
             className="fake-input"
@@ -148,7 +170,7 @@ const Feed = ({ userId }) => {
                       </div>
                     </div>
                     <div className="right">
-                      <RxCross1 onClick={() => setIsModal(false)} />
+                      <RxCross1 onClick={() => setIsModal(false)} aria-label="close model" />
                     </div>
                   </div>
 
@@ -168,11 +190,21 @@ const Feed = ({ userId }) => {
                   {/* Modal Footer */}
                   <div className="modal-footer">
                     <div className="action-buttons">
-                      <button className="attach-button">📷 Photo</button>
+                      <label className="attach-button" >
+                      📷 Photo
+                        <input
+                          type="file"
+                          style={{ display: "none" }}
+                        onChange={handleImgUpload}
+                        /> 
+                    
+                      </label>
                       <button className="attach-button">🎥 Video</button>
                       <button className="attach-button">💼 Job</button>
                     </div>
-                    <button className="post-button">Post</button>
+                    <button className="post-button"
+                    onClick={handlePostUpload}
+                    >Post</button>
                   </div>
                 </div>
               </div>
@@ -181,24 +213,17 @@ const Feed = ({ userId }) => {
         </div>
         <div className="feedSection_file_select">
           <div className="feedSection_file_select">
-            <label>
-              <PictureTwoTone className="feedSection_icon" twoToneColor="red" />
-              <input
-                type="file"
-                style={{ display: "none" }}
-                onChange={handleFileChange}
-              />
-            </label>
+              <PictureTwoTone className="feedSection_icon" twoToneColor="" />
             <p>media</p>
           </div>
           <div className="feedSection_job_icon">
-            <ToolTwoTone className="feedSection_icon" twoToneColor="green" />
+            <ToolTwoTone className="feedSection_icon" twoToneColor="" />
             <p>jobs</p>
           </div>
           <div className="feedSection_article_icon">
             <FilePdfTwoTone
               className="feedSection_icon"
-              twoToneColor="orange"
+              twoToneColor=""
             />
             <p>article</p>
           </div>
@@ -208,12 +233,12 @@ const Feed = ({ userId }) => {
       {/* Post section of the feed */}
       {posts.length > 0 ? (
         posts.map((post) => (
-          <div key={post.userId}>
-            <Post post={post} likePost={likePost} />
+          <div key={post.id}>
+            <Post post={post} />
           </div>
         ))
       ) : (
-        <div className="no-post">
+        <div className="no-post" key={1}>
           <Lottie animationData={NoPost} className="no-post-anim" />
           <p>No posts available</p>
         </div>
@@ -222,8 +247,9 @@ const Feed = ({ userId }) => {
   );
 };
 
-Feed.propTypes = {
-  userId: PropTypes.string,
-};
+
 
 export default Feed;
+
+
+

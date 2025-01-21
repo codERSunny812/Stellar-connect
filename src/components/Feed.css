@@ -163,7 +163,7 @@ padding:2px;
   gap: 10px;
 }
 
-.attach-button {
+.attach-button ,label {
   background: none;
   border: none;
   cursor: pointer;

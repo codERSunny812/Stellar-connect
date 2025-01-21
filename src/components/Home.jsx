@@ -2,28 +2,22 @@ import SideBar from "./SideBar";
 import Feed from "./Feed";
 import Widget from "./Widget";
 import "./Home.scss";
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/UserInfo";
-import { addUser } from "../Collections/User";
+import { useEffect} from "react";
+import { addUser } from "../Collections/user.collection.js";
 import { Breathing } from "react-shimmer";
- 
+import useStore from "../store/Store.js";
+
 const Home = () => {
-  // context api for the data of all the user
-  const { userData } = useContext(UserContext);
-  console.log("the data of the loggedin user:"+userData);
+  const userData = useStore((state) => state.userData);
 
-  const [userId, setUserId] = useState(null);
+  // console.log("user data in the home component:", userData);
 
-  // console.log(userId); //both are same
-  // console.log(userData?.id); //both are same
-
-  // adding the data of the user to the DB
+  // adding the data of the user to the firebase DB
   useEffect(() => {
     const addUserToDb = async () => {
       if (userData && userData?.id) {
         try {
-          const userId = await addUser(userData);
-          setUserId(userId);
+        await addUser(userData);
         } catch (error) {
           console.log(`Error adding user to DB: ${error.message}`);
         }
@@ -47,7 +41,7 @@ const Home = () => {
     <>
       <div className="App_body">
         <SideBar />
-        <Feed userId={userId} />
+        <Feed />
         <Widget />
       </div>
     </>

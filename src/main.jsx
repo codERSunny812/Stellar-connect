@@ -7,7 +7,6 @@ import "@fontsource/roboto/700.css";
 import { RouterProvider } from "react-router-dom";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { dark } from "@clerk/themes";
-import { UserContextProvider } from "./context/UserInfo.jsx";
 import React from "react";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -24,9 +23,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         baseTheme: dark,
       }}
     >
-      <UserContextProvider>
+
         <RouterProvider router={Router} />
-      </UserContextProvider>
     </ClerkProvider>
   </React.StrictMode>
 );
