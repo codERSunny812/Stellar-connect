@@ -1,7 +1,7 @@
 import SideBar from "./SideBar";
 import Feed from "./Feed";
 import Widget from "./Widget";
-import "./Home.css";
+import "./home.css";
 import { useEffect} from "react";
 import { addUser } from "../Collections/user.collection.js";
 import { Breathing } from "react-shimmer";
