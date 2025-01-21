@@ -4,7 +4,6 @@ import Post from "./Post";
 import { useState, useEffect } from "react";
 import Lottie from "lottie-react";
 import NoPost from "../animation/NoPost.json";
-import OutsideClickHandler from "react-outside-click-handler";
 import { RxCross1 } from "react-icons/rx";
 import useStore from "../store/Store";
 import { fileUpload , resizeFile } from "../Service/file.upload";
@@ -140,14 +139,6 @@ const Feed = () => {
           >
             Start a post
           </div>
-          <OutsideClickHandler
-            onOutsideClick={(e) => {
-              if (isModal) {
-                console.log("Outside clicked", e.target); // For debugging
-                setIsModal(false);
-              }
-            }}
-          >
             {isModal && (
               <div className="post-upload-section">
                 <div className="post-upload-content">
@@ -209,7 +200,6 @@ const Feed = () => {
                 </div>
               </div>
             )}
-          </OutsideClickHandler>
         </div>
         <div className="feedSection_file_select">
           <div className="feedSection_file_select">
