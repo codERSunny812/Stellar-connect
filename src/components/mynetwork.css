@@ -1,0 +1,72 @@
+@font-face {
+  font-family: Roboto;
+  src: local(Roboto-Regular), url(../font/Roboto-Regular.ttf);
+}
+.myNetworkContainer {
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  font-family: Roboto;
+}
+
+.myNetworkGridContainer {
+  display: grid;
+  grid-template-columns: 0.1fr 1.2fr 3fr 0.1fr; /* Margins and content columns */
+  gap: 30px;
+}
+
+.myNetworkList {
+  background-color: #fff;
+  border-radius: 20px;
+  border: 0.9px solid dimgray;
+}
+
+.topPartMyNetwork{
+    padding: 10px;
+    width: 100%;
+    border-bottom: 0.4px solid gray;
+}
+
+.topPartMyNetwork > h1{
+    text-transform: capitalize;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 3px 2px;
+}
+
+.bottomPartMyNetwork{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+}
+
+.MyNetwork{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: dimgray;
+
+}
+
+.MyNetwork .icon{
+font-size: 25px;
+}
+
+.MyNetwork span{
+    font-weight: 300;
+}
+
+.Item1 , .Item2 , .Item3 ,.Item4 , .Item5 , .Item6{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-transform: capitalize;
+}
+
+.myNetworkInfo {
+  background-color: #fff;
+  border: 0.9px solid dimgray;
+  border-radius: 20px;
+}

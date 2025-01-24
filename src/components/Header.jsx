@@ -9,14 +9,23 @@ import {
   BellFilled,
 } from "@ant-design/icons";
 import HeaderOption from "./HeaderOption";
+import { Link, useLocation } from "react-router-dom";
+import useStore from "../store/Store";
 import { UserButton } from "@clerk/clerk-react";
-import { Link } from "react-router-dom";
-// import { useContext } from "react";
-// import { UserContext } from "../context/UserInfo";
+
 
 const Header = () => {
-  // const { userData } = useContext(UserContext);
-  // console.log("UserData in Header:", userData);
+
+  const data = useStore((state) => state.userData);
+  const location = useLocation();
+
+  console.log(location)
+
+  let imageUrl = "";
+  if(data){
+   imageUrl = data.imageUrl;
+  }
+  // console.log(imageUrl)
 
   return (
     <div className="header">
@@ -52,9 +61,11 @@ const Header = () => {
           <HeaderOption Icon={BellFilled} title="notification" />
         </Link>
 
-        <Link to="/profile" style={{ textDecoration: "none" }}>
-          <UserButton />
-          {/* <img src={avtar}  /> */}
+        <Link to="/profile" style={{ textDecoration: "none" , overflow: "hidden" }}>
+        {
+            location.pathname === "/profile" ? <UserButton className="custom-user" /> : <img src={imageUrl || ""} style={{ width: "35px", height: "35px", borderRadius: 50 }} />
+        }
+          
         </Link>
       </div>
     </div>

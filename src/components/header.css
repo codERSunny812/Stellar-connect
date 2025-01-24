@@ -55,6 +55,12 @@
   justify-content: center;
 }
 
+.custom-user{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
 @media (max-width: 768px) {
   .header {
     width: 100%;

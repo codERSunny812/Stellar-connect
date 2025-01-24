@@ -7,7 +7,6 @@ import NoPost from "../animation/NoPost.json";
 import { RxCross1 } from "react-icons/rx";
 import useStore from "../store/Store";
 import { fileUpload , resizeFile } from "../Service/file.upload";
-// import { updateUser } from "../Collections/user.collection";
 import toast from 'react-hot-toast';
 
 
@@ -15,6 +14,7 @@ const Feed = () => {
   const [postCaption, setPostCaption] = useState("");
   const [mediaFile, setMediaFile] = useState(null);
   const [isModal, setIsModal] = useState(false);
+  const [imagePreview , setImagePreview]  = useState(null);
   const userData = useStore((state) => state.userData);
   const { fetchPosts, posts, addPost } = useStore((state) => state);
 
@@ -46,9 +46,20 @@ const Feed = () => {
   // function to handle the image upload 
   const handleImgUpload = async (e) => {
     if (e.target.files[0]) {
-      setMediaFile(e.target.files[0]);
+      const file = e.target.files[0];
+      setMediaFile(file);
+      setImagePreview(URL.createObjectURL(file));
     }
   };
+
+  // clear the file  preview 
+  const clearImagePreview = ()=>{
+    if(imagePreview){
+      URL.revokeObjectURL(imagePreview) // clear the memory 
+    }
+    setMediaFile(null);
+    setImagePreview(null);
+  }
 
   // function to upload the image upload after the button click
   const handlePostUpload =async()=>{
@@ -97,7 +108,7 @@ const Feed = () => {
 
           //clear the state of the image and text area 
           setPostCaption("");
-          setMediaFile(null);
+          clearImagePreview();
           setIsModal(false);
           resolve("Post uploaded successfully! 🎉");
         } catch (error) {
@@ -174,6 +185,23 @@ const Feed = () => {
                       onChange={handlePostCaption}
                       aria-label="Post caption"
                     ></textarea>
+
+                    {
+                      imagePreview && (
+                      <div className="image-preview">
+                        <img
+                          src={imagePreview}
+                          alt="Selected preview"
+                        />
+                        <div
+                          onClick={clearImagePreview}
+                          className="clear-preview-btn"
+                        >
+                        <RxCross1/>
+                        </div>
+                      </div>
+                      )
+                    }
                   </div>
 
                     <hr />

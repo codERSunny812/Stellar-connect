@@ -10,9 +10,8 @@ import SignUpPage from "./components/Signup.jsx";
 import SignInPage from "./components/Signin.jsx";
 import { useUser } from "@clerk/clerk-react";
 import useStore  from './store/Store.js'
-// import { ToastContainer } from "react-toastify"; // Import ToastContainer
-// import "react-toastify/dist/ReactToastify.css"; // Import CSS for Toastify
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
+import Profile from "./components/Profile.jsx";
 
 // lazy loading the component
 const MyNetwork = React.lazy(() => import("./components/MyNetwork"));
@@ -23,10 +22,6 @@ const Notification = React.lazy(() => import("./components/Notification"));
 function App() {
   const {user} = useUser(); //clerk user object
   const { userData,setUser }= useStore((state)=>state);
-
-  // console.log("user data in clerk:",user)
-  // console.log("user data in our store:", userData)
-  // console.log("user update function in our store:",setUser)
 
   //update the state of the store with the clerk user data
   useEffect(() => {
@@ -46,19 +41,6 @@ function App() {
   return (
     <>
       <Toaster />
-      {/* <ToastContainer
-        // position="top-center"
-        // autoClose={3000}
-        // hideProgressBar={false}
-        // newestOnTop
-        // closeOnClick
-        // rtl={false}
-        // pauseOnFocusLoss
-        // draggable
-        // pauseOnHover
-        // theme="dark"
-      /> */}
-      {/* <Toaster/> */}
       <Outlet />
     </>
   );
@@ -120,7 +102,8 @@ export const Router = createBrowserRouter([
             element: (
               <Suspense fallback={<div>Loading...</div>}>
                 {" "}
-                <UserProfile />{" "}
+                {/* <UserProfile />{" "} */}
+                <Profile/>
               </Suspense>
             ),
           },
