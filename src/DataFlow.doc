@@ -1,6 +1,7 @@
-1. when now user is signed in the base component is be rendered
+1. when a user is not signed in the base component is be rendered
 2. we can click on sign up to open signup componet and sign in to open sign in component
-3. when signed in i have used zustand to  manage the data of the user globally , when signed in and clerk is loaded then i will update the state of the user in the store.
+3. when signed in i have used zustand to  manage the data of the user globally , when signed in and clerk is loaded then i will update the state of the user in the store from cler useUser hook
 4. after successfull sign in the home component will be rendered which shows 3 component side bar , feed and widget and in the home component there is a function to add the user data in the firebase into the user collection.
 5. in the sidebar there is not too much it just show the basic profile of the current loggedIn user like his name and profile pic from the store.
 6. now feed is the main component of this which show all the post upload and an input box to upload the post and all.
+7. The feed section has input box with which he can upload posts 

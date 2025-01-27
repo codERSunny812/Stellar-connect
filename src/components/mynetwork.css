@@ -97,11 +97,13 @@ padding: 10px 20px;
 
 .cardsContent {
   display: flex;
-  gap: 20px;
+  gap: 1rem;
   overflow: hidden;
+  width: 100%;
 }
 
 .myNetworkCardsContent {
+   flex: 0 0 30%;
   border: 1px solid dimgray;
   padding:5px;
   height: 250px;
@@ -152,5 +154,88 @@ background:none;
 border: 2px solid blue;
 background-color: rgba(0, 0, 255, 0.161);
 cursor: pointer;
+}
+
+.connectUserBtn:hover {
+  background-color: blue;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.connectUserBtn:hover .connectUserBtn-icon {
+  color: white;
+}
+
+.connectUserBtn:hover p {
+  color: white;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .myNetworkGridContainer {
+    /* border: 2px solid red; */
+    grid-template-columns: 1fr; /* Single column for smaller screens */
+    gap: 20px;
+  }
+
+  .bottomPartMyNetwork {
+    /* border: 2px solid gold; */
+    /* flex-direction: row; */
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .MyNetwork {
+    /* border: 2px solid yellowgreen; */
+    flex-direction:row;
+  }
+
+  .cardsContent {
+    display: flex;
+    overflow-x: hidden;
+    width: 100%; /* Ensures only one card is visible */
+    justify-content: center; /* Center-align the card */
+  }
+
+   .myNetworkCardsContent {
+    flex: 0 0 100%; /* Show 1 card at a time on mobile view */
+  }
+
+
+  .myNetworkCardsContent img {
+    height: 60%;
+    width: 100%;
+  }
+
+  .connectUserBtn {
+    width: 100%;
+  }
+
+  .upperPartOfCard {
+    justify-content: space-between; /* Ensure navigation buttons are easily accessible */
+  }
+
+  .arrow-btn {
+    font-size: 25px; /* Slightly smaller navigation buttons */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .arrow-btn {
+    font-size: 25px;
+  }
+
+  .topPartMyNetwork > h1 {
+    font-size: 16px;
+  }
+
+  .MyNetwork span {
+    font-size: 12px;
+  }
+
+  .connectUserBtn p {
+    font-size: 13px;
+  }
 }
 

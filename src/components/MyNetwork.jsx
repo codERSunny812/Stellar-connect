@@ -6,7 +6,7 @@ import { MdEmojiEvents } from "react-icons/md";
 import { RiPagesFill } from "react-icons/ri";
 // import {users as data} from '../data'
 import { HiArrowCircleLeft , HiArrowCircleRight } from "react-icons/hi";
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import { TiUserAdd } from "react-icons/ti";
 import useStore from '../store/Store';
 
@@ -19,21 +19,48 @@ const MyNetwork = () => {
   const data = useStore((state) => state.allSignedUpUser)
   // console.log("data of all the user inside the mynetwork  page is:",data)
   const [startIndex, setStartIndex] = useState(0);
+  const [cardsToShow, setCardsToShow] = useState(3);
   const visibleCards = 3;
+
+  // Update the number of cards to show based on screen size
+  useEffect(() => {
+    const updateCardsToShow = () => {
+      setCardsToShow(window.innerWidth <= 768 ? 1 : 3);
+    };
+
+    updateCardsToShow(); // Set initial value
+    window.addEventListener("resize", updateCardsToShow);
+
+    return () => window.removeEventListener("resize", updateCardsToShow);
+  }, []);
+
+
+
+  // const handlePrev = () => {
+  //   setStartIndex((prev) => {
+  //     // If at the beginning, wrap to the end
+  //     return prev - 1 < 0 ? 0 : prev - 1;
+  //   });
+  // };
+
+  // const handleNext = () => {
+  //   setStartIndex((prev) => {
+  //     console.log(prev)
+  //     // If at the end, wrap to the beginning
+  //     return prev + 1 >= data.length ? 0 : prev + 1;
+  //   });
+  // };
 
 
   const handlePrev = () => {
     setStartIndex((prev) => {
-      // If at the beginning, wrap to the end
-      return prev - 1 < 0 ? 0 : prev - 1;
+      return prev - cardsToShow < 0 ? data.length - cardsToShow : prev - cardsToShow;
     });
   };
 
   const handleNext = () => {
     setStartIndex((prev) => {
-      console.log(prev)
-      // If at the end, wrap to the beginning
-      return prev + 1 >= data.length ? 0 : prev + 1;
+      return prev + cardsToShow >= data.length ? 0 : prev + cardsToShow;
     });
   };
 
@@ -52,7 +79,6 @@ const MyNetwork = () => {
             </div>
             <div className="bottomPartMyNetwork">
               <div className="MyNetwork">
-
                 <div className="Item1">
                   <FaPeopleArrows className='icon' />
                   <h3>connections</h3>
@@ -61,6 +87,7 @@ const MyNetwork = () => {
                 <span>23</span>
 
               </div>
+
               <div className="MyNetwork">
                 <div className="Item2">
                   <MdContactPhone className='icon' />
@@ -69,6 +96,7 @@ const MyNetwork = () => {
                 
                 <span>23</span>
               </div>
+
               <div className="MyNetwork">
                 <div className="Item3">
                   <FaPeopleGroup className='icon' />
@@ -76,6 +104,7 @@ const MyNetwork = () => {
                 </div>
                 <span>23</span>
               </div>
+
               <div className="MyNetwork">
                 <div className="Item4">
                   <HiUserGroup className='icon' />
@@ -83,6 +112,7 @@ const MyNetwork = () => {
                 </div>
                 <span>34</span>
               </div>
+
               <div className="MyNetwork">
                <div className="Item5">
                   <MdEmojiEvents className='icon' />
@@ -91,6 +121,7 @@ const MyNetwork = () => {
               
               <span>3</span>
               </div>
+
               <div className="MyNetwork Item6">
                 <div className="Item6">
                   <RiPagesFill className='icon' />
@@ -124,7 +155,7 @@ const MyNetwork = () => {
                 </div>
 
                 <div className="cardsContent">
-                  {data.slice(startIndex, startIndex + visibleCards).map((user) => (
+                  {data.slice(startIndex, startIndex + cardsToShow).map((user) => (
                     <div className="myNetworkCardsContent" key={user.id}>
                       <img src={user.avatar} alt={user.name} />
                       <p>{user.fullName}</p>
