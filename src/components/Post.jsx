@@ -8,23 +8,46 @@ import {
 } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import {Shimmer}    from 'react-shimmer'
-import {useState} from 'react'
 import LazyLoad from "react-lazyload";
+import { useDispatch , useSelector } from "react-redux";
+import { toggleLike, setInitialState} from "../Redux Store/likePost.slice";
+import { updateLikeCountInDatabase , getLikeStateFromDatabase } from "../Collections/post.collection";
+import { useEffect } from "react";
+import useStore from '../store/Store.js'
 
 
-const Post = ({ post, likePost }) => {
+
+
+const Post = ({ post }) => {
+  // console.log("the value of post inside post component:",post)
+  const dispatch = useDispatch();
+  const { userData } = useStore((state) => state);
   
-  // console.log(likePost);
 
-  // console.log('the data  of the post array is:');
-  // console.log(post);
-  const [postLiked , setPostLiked] = useState(false);
+  // Load initial like state from the database
+  useEffect(() => {
+    const fetchLikeState = async () => {
+      const likeState = await getLikeStateFromDatabase(post.id);
+      dispatch(setInitialState({ postId: post.id, ...likeState }));
+    };
+
+    fetchLikeState();
+  }, [post.id, dispatch , userData]);
 
 
-  const handleLike = ()=>{
-    setPostLiked(true);
-    likePost(post.id);
-  }
+  // Get the like state for the current post
+  const likeData = useSelector((state) => state.postLikes.likes[post.id]) || {
+    isLiked: false,
+    likeCount: 0,
+  };
+
+  console.log("the value of the likeData inside the post component:", likeData)
+ 
+  const handleLike = async () => {
+    const newIsLiked = !likeData.isLiked; // Toggle the like state
+    dispatch(toggleLike(post.id)); // Update Redux state
+    await updateLikeCountInDatabase(post.id, newIsLiked); // Update database
+  };
 
   if(!post.id){
     return <Shimmer width={100} height={100}/>;
@@ -37,7 +60,7 @@ const Post = ({ post, likePost }) => {
         <img src={post?.uploadUser?.imageUrl} alt="" style={{ borderRadius: "50%" }} />
         <div className="postInfo_about_user">
           <h4>{post?.uploadUser?.fullName}</h4>
-          <p>bio of the user</p>
+          <p>{new Date(post?.createdAt?.seconds * 1000).toLocaleDateString()}</p>
         </div>
       </div>
       {/* post caption  */}
@@ -50,42 +73,40 @@ const Post = ({ post, likePost }) => {
         </div>
       )}
 
+      <div className="PostStatsInfo">
+        <div className="likePostInfo">
+         <span className="likePostCount">{likeData.likeCount}</span>
+          <p className="likePostCount">likes</p>
+        </div>
+
+        <div className="commentPostInfo">
+          <span className="PostCommentCount">12</span>
+          <p className="PostCommentCount">comments</p>
+        </div>
+
+      </div>
+
       <hr className="post_content_line" />
 
       <div className="post_section_icon">
-        <div className="like_icon_box">
+        <div className="like_icon_box" onClick={handleLike}>
           {
-            postLiked ? (
-              <>
-                <LikeFilled className="icon" style={{color:'blue'}} onClick={handleLike} />
-                <p>{post?.likes || 0}</p>
-                <p>like</p>
-              </>
-            ) : (
-              <>
-                  <LikeOutlined className="icon" onClick={handleLike} />
-                  <p>{post?.likes || 0}</p>
-                  <p>like</p>
-              </>
-          
-            )
+
+            likeData.isLiked ? <LikeFilled className="icon" style={{ color: 'blue' }}  /> : <LikeOutlined className="icon"  />
           }
           
         </div>
 
         <div className="comment_icon_box">
           <CommentOutlined className="icon" />
-          <p>comment</p>
         </div>
 
         <div className="share_icon_box">
           <ShareAltOutlined className="icon" />
-          <p>share</p>
         </div>
 
         <div className="repost_icon_box">
           <DeploymentUnitOutlined className="icon" />
-          <p>repost</p>
         </div>
       </div>
     </div>
@@ -94,7 +115,6 @@ const Post = ({ post, likePost }) => {
 
 Post.propTypes = {
 post:PropTypes.object.isRequired,
-likePost:PropTypes.func.isRequired
 }
 
 export default Post;
