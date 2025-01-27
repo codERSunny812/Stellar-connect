@@ -1,11 +1,11 @@
-import { setDoc, getDoc, doc, collection , getDocs, updateDoc , arrayUnion } from 'firebase/firestore';
+import { setDoc, getDoc, doc, collection , getDocs } from 'firebase/firestore';
 import { db } from '../constants/Firebase.config';
 
 
 // function to handle user login 
 export const addUser = async (userData) => {
   try {
-
+    // console.log("inside the add user to firestore function:")
     // Check if userData is valid
     if (!userData || !userData.id) {
       console.error("Invalid user data");
@@ -27,10 +27,11 @@ export const addUser = async (userData) => {
       });
       console.log("New user added to Firestore");
     } else {
-      console.log("User already exists in Firestore");
+      console.error("User already exists in Firestore");
     }
 
-    return userSnap.exists() ? userSnap.data() : {id:userData.id};
+    // return userSnap.exists() ? userSnap.data() : {id:userData.id};
+    return userData; //return the id of the user
 
   } catch (error) {
     console.log(`Error adding user to database: ${error.message}`);
@@ -38,6 +39,7 @@ export const addUser = async (userData) => {
   }
 };
 
+// function to get the data of the user 
 export const getUser = async (userId) => {
   try {
     const userRef = doc(db, 'users', userId);
@@ -55,9 +57,10 @@ export const getUser = async (userId) => {
   }
 };
 
-
+// function to get the data of all the user 
 export const allUserData = async()=>{
 try {
+  // console.log("inside the function to get the data of all the user from the db")
   const allUserRef = collection(db, "users");
   const allUserSnapshot = await getDocs(allUserRef);
   // Extract data from snapshot
@@ -72,39 +75,6 @@ try {
 
 }
 
-
-export const updateUser = async(userId ,postId)=>{
-try {
-
-  console.log("inside the update user function")
-  if(!userId || !postId){
-    throw new Error('Invalid userId or postId');
-  }
-
+export const getASpecificUser = async()=>{
   
-  //refrence to the user document
-  const userRef = doc(db, "users", userId);
-
-  console.log("user ref",userRef);
-
-  // Fetch the user document
-  const userSnap = await getDoc(userRef);
-
-  console.log("user snap",userSnap);
-
-  if (!userSnap.exists()) {
-    throw new Error('User not found in Firestore');
-  }
-
-  // Update the posts array in the user document
-  await updateDoc(userRef, {
-    posts: arrayUnion(postId) // Add the post ID to the posts array
-  });
-
-  console.log('Post ID added to the user document successfully');
-
-} catch (error) {
-  console.error('Error updating user posts:', error.message);
-  throw error;
-}
 }
