@@ -15,18 +15,17 @@ import { UserButton } from "@clerk/clerk-react";
 
 
 const Header = () => {
-
+// console.log("inside the header component")
   const data = useStore((state) => state.userData);
+  // console.log("the value of data in header is:",data)
   const location = useLocation();
 
-  console.log(location)
+  // console.log("the value of location in header",location)
 
   let imageUrl = "";
   if(data){
    imageUrl = data.imageUrl;
   }
-  // console.log(imageUrl)
-
   return (
     <div className="header">
       <div className="header_left">
