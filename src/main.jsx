@@ -8,6 +8,8 @@ import { RouterProvider } from "react-router-dom";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { dark } from "@clerk/themes";
 import React from "react";
+import  {Provider}  from 'react-redux'
+import reduxStore  from './Redux Store/Rtk.store.js'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -22,9 +24,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       appearance={{
         baseTheme: dark,
       }}
-    >
-
-        <RouterProvider router={Router} />
+    >  
+    <Provider store={reduxStore}>
+    <RouterProvider router={Router} />
+    </Provider>
     </ClerkProvider>
   </React.StrictMode>
 );
