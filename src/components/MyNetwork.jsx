@@ -4,10 +4,39 @@ import { MdContactPhone } from "react-icons/md";
 import { HiUserGroup } from "react-icons/hi2";
 import { MdEmojiEvents } from "react-icons/md";
 import { RiPagesFill } from "react-icons/ri";
+// import {users as data} from '../data'
+import { HiArrowCircleLeft , HiArrowCircleRight } from "react-icons/hi";
+import { useState } from 'react';
+import { TiUserAdd } from "react-icons/ti";
+import useStore from '../store/Store';
+
+
 
 
 
 const MyNetwork = () => {
+  // console.log("inside the mynetwork page");
+  const data = useStore((state) => state.allSignedUpUser)
+  // console.log("data of all the user inside the mynetwork  page is:",data)
+  const [startIndex, setStartIndex] = useState(0);
+  const visibleCards = 3;
+
+
+  const handlePrev = () => {
+    setStartIndex((prev) => {
+      // If at the beginning, wrap to the end
+      return prev - 1 < 0 ? 0 : prev - 1;
+    });
+  };
+
+  const handleNext = () => {
+    setStartIndex((prev) => {
+      console.log(prev)
+      // If at the end, wrap to the beginning
+      return prev + 1 >= data.length ? 0 : prev + 1;
+    });
+  };
+
   return (
     <>
       <div className="myNetworkContainer">
@@ -78,6 +107,41 @@ const MyNetwork = () => {
             <div className="topPartMyNetwork">
               <h1>Grow your network</h1>
             </div>
+             {/* cards  of the user's */}
+            <div className="cards-container">
+            
+              {/* Cards Slider */}
+              <div className="cards-container">
+                <div className="upperPartOfCard">
+                  <button onClick={handlePrev} className="arrow-btn"
+                    disabled={data.length <= visibleCards}
+                  >
+                    <HiArrowCircleLeft />
+                  </button>
+                  <button onClick={handleNext} className="arrow-btn">
+                    <HiArrowCircleRight />
+                  </button>
+                </div>
+
+                <div className="cardsContent">
+                  {data.slice(startIndex, startIndex + visibleCards).map((user) => (
+                    <div className="myNetworkCardsContent" key={user.id}>
+                      <img src={user.avatar} alt={user.name} />
+                      <p>{user.fullName}</p>
+                      <button className="connectUserBtn">
+                        <TiUserAdd className='connectUserBtn-icon'/>
+                        <p>  connect</p>
+                       
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+               
+            
+             
+            </div>
+
            
            
           </div>
@@ -94,3 +158,8 @@ const MyNetwork = () => {
 };
 
 export default MyNetwork;
+
+
+
+
+
