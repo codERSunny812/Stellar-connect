@@ -70,3 +70,87 @@ font-size: 25px;
   border: 0.9px solid dimgray;
   border-radius: 20px;
 }
+
+.cards-container {
+  margin: 10px 16px;
+}
+
+.upperPartOfCard {
+display: flex;
+justify-content:flex-end;
+align-items: center;
+padding: 10px 20px;
+}
+
+.arrow-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+  color: gray;
+  transition: color 0.2s;
+}
+
+.arrow-btn:hover {
+  color: black;
+}
+
+.cardsContent {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.myNetworkCardsContent {
+  border: 1px solid dimgray;
+  padding:5px;
+  height: 250px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  transition: transform 0.3s;
+}
+
+.myNetworkCardsContent img {
+  height:70%;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.myNetworkCardsContent p{
+  margin: 6px 0;
+  text-transform: capitalize;
+}
+
+.connectUserBtn{
+padding: 3px 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 90%;
+border-radius: 12px;
+border: 1.2px solid blue;
+background:none;
+}
+
+.connectUserBtn-icon{
+  font-size: 20px;
+  margin: 0 4px;
+  color:blue;
+}
+
+.connectUserBtn p{
+  font-size: 15px;
+  font-weight: 600;
+  color: blue;
+}
+
+.connectUserBtn:hover{
+border: 2px solid blue;
+background-color: rgba(0, 0, 255, 0.161);
+cursor: pointer;
+}
+

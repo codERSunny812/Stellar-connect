@@ -70,6 +70,7 @@
 .post_section .post_section_icon .repost_icon_box {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .post_section .post_section_icon .like_icon_box .icon,
@@ -87,3 +88,36 @@
   font-weight: 500;
   margin-left: 3px;
 }
+
+.PostStatsInfo{
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+.likePostInfo ,.commentPostInfo{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+
+.likePostCount , .PostCommentCount{
+  font-size: 13px;
+  font-weight: 300;
+}
+
+@media (max-width:768px){
+
+.post_section .post_img img {
+  height: 200px;
+  width: 100%;
+  object-fit: contain;
+}
+
+
+}
+
+
