@@ -1,5 +1,7 @@
 
 export const userSlice = (set)=>({
     userData:null,
-    setUser:(user)=>set({userData:user})
+    allSignedUpUser:null,
+    setUser:(user)=>set({userData:user}),
+    setSignedUpUser :(user)=> set({allSignedUpUser:user})
 })

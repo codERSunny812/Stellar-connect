@@ -11,10 +11,6 @@ export const postSlice = (set)=>({
       addPost: async (newPost,userId) => {
         //upload the data to the firestore
         const postId = await FireBaseAddPost(newPost , userId);
-
-        // set((state) => ({
-        //   posts: [...state.posts, { id: postId, caption:newPost.caption, media: newPost.media, uploadUser:userId}],
-        // }));
         return postId;
       },
 
