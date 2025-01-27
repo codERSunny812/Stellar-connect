@@ -2,7 +2,7 @@ import "./HeaderOption.css";
 import PropTypes from "prop-types";
 
 const HeaderOption = ({ Icon, title }) => {
-  // console.log(HomeFilled)
+  // console.log("inside the header component")
   return (
     <div className="headerOptions">
       {Icon && <Icon className="header_icon" />}
