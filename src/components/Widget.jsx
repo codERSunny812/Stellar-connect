@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 
 const Widget =() => {
-
   const News = ({title,para})=>{
+    // console.log("inside the widget page:")
     return(
       <div className="news_heading">
         <h4>{title}</h4>
