@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 
 
 const Feed = () => {
+  // console.log("inside the feed component:")
   const [postCaption, setPostCaption] = useState("");
   const [mediaFile, setMediaFile] = useState(null);
   const [isModal, setIsModal] = useState(false);
@@ -18,7 +19,14 @@ const Feed = () => {
   const userData = useStore((state) => state.userData);
   const { fetchPosts, posts, addPost } = useStore((state) => state);
 
-  console.log("post data in feed:", posts);
+  // console.log("post caption value in feed",postCaption);
+  // console.log("media file value in feed:",mediaFile);
+  // console.log("isModal value in feed:",isModal);
+  // console.log("image preview value in feed:",imagePreview);
+  // console.log("user data in feed:",userData);
+  // console.log("fetch post func value in feed:",fetchPosts);
+  // console.log("add post function in feed:",addPost)
+  // console.log("post data in feed:", posts);
   
 // function to handle the model 
   useEffect(() => {
@@ -90,7 +98,7 @@ const Feed = () => {
           if (mediaFile) {
             //resize the image before uploading
             resizeFileUrl = await resizeFile(mediaFile);
-            console.log("resize file url:", resizeFileUrl);
+            // console.log("resize file url:", resizeFileUrl);
             mediaUrl = await fileUpload(resizeFileUrl); // upload the resized file to the cloudinary
           }
 
@@ -100,6 +108,8 @@ const Feed = () => {
             media: mediaUrl || "",
             uploadUser: userData,
             createdAt: new Date(),
+            like:0,
+            isLiked:false
           }
 
           //add the post to the firestore and also update the user
