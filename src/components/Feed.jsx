@@ -109,7 +109,8 @@ const Feed = () => {
             uploadUser: userData,
             createdAt: new Date(),
             like:0,
-            isLiked:false
+            isLiked:false,
+            likedUser:[]
           }
 
           //add the post to the firestore and also update the user

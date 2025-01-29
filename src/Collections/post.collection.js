@@ -1,4 +1,4 @@
-import { collection, arrayUnion,  getDocs , getDoc , writeBatch , doc , updateDoc , increment } from 'firebase/firestore';
+import { collection, arrayUnion, arrayRemove,  getDocs , getDoc , writeBatch , doc , updateDoc , increment, query, orderBy } from 'firebase/firestore';
 import { db } from '../constants/Firebase.config';
 
 
@@ -32,15 +32,21 @@ const addPost = async (post,userId) => {
 
 }
 
-
+// function to fetch all the post from the DB
 const getPost = async () => {
     try {
-        // console.log("inside the fetch post function")
-        const querySnapshot = await getDocs(collection(db, "posts"));
+        console.log("Fetching posts...");
+
+        const postRef = collection(db, "posts"); // Reference to "posts" collection
+        const q = query(postRef, orderBy("createdAt", "desc")); // Sort by latest posts
+
+        const querySnapshot = await getDocs(q); // Use the correct query
         const postData = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
         }));
+        console.log(postData)
+
         return postData;
     } catch (error) {
         console.error("Error fetching posts:", error);
@@ -48,28 +54,25 @@ const getPost = async () => {
     }
 };
 
-const updateLikeCountInDatabase = async (postId, isLiked) => {
+// Get like state for a post and user
+const getLikeStateFromDatabase = async (postId, userId) => {
     try {
+        // refrence to the post collection to a specfic doc
         const postRef = doc(db, "posts", postId);
-        await updateDoc(postRef, {
-            like: increment(isLiked ? 1 : -1), // Increment or decrement
-        });
-        console.log("Like count updated in database!");
-    } catch (error) {
-        console.error("Error updating like count:", error);
-    }
-};
-
-
-const getLikeStateFromDatabase = async (postId) => {
-    try {
-        const postRef = doc(db, "posts", postId);
+        // getting the data of the element
         const postSnap = await getDoc(postRef);
-
+        
+        // checking the post like stats
         if (postSnap.exists()) {
             const postData = postSnap.data();
-            const likeCount = postData.like || 0; // Default to 0 if missing
-            return { isLiked: false, likeCount }; // Assuming no per-user like tracking
+            const likeCount = postData.like || 0;
+            const likedUsers = postData.likedUsers || [];
+            
+            // returning the value 
+            return {
+                isLiked: likedUsers.includes(userId), // Check if user already liked the post
+                likeCount: likeCount,
+            };
         } else {
             console.error("No such document!");
             return { isLiked: false, likeCount: 0 };
@@ -79,6 +82,33 @@ const getLikeStateFromDatabase = async (postId) => {
         return { isLiked: false, likeCount: 0 };
     }
 };
+
+// Update like count & track user in Firestore
+const updateLikeCountInDatabase = async (postId, userId, isLiked) => {
+    try {
+        const postRef = doc(db, "posts", postId);
+
+        if (isLiked) {
+            // Add user to likedUsers array & increment like count
+            await updateDoc(postRef, {
+                like: increment(1),
+                likedUsers: arrayUnion(userId),
+            });
+        } else {
+            // Remove user from likedUsers array & decrement like count
+            await updateDoc(postRef, {
+                like: increment(-1),
+                likedUsers: arrayRemove(userId),
+            });
+        }
+
+        console.log("Like count updated in Firestore!");
+    } catch (error) {
+        console.error("Error updating like count:", error);
+    }
+};
+
+
 
 
 

@@ -1,44 +1,63 @@
-import { addDoc, collection , where , getDocs , query } from 'firebase/firestore'
+import { addDoc, collection , where , getDocs , query, serverTimestamp, onSnapshot } from 'firebase/firestore'
 import {db} from '../constants/Firebase.config'
 
 
-// Function to add a friend
-export const addFriend = async (userId, friendId) => {
-    try {
-        const friendRef = collection(db, "friends");
-        const friendDoc = {
-            userId,
-            friendId
-        };
-        await addDoc(friendRef, friendDoc);
-        // console.log(`Friend added: ${friendId}`);
-    } catch (error) {
-        console.error("Error adding friend: ", error);
-    }
-};
+//function to add friends
+export const addFriend = async(currentUserId , targetedUserId)=>{
+ if(!currentUserId || !targetedUserId){
+    console.log("no valid id is found");
+    return;
+ }
+ try {
+    //refrence to the connection collection
+    const connectionRef = collection(db,"connection");
 
-// Function to get friends of a user
-export const getFriends = async (userId) => {
-    try {
-        const friendsRef = collection(db, "friends");
-        const q = query(friendsRef, where("userId", "==", userId));
-        const querySnapshot = await getDocs(q);
-        const friends = querySnapshot.docs.map(doc => doc.data().friendId);
-        return friends;
-    } catch (error) {
-        console.error("Error fetching friends: ", error);
-    }
-};
+    //checking that exisiting collection is already present or not
+    const exisitingConnectionRef = query(
+        connectionRef,
+        where("userId","==",currentUserId),
+        where("friendId","==",targetedUserId)
+    )
 
-// Function to get user data by IDs
-export const getUsersByIds = async (userIds) => {
-    try {
-        const usersRef = collection(db, "users");
-        const q = query(usersRef, where("id", "in", userIds));
-        const querySnapshot = await getDocs(q);
-        const users = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        return users;
-    } catch (error) {
-        console.error("Error fetching users by IDs: ", error);
+    const exisitingConnectionData = await getDocs(exisitingConnectionRef);
+
+    //  only add the data if there is no connection present 
+    if(!exisitingConnectionData.empty){
+         console.log("friend request is already present");
+         return;
     }
-};
+
+    // add the new connection 
+    const addDocRef = await addDoc(connectionRef,{
+      userId:currentUserId,
+      friendsId:targetedUserId,
+      status:"pending", //initial time stamp
+      timeStamp:serverTimestamp()
+    })
+
+    console.log("friend request is sent successfully",addDocRef.id);
+ } catch (error) {
+    console.log('error in adding friend',error.message)
+ }
+}
+
+
+// function to fetch the data of friends in real time
+export const fetchFriends = async(currentUserId,setFriends)=>{
+const q = query(
+    collection(db,"connection"),
+    where("userId","==",currentUserId)
+)
+
+const friendData = onSnapshot(q,(querySnapshot)=>{
+const friends=[];
+querySnapshot.forEach((doc)=>{
+    friends.push({id:doc.id,...doc.data()});
+});
+setFriends(friends);
+console.log("real time friends updated",friends);
+})
+return friendData;
+}
+
+

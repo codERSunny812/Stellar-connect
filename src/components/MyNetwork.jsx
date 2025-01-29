@@ -1,29 +1,38 @@
-import './mynetwork.css';
-import { FaPeopleArrows , FaPeopleGroup } from "react-icons/fa6";
+import "./mynetwork.css";
+import { FaPeopleArrows, FaPeopleGroup } from "react-icons/fa6";
 import { MdContactPhone } from "react-icons/md";
 import { HiUserGroup } from "react-icons/hi2";
 import { MdEmojiEvents } from "react-icons/md";
 import { RiPagesFill } from "react-icons/ri";
-// import {users as data} from '../data'
-import { HiArrowCircleLeft , HiArrowCircleRight } from "react-icons/hi";
-import { useState , useEffect } from 'react';
+import { HiArrowCircleLeft, HiArrowCircleRight } from "react-icons/hi";
+import { useState, useEffect } from "react";
 import { TiUserAdd } from "react-icons/ti";
-import useStore from '../store/Store';
-
-
-
-
+import useStore from "../store/Store";
 
 const MyNetwork = () => {
-  // console.log("inside the mynetwork page");
-  const data = useStore((state) => state.allSignedUpUser)
-  // console.log("data of all the user inside the mynetwork  page is:",data)
+  console.log("inside the mynetwork page");
+  const { userData, allSignedUpUser } = useStore((state) => state);
   const [startIndex, setStartIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(3);
-  const visibleCards = 3;
+  const [allUserExceptLogged, setAllUserExceptLogged] =
+    useState(allSignedUpUser);
+
+  console.log("userData:",userData)
+  console.log("all user from db:",allSignedUpUser)
+  // console.log("all connection:",connections)
+  console.log("cards to show",cardsToShow)
+  console.log("new all user:",allUserExceptLogged)
 
   // Update the number of cards to show based on screen size
   useEffect(() => {
+    console.log("inside the use effect")
+    //function to update the list
+    const newArr = allSignedUpUser.filter((data) => {
+      return data.id != userData.id;
+    });
+
+    setAllUserExceptLogged(newArr);
+
     const updateCardsToShow = () => {
       setCardsToShow(window.innerWidth <= 768 ? 1 : 3);
     };
@@ -34,34 +43,24 @@ const MyNetwork = () => {
     return () => window.removeEventListener("resize", updateCardsToShow);
   }, []);
 
-
-
-  // const handlePrev = () => {
-  //   setStartIndex((prev) => {
-  //     // If at the beginning, wrap to the end
-  //     return prev - 1 < 0 ? 0 : prev - 1;
-  //   });
-  // };
-
-  // const handleNext = () => {
-  //   setStartIndex((prev) => {
-  //     console.log(prev)
-  //     // If at the end, wrap to the beginning
-  //     return prev + 1 >= data.length ? 0 : prev + 1;
-  //   });
-  // };
-
-
   const handlePrev = () => {
     setStartIndex((prev) => {
-      return prev - cardsToShow < 0 ? data.length - cardsToShow : prev - cardsToShow;
+      return prev - cardsToShow < 0
+        ? allUserExceptLogged.length - cardsToShow
+        : prev - cardsToShow;
     });
   };
 
   const handleNext = () => {
     setStartIndex((prev) => {
-      return prev + cardsToShow >= data.length ? 0 : prev + cardsToShow;
+      return prev + cardsToShow >= allUserExceptLogged.length
+        ? 0
+        : prev + cardsToShow;
     });
+  };
+
+  const addFriend = () => {
+    alert("hola");
   };
 
   return (
@@ -69,8 +68,7 @@ const MyNetwork = () => {
       <div className="myNetworkContainer">
         <div className="myNetworkGridContainer">
           {/* Left margin */}
-          <div>
-          </div>
+          <div></div>
 
           {/* Main Content */}
           <div className="myNetworkList">
@@ -80,26 +78,25 @@ const MyNetwork = () => {
             <div className="bottomPartMyNetwork">
               <div className="MyNetwork">
                 <div className="Item1">
-                  <FaPeopleArrows className='icon' />
+                  <FaPeopleArrows className="icon" />
                   <h3>connections</h3>
                 </div>
-                
-                <span>23</span>
 
+                <span>11</span>
               </div>
 
               <div className="MyNetwork">
                 <div className="Item2">
-                  <MdContactPhone className='icon' />
-                  <h3>contacts</h3>
+                  <MdContactPhone className="icon" />
+                  <h3>followings</h3>
                 </div>
-                
+
                 <span>23</span>
               </div>
 
               <div className="MyNetwork">
                 <div className="Item3">
-                  <FaPeopleGroup className='icon' />
+                  <FaPeopleGroup className="icon" />
                   <h3>contacts</h3>
                 </div>
                 <span>23</span>
@@ -107,29 +104,28 @@ const MyNetwork = () => {
 
               <div className="MyNetwork">
                 <div className="Item4">
-                  <HiUserGroup className='icon' />
+                  <HiUserGroup className="icon" />
                   <h3>groups</h3>
                 </div>
                 <span>34</span>
               </div>
 
               <div className="MyNetwork">
-               <div className="Item5">
-                  <MdEmojiEvents className='icon' />
+                <div className="Item5">
+                  <MdEmojiEvents className="icon" />
                   <h3>events</h3>
-               </div>
-              
-              <span>3</span>
+                </div>
+
+                <span>3</span>
               </div>
 
               <div className="MyNetwork Item6">
                 <div className="Item6">
-                  <RiPagesFill className='icon' />
+                  <RiPagesFill className="icon" />
                   <h3>pages</h3>
                 </div>
                 <span>43</span>
               </div>
-
             </div>
           </div>
 
@@ -138,14 +134,15 @@ const MyNetwork = () => {
             <div className="topPartMyNetwork">
               <h1>Grow your network</h1>
             </div>
-             {/* cards  of the user's */}
+            {/* cards  of the user's */}
             <div className="cards-container">
-            
               {/* Cards Slider */}
               <div className="cards-container">
                 <div className="upperPartOfCard">
-                  <button onClick={handlePrev} className="arrow-btn"
-                    disabled={data.length <= visibleCards}
+                  <button
+                    onClick={handlePrev}
+                    className="arrow-btn"
+                    disabled={allSignedUpUser.length <= cardsToShow}
                   >
                     <HiArrowCircleLeft />
                   </button>
@@ -155,33 +152,32 @@ const MyNetwork = () => {
                 </div>
 
                 <div className="cardsContent">
-                  {data.slice(startIndex, startIndex + cardsToShow).map((user) => (
-                    <div className="myNetworkCardsContent" key={user.id}>
-                      <img src={user.avatar} alt={user.name} />
-                      <p>{user.fullName}</p>
-                      <button className="connectUserBtn">
-                        <TiUserAdd className='connectUserBtn-icon'/>
-                        <p>  connect</p>
-                       
-                      </button>
-                    </div>
-                  ))}
+                  {allUserExceptLogged
+                    .slice(startIndex, startIndex + cardsToShow)
+                    .map((user) => {
+                      return (
+                        <div className="myNetworkCardsContent" key={user.id}>
+                          <img src={user.avatar} alt={user.name} />
+                          <p>{user.fullName}</p>
+                          <button
+                            className="connectUserBtn"
+                            onClick={()=>{
+                              addFriend()
+                            }}
+                          >
+                            <TiUserAdd className="connectUserBtn-icon" />
+                            <p> connect</p>
+                          </button>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
-               
-            
-             
             </div>
-
-           
-           
           </div>
 
           {/* Right Sidebar */}
-          <div>
-          
-          </div>
-
+          <div></div>
         </div>
       </div>
     </>
@@ -189,8 +185,3 @@ const MyNetwork = () => {
 };
 
 export default MyNetwork;
-
-
-
-
-

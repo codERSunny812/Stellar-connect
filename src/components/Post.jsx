@@ -7,33 +7,27 @@ import {
   DeploymentUnitOutlined,
 } from "@ant-design/icons";
 import PropTypes from "prop-types";
-import {Shimmer}    from 'react-shimmer'
+import { Shimmer } from "react-shimmer";
 import LazyLoad from "react-lazyload";
-import { useDispatch , useSelector } from "react-redux";
-import { toggleLike, setInitialState} from "../Redux Store/likePost.slice";
-import { updateLikeCountInDatabase , getLikeStateFromDatabase } from "../Collections/post.collection";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleLike, setInitialState } from "../Redux Store/likePost.slice";
+import { updateLikeCountInDatabase, getLikeStateFromDatabase } from "../Collections/post.collection";
 import { useEffect } from "react";
-import useStore from '../store/Store.js'
-
-
-
+import useStore from '../store/Store.js';
 
 const Post = ({ post }) => {
-  // console.log("the value of post inside post component:",post)
   const dispatch = useDispatch();
   const { userData } = useStore((state) => state);
-  
 
-  // Load initial like state from the database
+  // Load initial like state from Firestore
   useEffect(() => {
     const fetchLikeState = async () => {
-      const likeState = await getLikeStateFromDatabase(post.id);
-      dispatch(setInitialState({ postId: post.id, ...likeState }));
+      const likeState = await getLikeStateFromDatabase(post.id, userData.id); //get the data of the post like stats
+      dispatch(setInitialState({ postId: post.id, ...likeState })); //storing it to the redux store
     };
 
     fetchLikeState();
-  }, [post.id, dispatch , userData]);
-
+  }, [post.id, dispatch, userData.id]);
 
   // Get the like state for the current post
   const likeData = useSelector((state) => state.postLikes.likes[post.id]) || {
@@ -41,21 +35,21 @@ const Post = ({ post }) => {
     likeCount: 0,
   };
 
-  console.log("the value of the likeData inside the post component:", likeData)
- 
+  // console.log(likeData)
+
   const handleLike = async () => {
-    const newIsLiked = !likeData.isLiked; // Toggle the like state
+    const newIsLiked = !likeData.isLiked; // Toggle like state
     dispatch(toggleLike(post.id)); // Update Redux state
-    await updateLikeCountInDatabase(post.id, newIsLiked); // Update database
+    await updateLikeCountInDatabase(post.id, userData.id, newIsLiked); // Update Firestore
   };
 
-  if(!post.id){
-    return <Shimmer width={100} height={100}/>;
+  if (!post.id) {
+    return <Shimmer width={100} height={100} />;
   }
 
   return (
     <div className="post_section">
-      {/* top section of the post */}
+      {/* Top section of the post */}
       <div className="postinfo_top">
         <img src={post?.uploadUser?.imageUrl} alt="" style={{ borderRadius: "50%" }} />
         <div className="postInfo_about_user">
@@ -63,19 +57,21 @@ const Post = ({ post }) => {
           <p>{new Date(post?.createdAt?.seconds * 1000).toLocaleDateString()}</p>
         </div>
       </div>
-      {/* post caption  */}
+
+      {/* Post caption */}
       <p className="post_content">{post?.caption}</p>
       {post?.media && (
         <div className="post_img">
-          <LazyLoad height={200} offset={100} once> 
-          <img src={post?.media} alt="" />
+          <LazyLoad height={200} offset={100} once>
+            <img src={post?.media} alt="" />
           </LazyLoad>
         </div>
       )}
 
+      {/* Post Stats Info */}
       <div className="PostStatsInfo">
         <div className="likePostInfo">
-         <span className="likePostCount">{likeData.likeCount}</span>
+          <span className="likePostCount">{likeData.likeCount}</span>
           <p className="likePostCount">likes</p>
         </div>
 
@@ -83,18 +79,18 @@ const Post = ({ post }) => {
           <span className="PostCommentCount">12</span>
           <p className="PostCommentCount">comments</p>
         </div>
-
       </div>
 
       <hr className="post_content_line" />
 
+      {/* Like & Other Icons */}
       <div className="post_section_icon">
         <div className="like_icon_box" onClick={handleLike}>
-          {
-
-            likeData.isLiked ? <LikeFilled className="icon" style={{ color: 'blue' }}  /> : <LikeOutlined className="icon"  />
-          }
-          
+          {likeData.isLiked ? (
+            <LikeFilled className="icon" style={{ color: "blue" }} />
+          ) : (
+            <LikeOutlined className="icon" />
+          )}
         </div>
 
         <div className="comment_icon_box">
@@ -114,7 +110,7 @@ const Post = ({ post }) => {
 };
 
 Post.propTypes = {
-post:PropTypes.object.isRequired,
-}
+  post: PropTypes.object.isRequired,
+};
 
 export default Post;

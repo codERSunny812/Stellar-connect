@@ -1,8 +1,9 @@
-import { setDoc, getDoc, doc, collection , getDocs } from 'firebase/firestore';
+import { setDoc, getDoc, doc, collection , getDocs , serverTimestamp   } from 'firebase/firestore';
 import { db } from '../constants/Firebase.config';
 
 
-// function to handle user login 
+
+// function to add the user data into the firestore DB
 export const addUser = async (userData) => {
   try {
     // console.log("inside the add user to firestore function:")
@@ -12,23 +13,23 @@ export const addUser = async (userData) => {
       return null;
     }
 
-    // Reference the user document in Firestore
-    const userRef = doc(db, "users", userData.id);
+    // taking a refrence to store the data at a specifice place in users collection
+    const userRef = doc(db, "users", userData.id); //make refrence to a doc
 
     // Check if the user exists in Firestore
     const userSnap = await getDoc(userRef);
 
+    // only add if data is not present 
     if (!userSnap.exists()) {
       // if user does not exist then add it 
       await setDoc(userRef, {
         id:userData.id,
         fullName: userData.fullName,
-        avatar: userData.imageUrl
+        avatar: userData.imageUrl,
+        timeStamp:serverTimestamp()
       });
       console.log("New user added to Firestore");
-    } else {
-      console.error("User already exists in Firestore");
-    }
+    } 
 
     // return userSnap.exists() ? userSnap.data() : {id:userData.id};
     return userData; //return the id of the user
@@ -39,29 +40,13 @@ export const addUser = async (userData) => {
   }
 };
 
-// function to get the data of the user 
-export const getUser = async (userId) => {
-  try {
-    const userRef = doc(db, 'users', userId);
-    const userSnap = await getDoc(userRef);
-
-    if (userSnap.exists()) {
-      return userSnap.data();
-    } else {
-      console.log('User not found in Firestore');
-      return null;
-    }
-  } catch (error) {
-    console.error('Error fetching user:', error);
-    return null;
-  }
-};
-
 // function to get the data of all the user 
 export const allUserData = async()=>{
 try {
   // console.log("inside the function to get the data of all the user from the db")
-  const allUserRef = collection(db, "users");
+  const allUserRef = collection(db, "users"); // make refrence to the whole collection
+  // dont show the current loggedIn user 
+  // const q = Query(allUserRef , where())
   const allUserSnapshot = await getDocs(allUserRef);
   // Extract data from snapshot
   const allUserData = allUserSnapshot.docs.map(doc => ({

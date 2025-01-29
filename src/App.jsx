@@ -2,7 +2,7 @@
 import "./App.css";
 import Home from "./components/Home";
 import { Outlet, createBrowserRouter } from "react-router-dom";
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useEffect , useState } from "react";
 import AuthLayout from "./Auth";
 import Error from "./Error";
 import SignUpPage from "./components/Signup.jsx";
@@ -24,6 +24,7 @@ function App() {
   // console.log("app component rendered")
   const {user} = useUser(); //clerk user object
   const { userData , setUser, allSignedUpUser, setSignedUpUser }= useStore((state)=>state);
+  const [allUser,setAllUser] = useState(allSignedUpUser)
   // console.log("value of user clerk object in app component:",user);
   // console.log("value of the  user data from the store in app component:",userData);
   // console.log("value of the  set user function inside the app component is:",setUser);
