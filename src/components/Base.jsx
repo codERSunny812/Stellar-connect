@@ -19,7 +19,7 @@ import {
 import img from "../../public/img.png";
 import Screen2 from "./Screen/Screen2";
 import Footer from "./Screen/Footer";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const Base = () => {
   return (
@@ -37,7 +37,6 @@ const Base = () => {
       </div>
 
       <div className="bottomBar">
-
         <div className="login_crendential">
           <h1>Welcome to your professional community</h1>
 
@@ -48,7 +47,13 @@ const Base = () => {
 
           <div className="email">
             <MailFilled style={{ color: "white", fontSize: "26px" }} />
-            <p> <Link to='/sign-up' className="login_in_link"> Continue with email </Link></p>
+            <p>
+              {" "}
+              <Link to="/sign-up" className="login_in_link">
+                {" "}
+                Continue with email{" "}
+              </Link>
+            </p>
           </div>
 
           <p className="disclaimer">
@@ -58,16 +63,16 @@ const Base = () => {
           </p>
 
           <p className="new_user_text">
-            New to LinkedIn? <span> 
-              <Link to='/sign-up' className="sign_up_link">
-              Join now
+            New to LinkedIn?{" "}
+            <span>
+              <Link to="/sign-up" className="sign_up_link">
+                Join now
               </Link>
-              </span>{" "}
+            </span>{" "}
           </p>
         </div>
 
         <img src={img} alt="front imageec" className="base_img" />
-        
       </div>
 
       {/* second screen 2 */}

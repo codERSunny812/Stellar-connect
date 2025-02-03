@@ -7,10 +7,8 @@ import { FaBookmark } from "react-icons/fa6";
 import useStore from "../store/Store.js";
 
 const SideBar = () => {
-//  extracting the user data from zustand store
-  const useData = useStore((state) => state.userData); 
-
-  // console.log("user data in side bar:", useData);
+ 
+  const useData = useStore((state) => state.userData);
 
   const RecentItems = ({ title }) => {
     return (
@@ -31,7 +29,10 @@ const SideBar = () => {
           alt="user profile photo"
         />
         <h2>{useData?.fullName}</h2>
-        <h4>Ex Intern@Cynayd Solution||Full Stack Developer🚀|| LeetCode 1 🌟 || Open source contributer ☯⚒</h4>
+        <h4>
+          Ex Intern@Cynayd Solution||Full Stack Developer🚀|| LeetCode 1 🌟 ||
+          Open source contributer ☯⚒
+        </h4>
 
         <hr />
         <div className="sideBar_stats">
@@ -50,7 +51,7 @@ const SideBar = () => {
         <div className="sideBar_Premium_Info">
           <p className="sideBar_text">
             <span>
-            <FaSquare color="orange"/>
+              <FaSquare color="orange" />
             </span>
             see all premium features
           </p>
@@ -65,8 +66,6 @@ const SideBar = () => {
             </span>
             saved items
           </p>
-          
-          
         </div>
       </div>
 
