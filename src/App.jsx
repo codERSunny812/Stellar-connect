@@ -2,17 +2,21 @@
 import "./App.css";
 import Home from "./components/Home";
 import { Outlet, createBrowserRouter } from "react-router-dom";
-import React, { Suspense, useEffect , useState } from "react";
+import React, { Suspense, useEffect } from "react";
 import AuthLayout from "./Auth";
 import Error from "./Error";
 import SignUpPage from "./components/Signup.jsx";
 import SignInPage from "./components/Signin.jsx";
 import { useUser } from "@clerk/clerk-react";
-import useStore  from './store/Store.js'
-import { Toaster } from 'react-hot-toast';
+import useStore from "./store/Store.js";
+import { Toaster } from "react-hot-toast";
 import Profile from "./components/Profile.jsx";
-import { allUserData as fetchAllUser , addUser } from "./Collections/user.collection.js";
-
+import {
+  allUserData as fetchAllUser,
+  addUser,
+} from "./Collections/user.collection.js";
+import { pendingRequest } from "./Collections/friendrequest.collection.js";
+import { getFriendList } from "./Collections/friends.collection.js";
 
 // lazy loading the component
 const MyNetwork = React.lazy(() => import("./components/MyNetwork"));
@@ -21,63 +25,89 @@ const Message = React.lazy(() => import("./components/Message"));
 const Notification = React.lazy(() => import("./components/Notification"));
 
 function App() {
-  // console.log("app component rendered")
-  const {user} = useUser(); //clerk user object
-  const { userData , setUser, allSignedUpUser, setSignedUpUser }= useStore((state)=>state);
-  const [allUser,setAllUser] = useState(allSignedUpUser)
-  // console.log("value of user clerk object in app component:",user);
-  // console.log("value of the  user data from the store in app component:",userData);
-  // console.log("value of the  set user function inside the app component is:",setUser);
-  // console.log("value of the all allSignedUpUser variable inside the app component is:",allSignedUpUser);
-  // console.log("value of the setSignedUpUser func inside the app component is:",setSignedUpUser);
-  
+  const { user } = useUser(); //clerk user object
+  const { userData, setUser, allSignedUpUser, setSignedUpUser, requestPending, setPendingRequest, friends, setFriendInTheList } = useStore((state) => state);
 
-  //uploding the data of the user into the user's collection
-   useEffect(()=>{
+  //console logs for checking the value 
+  // console.log("user data in the app component:",userData);
+  // console.log("all the user in the DB in app component:",allSignedUpUser);
+  // console.log("pending request users in app component:",requestPending);
+  console.log("friends of the currentLoggedIN user :",friends)
+
+  //uploading the data of the user into the user's collection
+  useEffect(() => {
     try {
-      // console.log("uploading the user data into the firestore collection:")
-      if(user){
+      if (user) {
         const userInfo = {
           id: user.id,
           fullName: user.fullName,
           imageUrl: user.imageUrl,
           firstName: user.firstName,
-        }
+        };
 
         const addUserToDb = async () => {
-             if (userInfo && userInfo?.id) {
-               try {
-                const data =  await addUser(userInfo);
-                setUser(data);
-                // console.log("user data is upadted in the zustand store:")
-               } catch (error) {
-                 console.log(`Error adding user to DB: ${error.message}`);
-               }
-             }
-           };
-           addUserToDb();
+          if (userInfo && userInfo?.id) {
+            try {
+              const data = await addUser(userInfo);
+              setUser(data); //updating the zustand store
+            } catch (error) {
+              console.log(`Error adding user to DB: ${error.message}`);
+            }
+          }
+        };
+        addUserToDb();
       }
-     } catch (error) {
-       console.error("error in adding the user into the DB",error.message)
+    } catch (error) {
+      console.error("error in adding the user into the DB", error.message);
     }
-  },[user])
+  }, [user, setUser]);
+
+  //fetching all the user from the db
+  useEffect(() => {
+    const unsubscribe  = fetchAllUser(userData?.id,(data)=>{
+      setSignedUpUser(data);
+    })
+    
+
+    return () => {
+      if (typeof unsubscribe === "function") {
+        unsubscribe(); // Cleanup function to prevent memory leaks
+      }
+    };
+  }, [user, userData, setSignedUpUser]);
+
+
+  // fetching the pending user list from the db
+  useEffect(() => {
+    const unsubscribe = pendingRequest(userData.id, (data) => {
+      setPendingRequest(data)
+    });
+
+    return () => {
+      if (typeof unsubscribe === "function") {
+        unsubscribe(); // Cleanup to prevent memory leaks
+      }
+    };
+  }, [user, userData, setPendingRequest]);
+
+  // fetching the  friendList from the DB
+  useEffect(()=>{
+   const unsubscribe = getFriendList(userData.id,(data)=>{
+    setFriendInTheList(data);
+   })
+
+    return () => {
+      if (typeof unsubscribe === "function") {
+        unsubscribe(); // Cleanup function to prevent memory leaks
+      }
+    };
+  },[user,userData,setFriendInTheList])
 
 
 
-// update the all user data 
-useEffect(()=>{
-  // console.log("fetching the data of all the logged in user from the db")
-const fetchedAllUser = async()=>{
-const allUserData = await fetchAllUser();
-setSignedUpUser(allUserData);
-// console.log("updating the state of the user in the db.")
-}
-
-fetchedAllUser();
-},[user,userData])
 
 
-  
+
   return (
     <>
       <Toaster />
@@ -143,7 +173,7 @@ export const Router = createBrowserRouter([
               <Suspense fallback={<div>Loading...</div>}>
                 {" "}
                 {/* <UserProfile />{" "} */}
-                <Profile/>
+                <Profile />
               </Suspense>
             ),
           },
@@ -151,7 +181,7 @@ export const Router = createBrowserRouter([
       },
       {
         path: "/sign-up/*",
-        element: <SignUpPage/>,
+        element: <SignUpPage />,
       },
       {
         path: "/sign-in/*",
