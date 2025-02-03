@@ -1,7 +1,13 @@
-1. when a user is not signed in the base component is be rendered
+1. when a user is not signed in the base component is be rendered which show the basic landing page to the user
 2. we can click on sign up to open signup componet and sign in to open sign in component
-3. when signed in i have used zustand to  manage the data of the user globally , when signed in and clerk is loaded then i will update the state of the user in the store from cler useUser hook
+3. when signed in i have used zustand to  manage the data of the user globally , when signed in and clerk is loaded then it will updated some date by callling spme function like userData , allUser in db except the curentg loggedIn one , all friends of the current loggedIn user and also all the pending request the user have.
 4. after successfull sign in the home component will be rendered which shows 3 component side bar , feed and widget and in the home component there is a function to add the user data in the firebase into the user collection.
 5. in the sidebar there is not too much it just show the basic profile of the current loggedIn user like his name and profile pic from the store.
 6. now feed is the main component of this which show all the post upload and an input box to upload the post and all.
-7. The feed section has input box with which he can upload posts 
+7. The feed section has input box with which he can upload posts and during the upload of the post the user can also see that the image he has select to post and also if he want to deselct the image and post the image using post button and also see the status on the uploading using toast notification and the post will be uploaded in realtime like if two user are uploaded the post then both can see each other post with refresh and also user can like the post and post liked will be in  in realtime.
+
+8. now in the mynetwork componet user can see all the user present in the db and if he want he can sent a connect request to them and the other user can accept and reject them if he accept them he became thier friend and if he reject then he will became the request will be removed from pending request.
+
+9. the user can also chat with the users who we his friend.
+
+10. their is a profile page at which the user can see the his profile and edit some basic detail

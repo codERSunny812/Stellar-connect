@@ -2,7 +2,6 @@ import "./icon.css";
 import PropTypes from "prop-types";
 
 const Icons = ({ Icons, name }) => {
-  // console.log("inside the icons componet:",Icons,name)
   return (
     <div className="Icons">
       <Icons className="iconss" />

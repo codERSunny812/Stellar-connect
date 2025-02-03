@@ -13,26 +13,21 @@ import { Link, useLocation } from "react-router-dom";
 import useStore from "../store/Store";
 import { UserButton } from "@clerk/clerk-react";
 
-
 const Header = () => {
-// console.log("inside the header component")
   const data = useStore((state) => state.userData);
-  // console.log("the value of data in header is:",data)
+
   const location = useLocation();
 
-  // console.log("the value of location in header",location)
-
   let imageUrl = "";
-  if(data){
-   imageUrl = data.imageUrl;
+  if (data) {
+    imageUrl = data.imageUrl;
   }
   return (
     <div className="header">
       <div className="header_left">
-        <Link to='/'>
+        <Link to="/">
           <img src={Linkedln_logo} alt="" />
         </Link>
-       
 
         <div className="header_searchBar">
           <SearchOutlined className="header_searchBar_icon" />
@@ -60,11 +55,18 @@ const Header = () => {
           <HeaderOption Icon={BellFilled} title="notification" />
         </Link>
 
-        <Link to="/profile" style={{ textDecoration: "none" , overflow: "hidden" }}>
-        {
-            location.pathname === "/profile" ? <UserButton className="custom-user" /> : <img src={imageUrl || ""} style={{ width: "35px", height: "35px", borderRadius: 50 }} />
-        }
-          
+        <Link
+          to="/profile"
+          style={{ textDecoration: "none", overflow: "hidden" }}
+        >
+          {location.pathname === "/profile" ? (
+            <UserButton className="custom-user" />
+          ) : (
+            <img
+              src={imageUrl || ""}
+              style={{ width: "35px", height: "35px", borderRadius: 50 }}
+            />
+          )}
         </Link>
       </div>
     </div>

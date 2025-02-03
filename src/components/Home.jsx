@@ -6,9 +6,7 @@ import { Breathing } from "react-shimmer";
 import useStore from "../store/Store.js";
 
 const Home = () => {
-  // console.log("inside the home component:")
   const userData = useStore((state) => state.userData);
-  // console.log("user data in the home component:", userData);
 
   // Conditional rendering to wait for userData to be populated
   if (!userData || userData == null) {

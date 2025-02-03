@@ -1,10 +1,5 @@
-
-
 const Jobs = () => {
-  // console.log("inside the jobs compnent")
-  return (
-    <div>Jobs</div>
-  )
-}
+  return <div>Jobs</div>;
+};
 
-export default Jobs
+export default Jobs;

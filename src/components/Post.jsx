@@ -11,31 +11,37 @@ import { Shimmer } from "react-shimmer";
 import LazyLoad from "react-lazyload";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleLike, setInitialState } from "../Redux Store/likePost.slice";
-import { updateLikeCountInDatabase, getLikeStateFromDatabase } from "../Collections/post.collection";
+import {
+  updateLikeCountInDatabase,
+  getLikeStateFromDatabase,
+} from "../Collections/post.collection";
 import { useEffect } from "react";
-import useStore from '../store/Store.js';
+import useStore from "../store/Store.js";
 
 const Post = ({ post }) => {
+
   const dispatch = useDispatch();
   const { userData } = useStore((state) => state);
 
   // Load initial like state from Firestore
   useEffect(() => {
-    const fetchLikeState = async () => {
-      const likeState = await getLikeStateFromDatabase(post.id, userData.id); //get the data of the post like stats
-      dispatch(setInitialState({ postId: post.id, ...likeState })); //storing it to the redux store
-    };
+    const unsubscribe = getLikeStateFromDatabase(post.id, userData.id, (likeState) => {
+      dispatch(setInitialState(likeState)); // ✅ Updates Redux store in real-time
+    });
 
-    fetchLikeState();
+    return () => {
+      if (typeof unsubscribe === "function") {
+        unsubscribe(); // Cleanup function to prevent memory leaks
+      }
+    };
   }, [post.id, dispatch, userData.id]);
+
 
   // Get the like state for the current post
   const likeData = useSelector((state) => state.postLikes.likes[post.id]) || {
     isLiked: false,
     likeCount: 0,
   };
-
-  // console.log(likeData)
 
   const handleLike = async () => {
     const newIsLiked = !likeData.isLiked; // Toggle like state
@@ -51,15 +57,22 @@ const Post = ({ post }) => {
     <div className="post_section">
       {/* Top section of the post */}
       <div className="postinfo_top">
-        <img src={post?.uploadUser?.imageUrl} alt="" style={{ borderRadius: "50%" }} />
+        <img
+          src={post?.uploadUser?.imageUrl}
+          alt=""
+          style={{ borderRadius: "50%" }}
+        />
         <div className="postInfo_about_user">
           <h4>{post?.uploadUser?.fullName}</h4>
-          <p>{new Date(post?.createdAt?.seconds * 1000).toLocaleDateString()}</p>
+          <p>
+            {new Date(post?.createdAt?.seconds * 1000).toLocaleDateString()}
+          </p>
         </div>
       </div>
 
       {/* Post caption */}
       <p className="post_content">{post?.caption}</p>
+
       {post?.media && (
         <div className="post_img">
           <LazyLoad height={200} offset={100} once>
@@ -86,10 +99,11 @@ const Post = ({ post }) => {
       {/* Like & Other Icons */}
       <div className="post_section_icon">
         <div className="like_icon_box" onClick={handleLike}>
-          {likeData.isLiked ? (
-            <LikeFilled className="icon" style={{ color: "blue" }} />
+          {
+          likeData.isLiked ? (
+            <LikeFilled className="icon" style={{color:"blue"}}/>
           ) : (
-            <LikeOutlined className="icon" />
+            <LikeOutlined className="icon"/>
           )}
         </div>
 

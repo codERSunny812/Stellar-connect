@@ -1,10 +1,7 @@
-import './profile.css'
+import "./profile.css";
 
 const Profile = () => {
-  // console.log("inside the profile page:")
-  return (
-    <div>Profile</div>
-  )
-}
+  return <div>Profile</div>;
+};
 
-export default Profile
+export default Profile;

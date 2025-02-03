@@ -20,6 +20,8 @@
   background-color: #fff;
   border-radius: 20px;
   border: 0.9px solid dimgray;
+  /* height: fit-content; */
+  max-height: 500px;
 }
 
 .topPartMyNetwork{
@@ -63,6 +65,26 @@ font-size: 25px;
     align-items: center;
     gap: 15px;
     text-transform: capitalize;
+    cursor: pointer;
+}
+.connectionRequestDiv{
+  background-color: #fff;
+  border: 0.9px solid dimgray;
+  border-radius: 20px;
+  margin: 12px 0;
+}
+
+.connectionRequestDivHeading{
+     padding: 10px;
+    width: 100%;
+   
+}
+
+.connectionRequestDivHeading > h1{
+text-transform: capitalize;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 3px 2px;
 }
 
 .myNetworkInfo {
@@ -71,7 +93,8 @@ font-size: 25px;
   border-radius: 20px;
 }
 
-.cards-container {
+.main-cards-container {
+  /* border: 2px solid red; */
   margin: 10px 16px;
 }
 
@@ -100,6 +123,9 @@ padding: 10px 20px;
   gap: 1rem;
   overflow: hidden;
   width: 100%;
+  justify-content: space-evenly;
+  margin-bottom:2%;
+
 }
 
 .myNetworkCardsContent {
@@ -154,6 +180,24 @@ background:none;
 border: 2px solid blue;
 background-color: rgba(0, 0, 255, 0.161);
 cursor: pointer;
+}
+
+.cancelUserBtn{
+ padding: 3px 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 90%;
+border-radius: 12px;
+border: 1.2px solid rgb(255, 0, 0);
+background:red; 
+}
+
+.cancelUserBtn p{
+  font-size: 15px;
+  font-weight: 600;
+  /* color:red; */
+  color: white;
 }
 
 .connectUserBtn:hover {
@@ -221,6 +265,12 @@ cursor: pointer;
   }
 }
 
+.friendCard{
+  /* border: 2px solid rosybrown; */
+  display:flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 480px) {
   .arrow-btn {
     font-size: 25px;
@@ -237,5 +287,20 @@ cursor: pointer;
   .connectUserBtn p {
     font-size: 13px;
   }
+
+  .friendCard{ 
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.friend-cards-container{
+  /* border: 2px solid hotpink; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 }
 
