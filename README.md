@@ -8,7 +8,6 @@ Stellar connect is a feature-rich social networking platform designed to connect
 - ReactJS: Frontend library for building user interfaces.
 - Ant Design: UI framework for enhancing the visual appeal and user experience.
 - Firebase: Backend as a service providing authentication and database.
-- SCSS: CSS preprocessor for writing reusable and maintainable styles.
 - CSS: Styling language for the user interface.
 - Clerk: Authentication solution for managing user sessions and sign-ups.
 
@@ -34,7 +33,7 @@ Stellar connect offers a comprehensive suite of features to enhance user interac
 - Clerk Setup: Integrated Clerk for user authentication and session management.
 - Frontend Development
 - UI Design: Designed the user interface using ReactJS and Ant Design.
-- State Management: Managed application state using React hooks and context API.
+- State Management: Managed application state using zustand.
 - Feature Implementation: Implemented features such as post uploads, liking posts, and adding connections.
 
 ## Testing and Debugging
@@ -46,7 +45,7 @@ Stellar connect offers a comprehensive suite of features to enhance user interac
 ## Deployment and Optimization
 
 - Optimization: Used lazy loading to improve performance and load times.
-- Deployment: Deployed the application to a hosting platform.
+- Deployment: Deployed the application to a hosting platform(vercel).
 
 ## Monitoring and Maintenance
 
@@ -59,9 +58,9 @@ During the development process, valuable insights and skills were gained in vari
 
 - Authentication: Implemented secure user authentication and email verification.
 - Real-Time Updates: Managed real-time data updates using Firebase.
-- State Management: Efficiently managed application state with React hooks and context API.
+- State Management: Efficiently managed application state with Zustand.
 - Performance Optimization: Enhanced application performance with lazy loading.
-- UI/UX Design: Created an intuitive and visually appealing user interface with Ant Design and SCSS.
+- UI/UX Design: Created an intuitive and visually appealing user interface with Ant Design and Reactjs.
 
 # ✨ Improvement
 
@@ -116,3 +115,7 @@ Start the development Server::
 
 **main section of the App:**
 ![Mobile View](assets/main.png)
+
+
+
+
