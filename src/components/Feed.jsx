@@ -10,6 +10,7 @@ import { fileUpload, resizeFile } from "../Service/file.upload";
 import toast from "react-hot-toast";
 
 const Feed = () => {
+  console.log("feed compomnent rendred")
   const [postCaption, setPostCaption] = useState("");
   const [mediaFile, setMediaFile] = useState(null);
   const [isModal, setIsModal] = useState(false);
@@ -17,7 +18,7 @@ const Feed = () => {
   const { userData,fetchPosts, posts, addPost } = useStore((state) => state);
 
   // console logs to check the data 
-  // console.log("post captio in the post component:",postCaption);
+  // console.log("post caption in the post component:",postCaption);
   // console.log("media file in the post component:", mediaFile);
   // console.log("is modal value in the post component:",isModal);
   // console.log("image preview in the post component:",imagePreview);
@@ -35,13 +36,13 @@ const Feed = () => {
     return () => window.removeEventListener("keydown", handleEsc);
   }, []);
 
-  // fetching all post data from DB
+  // fetching all post data from the DB
   useEffect(() => {
-    const unsubscribe = fetchPosts(); // Call the function and store the unsubscribe function
+    const unsubscribe = fetchPosts();
 
     return () => {
       if (typeof unsubscribe === "function") {
-        unsubscribe(); // Cleanup function to prevent memory leaks
+        unsubscribe(); 
       }
     };
   }, [userData, fetchPosts]); 
@@ -71,7 +72,7 @@ const Feed = () => {
 
   // function to upload the image upload after the button click
   const handlePostUpload = async () => {
-    // toast message if the caption and media file is empty
+   
     if (!postCaption && !mediaFile) {
       return toast("Please add a caption or media before posting.", {
         duration: 3000,

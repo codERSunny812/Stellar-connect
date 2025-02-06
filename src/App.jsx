@@ -25,19 +25,16 @@ const Message = React.lazy(() => import("./components/Message"));
 const Notification = React.lazy(() => import("./components/Notification"));
 
 function App() {
+  console.log("the app component is rendred:")
   const { user } = useUser(); //clerk user object
   const { userData, setUser, allSignedUpUser, setSignedUpUser, requestPending, setPendingRequest, friends, setFriendInTheList } = useStore((state) => state);
 
-  //console logs for checking the value 
-  // console.log("user data in the app component:",userData);
-  // console.log("all the user in the DB in app component:",allSignedUpUser);
-  // console.log("pending request users in app component:",requestPending);
-  console.log("friends of the currentLoggedIN user :",friends)
 
   //uploading the data of the user into the user's collection
   useEffect(() => {
     try {
       if (user) {
+
         const userInfo = {
           id: user.id,
           fullName: user.fullName,
@@ -51,7 +48,7 @@ function App() {
               const data = await addUser(userInfo);
               setUser(data); //updating the zustand store
             } catch (error) {
-              console.log(`Error adding user to DB: ${error.message}`);
+              console.log(`Error adding user to firestore DB: ${error?.message}`);
             }
           }
         };
@@ -62,8 +59,10 @@ function App() {
     }
   }, [user, setUser]);
 
-  //fetching all the user from the db
+  // //fetching all the user from the db
   useEffect(() => {
+    // early return 
+    if(!userData?.id) return;
     const unsubscribe  = fetchAllUser(userData?.id,(data)=>{
       setSignedUpUser(data);
     })
@@ -74,10 +73,10 @@ function App() {
         unsubscribe(); // Cleanup function to prevent memory leaks
       }
     };
-  }, [user, userData, setSignedUpUser]);
+  }, [userData.id, setSignedUpUser]);
 
 
-  // fetching the pending user list from the db
+  // // fetching the pending user list from the db
   useEffect(() => {
     const unsubscribe = pendingRequest(userData.id, (data) => {
       setPendingRequest(data)
@@ -85,12 +84,12 @@ function App() {
 
     return () => {
       if (typeof unsubscribe === "function") {
-        unsubscribe(); // Cleanup to prevent memory leaks
+        unsubscribe(); 
       }
     };
-  }, [user, userData, setPendingRequest]);
+  }, [userData?.id,setPendingRequest]);
 
-  // fetching the  friendList from the DB
+  // // fetching the  friendList from the DB
   useEffect(()=>{
    const unsubscribe = getFriendList(userData.id,(data)=>{
     setFriendInTheList(data);
@@ -98,16 +97,10 @@ function App() {
 
     return () => {
       if (typeof unsubscribe === "function") {
-        unsubscribe(); // Cleanup function to prevent memory leaks
+        unsubscribe();
       }
     };
-  },[user,userData,setFriendInTheList])
-
-
-
-
-
-
+  },[userData?.id,setFriendInTheList])
   return (
     <>
       <Toaster />

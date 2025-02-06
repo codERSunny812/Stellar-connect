@@ -19,7 +19,7 @@ const MyNetwork = () => {
   const [cardsToShow, setCardsToShow] = useState(3);
   const [selectState, setSelectState] = useState("");
 
-  // console.log(requestPending.length)
+  console.log(friends)
 
 
   // Update the number of cards to show based on screen size
@@ -130,13 +130,13 @@ const MyNetwork = () => {
           <div className="">
 
             {
-              selectState && (<div className="connectionRequestDiv">
+              selectState && (
+              <div className="connectionRequestDiv">
                 <div className="connectionRequestDivHeading">
                   <h1>{selectState}</h1>
                   {
                     selectState == "connection" ? (<FriendList />) : (<PendingFriend />)
                   }
-
                 </div>
               </div>)
             } 
@@ -165,20 +165,19 @@ const MyNetwork = () => {
                   </div>
 
                   <div className="cardsContent">
-                    {allSignedUpUser
+                    {
+                    allSignedUpUser
                       .slice(startIndex, startIndex + cardsToShow)
                       .map((user) => {
                         return (
                           <div key={user.id} >
-                            <Card img={user.avatar} altText={user.name} name={user.fullName} id={user.id}/>
+                            <Card img={user.avatar} altText={user.name} name={user.fullName} userid={user.id}/>
                           </div>
                         );
                       })}
                   </div>
                 </div>
               </div>
-              
-                {/* <CardsComponent allDBUser={allSignedUpUser} pendingRequestUser={requestPending} connection={friends} /> */}
             </div>
           </div>
 

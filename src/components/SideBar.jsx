@@ -7,6 +7,8 @@ import { FaBookmark } from "react-icons/fa6";
 import useStore from "../store/Store.js";
 
 const SideBar = () => {
+
+  console.log("side bar component rendered:")
  
   const useData = useStore((state) => state.userData);
 
@@ -30,7 +32,7 @@ const SideBar = () => {
         />
         <h2>{useData?.fullName}</h2>
         <h4>
-          Ex Intern@Cynayd Solution||Full Stack Developer🚀|| LeetCode 1 🌟 ||
+          SWE@Google{``}||{``} Full Stack Developer🚀 {``}||{``}LeetCode 1 🌟{``}||
           Open source contributer ☯⚒
         </h4>
 

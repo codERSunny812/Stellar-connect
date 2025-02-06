@@ -7,7 +7,6 @@ import "@fontsource/roboto/700.css";
 import { RouterProvider } from "react-router-dom";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { dark } from "@clerk/themes";
-import React from "react";
 import { Provider } from "react-redux";
 import reduxStore from "./Redux Store/Rtk.store.js";
 
@@ -18,7 +17,7 @@ if (!PUBLISHABLE_KEY) {
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <>
     <ClerkProvider
       publishableKey={PUBLISHABLE_KEY}
       appearance={{
@@ -29,5 +28,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <RouterProvider router={Router} />
       </Provider>
     </ClerkProvider>
-  </React.StrictMode>
+  </>
 );

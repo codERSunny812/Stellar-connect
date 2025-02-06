@@ -125,12 +125,11 @@ padding: 10px 20px;
   width: 100%;
   justify-content: space-evenly;
   margin-bottom:2%;
-
 }
 
 .myNetworkCardsContent {
    flex: 0 0 30%;
-  border: 1px solid dimgray;
+  border: 2px solid dimgray;
   padding:5px;
   height: 250px;
   width: 200px;
@@ -151,6 +150,36 @@ padding: 10px 20px;
 .myNetworkCardsContent p{
   margin: 6px 0;
   text-transform: capitalize;
+}
+
+.linkBtn{
+padding: 3px 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 90%;
+border-radius: 12px;
+background:none;
+text-decoration: none;
+
+}
+
+.connectedUserBtn{
+padding: 3px 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 90%;
+border-radius: 12px;
+border:none;
+background:#143D60;
+}
+
+.connectedUserBtn p{
+  font-size: 15px;
+  font-weight: 600;
+  color:#A0C878;
+ 
 }
 
 .connectUserBtn{
@@ -174,6 +203,7 @@ background:none;
   font-size: 15px;
   font-weight: 600;
   color: blue;
+ 
 }
 
 .connectUserBtn:hover{

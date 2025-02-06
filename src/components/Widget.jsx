@@ -2,6 +2,7 @@ import "./widget.css";
 import PropTypes from "prop-types";
 
 const Widget = () => {
+  console.log("widget compomnent rendered")
   const News = ({ title, para }) => {
     return (
       <div className="news_heading">

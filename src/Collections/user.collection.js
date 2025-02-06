@@ -57,7 +57,7 @@ export const allUserData =  (id,cb) => {
       , where("id", "!=",id));
 
 
-
+  //  getting the data from the firestore in teal time 
     const unsubscribe = onSnapshot(q,(allUserSnapshot)=>{
      const allUserData = allUserSnapshot.docs.map((doc) => ({
         id: doc.id,

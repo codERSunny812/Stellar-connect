@@ -4,9 +4,8 @@ import { HiArrowCircleLeft, HiArrowCircleRight } from "react-icons/hi";
 import { FaFacebookMessenger } from "react-icons/fa6";
 import useStore from "../store/Store";
 import Nodata from "../animation/NoData.json";
-import { Card } from "antd";
-import { TiUserAdd } from "react-icons/ti";
-// import { TiUserAdd } from "react-icons/ti";
+import { Link } from "react-router-dom";
+
 
 const FriendList = () => {
   const { friends } = useStore((state) => state);
@@ -69,7 +68,7 @@ const FriendList = () => {
             friends.length === 0 ? (
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                 <Lottie animationData={Nodata} style={{ height: "150px" }} />
-                <p>no request found</p>
+                <p>no friend found</p>
               </div>
 
             ) : (
@@ -80,12 +79,15 @@ const FriendList = () => {
                      <div className="myNetworkCardsContent" key={id}>
                           <img src={avatar} alt={fullName} />
                           <p>{fullName}</p>
+                      <Link to='/messages' className="linkBtn">
                               <button
                                 className="connectUserBtn"
                               >
                                 <FaFacebookMessenger className="connectUserBtn-icon" />
                                 <p>message</p>
                               </button>
+
+                      </Link>
                             
                           
                         </div>

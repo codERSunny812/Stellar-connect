@@ -6,6 +6,7 @@ import { Breathing } from "react-shimmer";
 import useStore from "../store/Store.js";
 
 const Home = () => {
+  console.log("home component rendered")
   const userData = useStore((state) => state.userData);
 
   // Conditional rendering to wait for userData to be populated

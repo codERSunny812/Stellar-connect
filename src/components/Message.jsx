@@ -1,12 +1,19 @@
+import { useState } from 'react';
 import useStore from '../store/Store';
 import './message.css'
-import { FaLinkedin } from "react-icons/fa";
+import Lottie from 'lottie-react';
+import data from '../animation/NoChats.json'
+import MessagePromt from './MessagePromt';
+
 
 const Message = () => {
+    
+  const [messageSection,setMessageSection] = useState(true);
+  const { userData, friends } = useStore((state) => state);
 
-  const { userData } = useStore((state) => state);
+  console.log(friends)
 
-  console.log(userData)
+  // console.log(userData)
   return (
     <div className="messageContainer">
       <div className="messageContent">
@@ -16,7 +23,43 @@ const Message = () => {
 
         {/* mid  */}
         <div className="message-mid">
-<h1>mid</h1>
+          <p>messaging</p>
+          <div className="mid-content">
+            
+            {/* for friend  */}
+            <div className="mid-part1">
+              {
+                friends.map(({id,fullName,avatar})=>{
+                  return(
+                    <div className="mid-user-content" key={id}>
+
+                      <img src={avatar} alt="" />
+                      <h3>{fullName}</h3>
+                     
+                    </div>
+                  )
+                })
+              }
+
+            </div>
+
+          {/* for the chat section  */}
+            <div className="mid-part2">
+              {
+              messageSection ?
+              (
+                <MessagePromt/> 
+              ):(
+                <div className="NoChatAnim">
+                  <Lottie animationData={data} className='anim'/>
+                  <h4>no chats avaiable !!</h4>
+                  <p>select a friend to show the chats</p>
+                </div>
+              )
+            }
+            </div>
+          </div>
+
         </div>
 
         {/* right  */}
