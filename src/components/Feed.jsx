@@ -10,21 +10,14 @@ import { fileUpload, resizeFile } from "../Service/file.upload";
 import toast from "react-hot-toast";
 
 const Feed = () => {
-  console.log("feed compomnent rendred")
+
   const [postCaption, setPostCaption] = useState("");
   const [mediaFile, setMediaFile] = useState(null);
   const [isModal, setIsModal] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
-  const { userData,fetchPosts, posts, addPost } = useStore((state) => state);
+  const { userData, fetchPosts, posts, addPost } = useStore((state) => state);
 
-  // console logs to check the data 
-  // console.log("post caption in the post component:",postCaption);
-  // console.log("media file in the post component:", mediaFile);
-  // console.log("is modal value in the post component:",isModal);
-  // console.log("image preview in the post component:",imagePreview);
-  // console.log("the data from the zustand store in the post component",userData,fetchPosts,posts,addPost);
 
-  
   // function to handle the model
   useEffect(() => {
     const handleEsc = (event) => {
@@ -42,10 +35,10 @@ const Feed = () => {
 
     return () => {
       if (typeof unsubscribe === "function") {
-        unsubscribe(); 
+        unsubscribe();
       }
     };
-  }, [userData, fetchPosts]); 
+  }, [userData, fetchPosts]);
 
   // function to handle the post caption``
   const handlePostCaption = (e) => {
@@ -72,7 +65,6 @@ const Feed = () => {
 
   // function to upload the image upload after the button click
   const handlePostUpload = async () => {
-   
     if (!postCaption && !mediaFile) {
       return toast("Please add a caption or media before posting.", {
         duration: 3000,
@@ -144,7 +136,7 @@ const Feed = () => {
       <div className="feedSection_top">
         <div className="feedSection_upload_section">
           <img
-            src={userData.imageUrl}
+            src={userData.avatar}
             alt=""
             style={{ borderRadius: "50%", height: "50px", width: "50px" }}
           />
@@ -157,15 +149,14 @@ const Feed = () => {
             Start a post
           </div>
 
-          {
-          isModal && (
+          {isModal && (
             <div className="post-upload-section">
               <div className="post-upload-content">
                 {/* modal head  */}
                 <div className="post-popup-top">
                   <div className="left">
                     <img
-                      src={userData.imageUrl}
+                      src={userData.avatar}
                       alt=""
                       style={{
                         borderRadius: "50%",
@@ -231,9 +222,7 @@ const Feed = () => {
                 </div>
               </div>
             </div>
-          )
-          }
-
+          )}
         </div>
 
         <div className="feedSection_file_select">
@@ -250,7 +239,6 @@ const Feed = () => {
             <p>article</p>
           </div>
         </div>
-        
       </div>
 
       {/* Post section of the feed */}

@@ -19,15 +19,19 @@ import { useEffect } from "react";
 import useStore from "../store/Store.js";
 
 const Post = ({ post }) => {
-
+  console.log(post)
   const dispatch = useDispatch();
   const { userData } = useStore((state) => state);
 
   // Load initial like state from Firestore
   useEffect(() => {
-    const unsubscribe = getLikeStateFromDatabase(post.id, userData.id, (likeState) => {
-      dispatch(setInitialState(likeState)); // ✅ Updates Redux store in real-time
-    });
+    const unsubscribe = getLikeStateFromDatabase(
+      post.id,
+      userData.id,
+      (likeState) => {
+        dispatch(setInitialState(likeState)); // ✅ Updates Redux store in real-time
+      }
+    );
 
     return () => {
       if (typeof unsubscribe === "function") {
@@ -35,7 +39,6 @@ const Post = ({ post }) => {
       }
     };
   }, [post.id, dispatch, userData.id]);
-
 
   // Get the like state for the current post
   const likeData = useSelector((state) => state.postLikes.likes[post.id]) || {
@@ -58,7 +61,7 @@ const Post = ({ post }) => {
       {/* Top section of the post */}
       <div className="postinfo_top">
         <img
-          src={post?.uploadUser?.imageUrl}
+          src={post?.uploadUser?.avatar || post?.uploadUser?.imageUrl }
           alt=""
           style={{ borderRadius: "50%" }}
         />
@@ -99,11 +102,10 @@ const Post = ({ post }) => {
       {/* Like & Other Icons */}
       <div className="post_section_icon">
         <div className="like_icon_box" onClick={handleLike}>
-          {
-          likeData.isLiked ? (
-            <LikeFilled className="icon" style={{color:"blue"}}/>
+          {likeData.isLiked ? (
+            <LikeFilled className="icon" style={{ color: "blue" }} />
           ) : (
-            <LikeOutlined className="icon"/>
+            <LikeOutlined className="icon" />
           )}
         </div>
 

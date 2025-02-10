@@ -1,0 +1,249 @@
+.profile-container{
+    /* border: 2px solid red; */
+    display: grid;
+    grid-template-columns: 0.3fr 2fr 0.3fr;
+    gap: 22px;
+    margin: 2% 0;
+}
+.mid-top{
+    border: 2px solid gray;
+    border-radius: 21px;
+    background-color: white;
+}
+
+.banner{
+    position: relative;
+}
+
+.edit-icon {
+  position:absolute;
+  top: 10px;
+  right: 1%;
+  cursor: pointer;
+  font-size: 25px;
+  color: #333;
+  background-color: white;
+  border-radius: 50%;
+}
+
+
+.banner img{
+    /* border: 2px solid forestgreen; */
+    width: 100%;
+    height: 250px;
+    border-radius: 20px 20px 0 0;
+    /* object-fit: contain; */
+}
+
+.profile-img{
+    position:absolute;
+    top: 30%;
+    left:14%;
+    height: 160px;
+    width:160px;
+    border-radius: 50%;
+    outline: 4px solid white;
+}
+
+.profile-info{
+    /* border: 2px solid gray; */
+    margin-top: 6%;
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+}
+
+.profile-mid-left{
+    /* border: 2px solid forestgreen; */
+    font-family: roboto;
+    margin: 0 4px;
+    padding: 0 10px;
+}
+
+.profile-headline,.profile-location{
+    font-weight: 300;
+}
+
+.contact-info{
+    color: blue;
+    cursor: pointer;
+}
+
+.profile-location{
+    margin: 8px 0;
+}
+
+
+.profile-btn{
+    /* border: 2px solid fuchsia; */
+    margin: 12px 0;
+    padding:0 12px;
+    text-transform: capitalize;
+}
+
+.profile-btn-btn{
+padding: 10px 30px;
+border: none;
+background-color: blue;
+border-radius:19px;
+color:white;
+margin: 0 2px;
+cursor: pointer;
+text-transform: capitalize;
+}
+.btn-btn{
+    background-color: white;
+    color: blue;
+    border: 2px solid blue;
+    border-radius:19px;
+    padding: 10px 30px;
+}
+
+.profile-mid-right{
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin: 0 7px;
+}
+
+.profile-edit-icon{
+    background-color:slategray;
+    border-radius: 12px;
+    font-size: 25px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.profile-right{
+/* border: 2px solid rgb(0, 4, 255); */
+}
+
+.about-user{
+    border: 2px solid grey;
+    margin: 2% 0;
+    border-radius: 21px;
+    background-color: white;
+    padding: 13px 0px;
+}
+
+.about-top{
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin: 30px 20px;
+}
+
+.about-top h2{
+    text-transform: capitalize;
+}
+
+.about-user p{
+    font-weight: 200;
+    margin: 0 20px;
+}
+
+.profile-modal-section{
+   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.profile-model-content{
+background: #fff;
+border-radius: 10px;
+width: 550px;
+padding: 20px;
+display: flex;
+/* align-items: center; */
+flex-direction: column;
+gap: 20px;
+}
+
+.profile-model-top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: capitalize;
+}
+
+.cross-icon{
+    cursor: pointer;
+}
+
+.profile-model-content input{
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  width: 100%;
+  background-color: #f3f3f3;
+  cursor: pointer;
+  color: #666;   
+}
+
+.profile-model-content input:hover {
+  background-color: #eaeaea;
+}
+
+.profile-model-content textarea{
+  width: 100%;
+  min-height: 100px;
+  border:1 px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+  resize: none;
+  outline: none;  
+}
+
+.profile-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
+}
+
+.profile-update-btn{
+    width: 40%;
+    padding: 12px 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    font-weight: 600;
+    border-radius: 19px;
+    cursor: pointer;
+}
+
+
+
+
+@media (max-width:768px) {
+    .profile-container{
+        grid-template-columns: 0.1fr 3fr 0.1fr;
+        gap: 0;
+    }
+
+    .banner img{
+        height: 150px;
+    }
+
+    .profile-img{
+    top: 24%;
+    left: 7%;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    outline: 4px solid white;
+    }
+}
+
+
+
+

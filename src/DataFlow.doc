@@ -8,6 +8,6 @@
 
 8. now in the mynetwork componet user can see all the user present in the db and if he want he can sent a connect request to them and the other user can accept and reject them if he accept them he became thier friend and if he reject then he will became the request will be removed from pending request.
 
-9. the user can also chat with the users who we his friend.
+9. the user can also chat with the users who we his friend in real time .
 
-10. their is a profile page at which the user can see the his profile and edit some basic detail
+10. their is a profile page at which the user can see the his profile and edit some basic detail of his profile 

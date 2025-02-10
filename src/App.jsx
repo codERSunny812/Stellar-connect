@@ -2,18 +2,19 @@
 import "./App.css";
 import Home from "./components/Home";
 import { Outlet, createBrowserRouter } from "react-router-dom";
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useEffect,useState } from "react";
 import AuthLayout from "./Auth";
 import Error from "./Error";
 import SignUpPage from "./components/Signup.jsx";
 import SignInPage from "./components/Signin.jsx";
 import { useUser } from "@clerk/clerk-react";
 import useStore from "./store/Store.js";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import Profile from "./components/Profile.jsx";
 import {
   allUserData as fetchAllUser,
   addUser,
+  getASpecificUser,
 } from "./Collections/user.collection.js";
 import { pendingRequest } from "./Collections/friendrequest.collection.js";
 import { getFriendList } from "./Collections/friends.collection.js";
@@ -25,13 +26,14 @@ const Message = React.lazy(() => import("./components/Message"));
 const Notification = React.lazy(() => import("./components/Notification"));
 
 function App() {
-  console.log("the app component is rendred:")
   const { user } = useUser(); //clerk user object
   const { userData, setUser, allSignedUpUser, setSignedUpUser, requestPending, setPendingRequest, friends, setFriendInTheList } = useStore((state) => state);
+ const [userId,setUserId] = useState(null); //state to store the user id
 
 
   //uploading the data of the user into the user's collection
   useEffect(() => {
+    if(!user) return;
     try {
       if (user) {
 
@@ -42,11 +44,13 @@ function App() {
           firstName: user.firstName,
         };
 
+
         const addUserToDb = async () => {
           if (userInfo && userInfo?.id) {
             try {
-              const data = await addUser(userInfo);
-              setUser(data); //updating the zustand store
+              const data = await addUser(userInfo);  //return type is object
+              setUserId(data); 
+              // console.log("return type of the data after adding it to the firestore:",data)
             } catch (error) {
               console.log(`Error adding user to firestore DB: ${error?.message}`);
             }
@@ -57,27 +61,27 @@ function App() {
     } catch (error) {
       console.error("error in adding the user into the DB", error.message);
     }
-  }, [user, setUser]);
+  }, [user]);
 
-  // //fetching all the user from the db
+  //fetching all the user from the db
   useEffect(() => {
-    // early return 
-    if(!userData?.id) return;
-    const unsubscribe  = fetchAllUser(userData?.id,(data)=>{
+    if (!userData?.id) return;
+    const unsubscribe = fetchAllUser(userData?.id, (data) => {
       setSignedUpUser(data);
-    })
-    
+    });
 
     return () => {
       if (typeof unsubscribe === "function") {
-        unsubscribe(); // Cleanup function to prevent memory leaks
+        unsubscribe();
       }
     };
-  }, [userData.id, setSignedUpUser]);
+  }, [userData?.id, setSignedUpUser]);
 
 
-  // // fetching the pending user list from the db
+
+  // fetching the pending user list from the db
   useEffect(() => {
+    if(!userData?.id) return;
     const unsubscribe = pendingRequest(userData.id, (data) => {
       setPendingRequest(data)
     });
@@ -89,8 +93,9 @@ function App() {
     };
   }, [userData?.id,setPendingRequest]);
 
-  // // fetching the  friendList from the DB
+  //fetching the  friendList from the DB
   useEffect(()=>{
+    if (!userData?.id) return;
    const unsubscribe = getFriendList(userData.id,(data)=>{
     setFriendInTheList(data);
    })
@@ -101,6 +106,25 @@ function App() {
       }
     };
   },[userData?.id,setFriendInTheList])
+
+  // function to fetch specific user 
+  useEffect(() => {
+    // console.log("get a specific user function run:")
+    if (!userId?.id) return;
+    try {
+      if (userId) {
+        const fetchSpecificUser = async () => {
+          const dataInfo = await getASpecificUser(userId?.id);
+          // console.log("data of the user from DB:",dataInfo)
+          setUser(dataInfo);
+        };
+        fetchSpecificUser();
+      }
+    } catch (error) {
+      toast.error("error in fetching the data", error.message);
+    }
+  }, [userId]); // Add userId as a dependency
+
   return (
     <>
       <Toaster />
@@ -165,7 +189,6 @@ export const Router = createBrowserRouter([
             element: (
               <Suspense fallback={<div>Loading...</div>}>
                 {" "}
-                {/* <UserProfile />{" "} */}
                 <Profile />
               </Suspense>
             ),

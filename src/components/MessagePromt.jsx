@@ -1,30 +1,90 @@
+import { useEffect, useRef, useState } from "react";
 import useStore from "../store/Store";
 import { MdPhotoSizeSelectActual } from "react-icons/md";
 import { FaPaperclip } from "react-icons/fa6";
 import { TbGif } from "react-icons/tb";
 import { HiOutlineEmojiHappy } from "react-icons/hi";
 import "./MessagePromt.css";
-import { useState } from "react";
+import { listenForMessages, sendMessage } from "../Collections/message.collection";
+import NoData from "../animation/NoChats.json";
+import Lottie from "lottie-react";
+import PropTypes from "prop-types";
+import { FcVideoCall } from "react-icons/fc";
+import { IoCall } from "react-icons/io5";
 
-const MessagePromt = () => {
+
+const MessagePromt = ({ selectedFriend }) => {
+  
   const { userData } = useStore((state) => state);
-  const [message, setMessage] = useState("");
+  const [sentMessage, setSentMessage] = useState("");
+  const [message, setMessage] = useState([]);
+  const messagesEndRef = useRef(null); // Ref for auto-scrolling
+
+  useEffect(() => {
+    if (!selectedFriend || !userData?.id) return;
+    const unsubscribe = listenForMessages(userData.id, selectedFriend.id, setMessage);
+
+    return () => {
+      if (typeof unsubscribe === "function") {
+        unsubscribe();
+      }
+    };
+  }, [selectedFriend, userData?.id]);
+
+  // Scroll to bottom when messages update
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [message]);
+
+  const handleMessage = async () => {
+    if (sentMessage.trim()) {
+      await sendMessage(userData.id, selectedFriend.id, sentMessage);
+      setSentMessage("");
+    }
+  };
 
   return (
     <div className="topOfMessagePrompt">
-      {/* top part  */}
+      {/* Header */}
       <div className="headerOfMessagePrompt">
-        <img src={userData.imageUrl} alt="" />
-        <h3>{userData.fullName}</h3>
+        <div className="header-info">
+        <img src={selectedFriend?.avatar} alt="" />
+        <h3>{selectedFriend?.fullName}</h3>
+        </div>
+        <div className="header-icons">
+        <FcVideoCall fontSize={22}/>
+        <IoCall fontSize={22}/>
+        </div>
       </div>
 
-      <div className="midOfMessagePrompt"></div>
+      {/* Messages */}
+      <div className="midOfMessagePrompt">
+        {message.length > 0 ? (
+          message.map((data) => (
+            <div key={data?.id} className={data?.senderId === userData.id ? "messages sent" : "messages received"}>
+              <p>{data?.message}</p>
+            </div>
+          ))
+        ) : (
+          <div className="nomessage">
+            <Lottie className="anim" animationData={NoData} />
+            <p>No chats found</p>
+          </div>
+        )}
+        {/* Empty div for auto-scroll */}
+        <div ref={messagesEndRef}></div>
+      </div>
 
+      {/* Input Section */}
       <div className="endOfMessagePrompt">
         <div className="textAreaOfMessagePrompt">
           <textarea
             className="message-input"
-            placeholder="write a message"
+            placeholder="Write any message"
+            value={sentMessage}
+            onChange={(e) => setSentMessage(e.target.value)}
           ></textarea>
         </div>
         <div className="controlOfMessagePrompt">
@@ -34,14 +94,12 @@ const MessagePromt = () => {
             <TbGif />
             <HiOutlineEmojiHappy />
           </div>
-
           <div className="right">
             <button
               type="button"
-              className={
-                message.length === 0 ? "send-btn disabled" : "send-btn active"
-              }
-              disabled={message.length === 0}
+              className={sentMessage.length === 0 ? "send-btn disabled" : "send-btn active"}
+              disabled={sentMessage.length === 0}
+              onClick={handleMessage}
             >
               Send
             </button>
@@ -50,6 +108,10 @@ const MessagePromt = () => {
       </div>
     </div>
   );
+};
+
+MessagePromt.propTypes = {
+  selectedFriend: PropTypes.object,
 };
 
 export default MessagePromt;

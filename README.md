@@ -99,7 +99,7 @@ Start the development Server::
 ## App UI
 
 **Home of the App:**
-![Home](assets/Home.png)
+![Base](assets/main.png)
 
 **Registration Page of the App:**
 ![Registration Page](assets/signup.png)
@@ -107,15 +107,22 @@ Start the development Server::
 **Login Page of the App:**
 ![Login Page](assets/signin.png)
 
+**Feed Page of the App:**
+![Feed Page](assets/Feed.png)
+
+
 **Connection page of the App:**
-![Home Page](assets/MyConnection.png)
+![connection Page](assets/Network.png)
 
 **Profile section of the App:**
-![Mobile View](assets/Profile.png)
+![Profile View](assets/Profile.png)
 
-**main section of the App:**
-![Mobile View](assets/main.png)
+**Jobs page of the App:**
+![Jobs Page](assets/Jobs.png)
 
+
+**Message Page of the App:**
+![Message Page](assets/Message.png)
 
 
 

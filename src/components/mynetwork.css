@@ -298,6 +298,7 @@ background:red;
 .friendCard{
   /* border: 2px solid rosybrown; */
   display:flex;
+  gap: 34px;
   justify-content: center;
 }
 

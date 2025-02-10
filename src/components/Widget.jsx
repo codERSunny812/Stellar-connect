@@ -1,16 +1,19 @@
 import "./widget.css";
 import PropTypes from "prop-types";
 
+
+const News = ({ title, para }) => {
+  return (
+    <div className="news_heading">
+      <h4>{title}</h4>
+      <p>{para}</p>
+    </div>
+  );
+};
+
 const Widget = () => {
-  console.log("widget compomnent rendered")
-  const News = ({ title, para }) => {
-    return (
-      <div className="news_heading">
-        <h4>{title}</h4>
-        <p>{para}</p>
-      </div>
-    );
-  };
+  
+  
   return (
     <div className="widget">
       <h1 className="widget_heading">trending now</h1>
@@ -23,7 +26,7 @@ const Widget = () => {
   );
 };
 
-Widget.propTypes = {
+News.propTypes = {
   title: PropTypes.string,
   para: PropTypes.string,
 };

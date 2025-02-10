@@ -8,12 +8,19 @@ import MessagePromt from './MessagePromt';
 
 const Message = () => {
     
-  const [messageSection,setMessageSection] = useState(true);
+  const [messageSection,setMessageSection] = useState(false);
   const { userData, friends } = useStore((state) => state);
+  const [selectedFriend , setSelectedFriend] = useState(null);
 
-  console.log(friends)
+  const handleFriends=({id,avatar,fullName})=>{
+    setSelectedFriend({
+      id:id,
+      avatar:avatar,
+      fullName:fullName
+    })
+    setMessageSection(true);
+  }
 
-  // console.log(userData)
   return (
     <div className="messageContainer">
       <div className="messageContent">
@@ -31,7 +38,9 @@ const Message = () => {
               {
                 friends.map(({id,fullName,avatar})=>{
                   return(
-                    <div className="mid-user-content" key={id}>
+                    <div className="mid-user-content" key={id}
+                    onClick = {()=> handleFriends({id,avatar,fullName})}
+                    >
 
                       <img src={avatar} alt="" />
                       <h3>{fullName}</h3>
@@ -48,7 +57,7 @@ const Message = () => {
               {
               messageSection ?
               (
-                <MessagePromt/> 
+                <MessagePromt selectedFriend={selectedFriend}/> 
               ):(
                 <div className="NoChatAnim">
                   <Lottie animationData={data} className='anim'/>

@@ -12,11 +12,10 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { db } from "../constants/Firebase.config";
+import toast from "react-hot-toast";
 
 // function to sent friend request
 export const sendFriendRequest = async (currentId, targetId) => {
-  console.log("inside the send friend request function:")
-  console.log("both id are:", currentId, targetId);
   //prior checking
   if (!currentId || !targetId) {
     console.error("not a valid id");
@@ -30,14 +29,15 @@ export const sendFriendRequest = async (currentId, targetId) => {
     // checking that friend request is already sent or not
     const q = query(
       friendRequestRef,
-      where("userId", "==", currentId),
-      where("friendId", "==", targetId)
+      where("userId", "in", [currentId, targetId]),
+      where("friendId", "in", [currentId, targetId])
     );
 
     const querySnapShot = await getDocs(q);
 
     if (!querySnapShot.empty) {
-      console.log("friend request has been already sent");
+      toast.error("friend request is already sent!!")
+      // console.log("friend request has been already sent");
       return;
     }
 
@@ -64,16 +64,13 @@ export const handleFriendRequest = async (
     console.log("not a valid id found");
     return;
   }
-
-  console.log(requestId);
-
   try {
-    console.log("inside the handle friend request function");
+    // console.log("inside the handle friend request function");
     // making a refrence to the friend request collection
     const requestRef = doc(db, "friendRequest", requestId);
-    console.log("request model ref:", requestRef);
+
     const friendCollectionRef = collection(db, "friends");
-    console.log("friends collection ref:", friendCollectionRef);
+
 
     // add the friend if the user accept the request
     if (action === "accept") {
@@ -94,22 +91,22 @@ export const handleFriendRequest = async (
   }
 };
 
-export const pendingRequest =async (userId, cb) => {
-  console.log("inside the peding request section")
+export const pendingRequest = async (userId, cb) => {
+  // console.log("inside the peding request section")
   if (!userId) {
-    console.log("User ID not found");
+    // console.log("User ID not found");
     return;
   }
 
   try {
-    console.log("inside the pending request function:")
+    // console.log("inside the pending request function:")
     const friendRequestRef = collection(db, "friendRequest");
 
     // Fetch requests where the user is either the sender or the receiver
     const qSent = query(friendRequestRef, where("userId", "==", userId));  // Sent requests
     const qReceived = query(friendRequestRef, where("friendId", "==", userId));  // Received requests
 
-    
+
     // for the sender 
     const unsubscribeSent = onSnapshot(qSent, async (querySnapshot) => {
 
@@ -119,26 +116,26 @@ export const pendingRequest =async (userId, cb) => {
         type: "sent",
       }));
 
-      console.log("sent request:",sentRequests)
+      // console.log("sent request:", sentRequests)
 
       // now get the detail of the user 
       const friendsData = await Promise.all(
-              sentRequests.map(async (data) => {
+        sentRequests.map(async (data) => {
 
-                const userRef = doc(db, "users", data.friendId);
-                const userData = await getDoc(userRef)
+          const userRef = doc(db, "users", data.friendId);
+          const userData = await getDoc(userRef)
 
-                return {
-                  ...data,
-                  friendName: userData.data()?.fullName, // Add user name
-                  friendProfilePic: userData.data()?.avatar, // Add profile picture (if available)
-                };
-              })
-            );
+          return {
+            ...data,
+            friendName: userData.data()?.fullName, // Add user name
+            friendProfilePic: userData.data()?.avatar, // Add profile picture (if available)
+          };
+        })
+      );
 
-            console.log("friend data to whom we have sent requst:",friendsData)
+      // console.log("friend data to whom we have sent requst:", friendsData)
 
-            cb(friendsData);
+      cb(friendsData);
     });
 
     const unsubscribeReceived = onSnapshot(qReceived, async (querySnapshot) => {
@@ -178,16 +175,17 @@ export const pendingRequest =async (userId, cb) => {
 
 
 // function to delete the request 
-export const deleteRequest = async(requestId)=>{
-try {
-  // talking the refrence of the friedn request collection
-  const requestDataRef = doc(db,"friendRequest",requestId);
+export const deleteRequest = async (requestId) => {
+  try {
+    // talking the refrence of the friedn request collection
+    const requestDataRef = doc(db, "friendRequest", requestId);
 
-  await deleteDoc(requestDataRef);
-  console.log("requrst deleted successfully")
+    // remove the doc from the db
+    await deleteDoc(requestDataRef);
 
-} catch (error) {
-  console.error("error in deleting the request:");
-  return;
-}
+
+  } catch (error) {
+    console.error("error in deleting the request:");
+    return;
+  }
 }

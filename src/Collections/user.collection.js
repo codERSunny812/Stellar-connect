@@ -35,13 +35,13 @@ export const addUser = async (userData) => {
         avatar: userData.imageUrl,
         timeStamp: serverTimestamp(),
       });
-      console.log("New user added to Firestore");
+      // console.log("New user added to Firestore");
     }
 
-    // return userSnap.exists() ? userSnap.data() : {id:userData.id};
-    return userData; 
+    return userSnap.exists() ? userSnap.data() : {id:userData.id};
+    // return userData; 
     } catch (error) {
-    console.log(`Error adding user to database: ${error.message}`);
+    console.error(`Error adding user to database: ${error.message}`);
     return null;
   }
 };
@@ -74,21 +74,22 @@ export const allUserData =  (id,cb) => {
 
 // function to get the data of the specific user 
 export const getASpecificUser = async (id) => {
-  console.log(id)
+  // console.log(id)
   try {
     const userRef = doc(db,"users",id); //take the refrence to the doc with id
     const userSnapShot = await getDoc(userRef);
-    console.log(userSnapShot)
+    // console.log(userSnapShot)
 
     if(userSnapShot.empty){
-      console.log("no user found");
+      // console.log("no user found");
       return;
     }
 
     const userData = await userSnapShot.data();
+    // console.log(userData)
 
     return userData;
   } catch (error) {
-    console.log("unable to fetch the data of the user",error.message)
+    console.error("unable to fetch the data of the user",error.message)
   }
 };

@@ -10,16 +10,12 @@ import useStore from "../store/Store";
 import PendingFriend from "./PendingFriend";
 import Card from "./Card";
 import FriendList from "./FriendList";
-// import CardsComponent from "./CardsComponent";
-
 
 const MyNetwork = () => {
   const { allSignedUpUser, requestPending, friends} = useStore((state) => state);
   const [startIndex, setStartIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(3);
   const [selectState, setSelectState] = useState("");
-
-  console.log(friends)
 
 
   // Update the number of cards to show based on screen size
@@ -134,8 +130,13 @@ const MyNetwork = () => {
               <div className="connectionRequestDiv">
                 <div className="connectionRequestDivHeading">
                   <h1>{selectState}</h1>
+                  {/* data of selected state */}
                   {
-                    selectState == "connection" ? (<FriendList />) : (<PendingFriend />)
+                    selectState == "connection" ? (
+                    <FriendList />
+                  ) : (
+                  <PendingFriend />
+                )
                   }
                 </div>
               </div>)

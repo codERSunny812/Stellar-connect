@@ -6,35 +6,36 @@ import { FaSquare } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa6";
 import useStore from "../store/Store.js";
 
+
+const RecentItems = ({ title }) => {
+  return (
+    <div className="recentItems">
+      <BulbFilled className="recentItems_icon" />
+      <h5>{title}</h5>
+    </div>
+  );
+};
+
+
 const SideBar = () => {
+  const userData = useStore((state) => state.userData);
 
-  console.log("side bar component rendered:")
  
-  const useData = useStore((state) => state.userData);
-
-  const RecentItems = ({ title }) => {
-    return (
-      <div className="recentItems">
-        <BulbFilled className="recentItems_icon" />
-        <h5>{title}</h5>
-      </div>
-    );
-  };
-
   return (
     <div className="sideBar">
       <div className="sideBar_top">
-        <img src={banner} alt="user bg" className="sideBar_bg" />
         <img
-          src={useData?.imageUrl}
+          src={userData.bannerImage || banner}
+          alt="user bg"
+          className="sideBar_bg"
+        />
+        <img
+          src={userData?.avatar}
           className="sideBar_avtar"
           alt="user profile photo"
         />
-        <h2>{useData?.fullName}</h2>
-        <h4>
-          SWE@Google{``}||{``} Full Stack Developer🚀 {``}||{``}LeetCode 1 🌟{``}||
-          Open source contributer ☯⚒
-        </h4>
+        <h2>{userData?.fullName}</h2>
+        <h4>{userData?.headline || "profile headline"}</h4>
 
         <hr />
         <div className="sideBar_stats">
@@ -88,7 +89,7 @@ const SideBar = () => {
     </div>
   );
 };
-SideBar.propTypes = {
+RecentItems.propTypes = {
   title: PropTypes.string,
 };
 

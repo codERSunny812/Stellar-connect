@@ -1,0 +1,87 @@
+.jobs-container {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+}
+
+.upperDiv {
+  /* border: 2px solid firebrick; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5%;
+  margin-bottom: 20px;
+
+}
+
+.search-jobs {
+  padding: 10px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.cards_div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.job-card {
+  width: 300px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.company-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.job-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.company-name {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.apply-button {
+  display: inline-block;
+  padding: 10px 15px;
+  background: #0073b1;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.apply-button:hover {
+  background: #005582;
+}
+
+/* Shimmer effect styling */
+.shimmer {
+  background: #f6f7f8;
+  border-radius: 10px;
+}
+
+
+@media (max-width:768px) {
+  .upperDiv{
+    flex-direction: column;
+    gap: 12px;
+   
+  }
+}

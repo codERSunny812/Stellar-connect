@@ -42,7 +42,7 @@ const FriendList = () => {
         });
       };
 
-  console.log(friends);
+  // console.log(friends);
 
   return (
     <div className="cards-container">
@@ -99,7 +99,6 @@ const FriendList = () => {
         </div>
 
       </div>
-      {/* <CardsComponent /> */}
     </div>
   );
 };

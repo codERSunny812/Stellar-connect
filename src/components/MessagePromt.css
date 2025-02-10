@@ -7,9 +7,14 @@
     /* border: 2px solid firebrick; */
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding-bottom: 2px;
     margin: 2px 7px;
     border-bottom: 2px solid darkgray;
+}
+.headerOfMessagePrompt .header-info{
+    display: flex;
+    align-items: center;
 }
 
 .headerOfMessagePrompt img{
@@ -22,9 +27,16 @@
     margin: 0 7px;
 }
 
+.header-icons{
+    margin: 0 10px;
+    padding: 0 3px;
+    /* font-size: 20px; */
+}
+
 .midOfMessagePrompt{
     /* border: 2px solid hotpink; */
-    height:450px;
+    height:400px;
+    overflow-y: scroll;
 }
 
 .endOfMessagePrompt{
@@ -86,11 +98,52 @@ font-size: 20px;
 
 /* Active State (Blue Button) */
 .send-btn.active {
-    background-color: #007bff;
+    background-color:blue;
     color: white;
     cursor: pointer;
 }
 
 .send-btn.active:hover {
     background-color: #0056b3;
+}
+
+.nomessage{
+    display: flex;
+    margin:30% 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.nomessage .anim{
+    height: 100px;
+}
+
+
+
+
+.sent {
+/* border: 2px solid red; */
+background-color: #F5F5F5;
+max-width: 50%;
+position: relative;
+left: 51%;
+margin: 4px;
+padding: 4px 0px;
+border-radius:10px 0px 0px 10px;
+}
+
+
+.received{
+/* border: 2px solid forestgreen; */
+background-color:#493D9E;
+color: white;
+font-weight: 100;
+max-width: 50%;
+position: relative;
+left: -0%;
+margin:4px;
+padding: 4px 0px;
+border-radius: 0px 10px 10px 0px;
 }

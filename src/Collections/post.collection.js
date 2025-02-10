@@ -12,17 +12,13 @@ import {
 } from "firebase/firestore";
 import { db } from "../constants/Firebase.config";
 
-
 // function to add the post to the DB
 const addPost = async (post, userId) => {
   try {
-    // console.log("inside add post function:",post,userId);
     const batch = writeBatch(db); //create a batch
 
     // create a post referecne
     const postRef = doc(collection(db, "posts"));
-
-    // console.log("post refrence",postRef);
 
     // add the post to the batch
     batch.set(postRef, post);
@@ -46,19 +42,18 @@ const addPost = async (post, userId) => {
 // function to fetch all the post from the DB
 const getPost = async (cb) => {
   try {
-
     const postRef = collection(db, "posts"); // Reference to "posts" collection
     const q = query(postRef, orderBy("createdAt", "desc")); // Sort by latest posts
 
-    const unsubscribe = onSnapshot(q,(snapshot)=>{
+    const unsubscribe = onSnapshot(q, (snapshot) => {
       const posts = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
       cb(posts); // Pass updated posts to Zustand store
-    })
+    });
 
-    return unsubscribe
+    return unsubscribe;
   } catch (error) {
     console.error("Error fetching posts:", error);
     return [];
@@ -71,9 +66,7 @@ const getLikeStateFromDatabase = async (postId, userId, callback) => {
     //refrence to the post collection to a specific doc
     const postRef = doc(db, "posts", postId);
 
-    // console.log("callback in the fetchLikestate:",callback)
-
-    const unsubscribe = onSnapshot(postRef,(postSnap)=>{
+    const unsubscribe = onSnapshot(postRef, (postSnap) => {
       if (postSnap.exists()) {
         const postData = postSnap.data();
         const likeCount = postData.like || 0;
@@ -88,7 +81,7 @@ const getLikeStateFromDatabase = async (postId, userId, callback) => {
       } else {
         console.error("No such document!");
       }
-    })
+    });
     return unsubscribe;
   } catch (error) {
     console.error("Error fetching like state:", error);
@@ -114,8 +107,6 @@ const updateLikeCountInDatabase = async (postId, userId, isLiked) => {
         likedUsers: arrayRemove(userId),
       });
     }
-
-    console.log("Like count updated in Firestore!");
   } catch (error) {
     console.error("Error updating like count:", error);
   }

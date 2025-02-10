@@ -1,5 +1,5 @@
 import "./header.css";
-import { Linkedln_logo } from "../constants/constant";
+import { Linkedln_logo,avtar } from "../constants/constant";
 import {
   SearchOutlined,
   HomeFilled,
@@ -20,7 +20,7 @@ const Header = () => {
 
   let imageUrl = "";
   if (data) {
-    imageUrl = data.imageUrl;
+    imageUrl = data.avatar;
   }
   return (
     <div className="header">
@@ -63,7 +63,7 @@ const Header = () => {
             <UserButton className="custom-user" />
           ) : (
             <img
-              src={imageUrl || ""}
+              src={imageUrl || avtar}
               style={{ width: "35px", height: "35px", borderRadius: 50 }}
             />
           )}
