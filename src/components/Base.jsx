@@ -25,15 +25,28 @@ const Base = () => {
   return (
     <div className="base_page">
       <div className="topBar">
-        <img src={Linkedln_logo_full} alt="" />
-        <div className="icons">
-          <Icons Icons={PaperClipOutlined} name="article" />
-          <Icons Icons={UsergroupDeleteOutlined} name="people" />
-          <Icons Icons={DollarOutlined} name="jobs" />
-          <Icons Icons={QqOutlined} name="games" />
-        </div>
+
+
+        <img src={Linkedln_logo_full} alt=""/>
+
+        <div className="topp">
+
+          <div className="icons">
+            <Icons Icons={PaperClipOutlined} name="article" />
+            <Icons Icons={UsergroupDeleteOutlined} name="people" />
+            <Icons Icons={DollarOutlined} name="jobs" />
+            <Icons Icons={QqOutlined} name="games" />
+          </div>
+
+          <div className="joinNow">
+            <button>join now</button>
+          </div>
+
 
         <SignInButton className="signInBtn" />
+        </div>
+        
+
       </div>
 
       <div className="bottomBar">

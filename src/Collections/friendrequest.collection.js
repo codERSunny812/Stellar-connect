@@ -37,7 +37,6 @@ export const sendFriendRequest = async (currentId, targetId) => {
 
     if (!querySnapShot.empty) {
       toast.error("friend request is already sent!!")
-      // console.log("friend request has been already sent");
       return;
     }
 

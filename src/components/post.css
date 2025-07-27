@@ -91,13 +91,15 @@
 
 .PostStatsInfo{
   /* border: 2px solid red; */
+  
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 8px;
 }
 
 .likePostInfo ,.commentPostInfo{
-  text-align: center;
+  /* border: 2px solid hotpink; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,6 +107,7 @@
 }
 
 .likePostCount , .PostCommentCount{
+  margin-top: 3px;
   font-size: 13px;
   font-weight: 300;
 }

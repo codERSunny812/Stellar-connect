@@ -70,7 +70,7 @@ const Card = ({ img, name, userid, state, requestId, t, friendId, userId }) => {
           <p>Connected</p>
         </button>
       ) : isPending ? (
-        <button className="connectUserBtn" onClick={() => addFriend(userid)}>
+        <button className="connectUserBtn" disabled={isPending}>
           <TiUserAdd className="connectUserBtn-icon" />
           <p>request sent</p>
         </button>

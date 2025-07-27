@@ -12,12 +12,13 @@
 }
 .Icons:hover{
     color: black;
+    cursor: pointer;
 }
 
 p{
-    font-family: Roboto;
+    font-family:Arial, Helvetica, sans-serif;
     text-transform: capitalize;
-    font-weight: 600;
+    /* font-weight: 300; */
     margin-left: 4px;
     margin-top: 3px;
 

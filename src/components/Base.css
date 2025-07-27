@@ -7,18 +7,28 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    border-bottom: 0.5px solid gray;
-    padding-bottom:10px;
+    padding-bottom:9px;
+    gap: 12px;
+    width:100%;
+}
+
+.topp{
+  width: 60%;
+  display: flex; 
+  gap: 1.3rem;
+  align-items: center;
+  justify-content: space-between;
 }
 
 
 img{
-    height: 45px;
+    height: 30px;
 }
 
 .icons{
     display: flex;
     color:slategray;
+    font-weight: 300;
 }
 
 
